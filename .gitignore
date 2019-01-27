@@ -1,1 +1,10 @@
-catalog/conroller/**
+**/catalog/conroller/
+image/
+ioncube/
+system/
+config.php
+index.php
+php.ini
+robots.txt
+test.php
+dbMultipleInsert.php
