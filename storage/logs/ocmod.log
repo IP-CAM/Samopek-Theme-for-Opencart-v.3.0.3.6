@@ -1,0 +1,1085 @@
+2019-01-20 20:59:54 - MOD: Modification Default
+
+FILE: system/engine/action.php
+REGEX: ~(require|include)(_once)?\(([^)]+)~
+LINE: 69
+
+FILE: system/engine/loader.php
+REGEX: ~(require|include)(_once)?\(([^)]+)~
+LINE: 77
+LINE: 151
+LINE: 168
+
+FILE: system/library/config.php
+REGEX: ~(require|include)(_once)?\(([^)]+)~
+LINE: 59
+
+FILE: system/library/language.php
+REGEX: ~(require|include)(_once)?\(([^)]+)~
+LINE: 67
+LINE: 73
+
+FILE: system/library/template/template.php
+REGEX: ~(require|include)(_once)?\(([^)]+)~
+LINE: 18
+
+FILE: system/library/template/twig.php
+CODE: $loader = new \Twig_Loader_Filesystem(DIR_TEMPLATE);
+LINE: 19
+----------------------------------------------------------------
+MOD: Simplica Theme
+
+FILE: catalog/view/theme/simplica/template/common/cart.twig
+CODE: <div id="cart" class="btn-group btn-block">
+LINE: 0
+
+FILE: catalog/controller/extension/module/carousel.php
+CODE: $this->document->addStyle('catalog/view/javascript/jquery/swiper/css/opencart.css');
+LINE: 9
+
+FILE: catalog/controller/extension/module/banner.php
+CODE: $this->document->addStyle('catalog/view/javascript/jquery/swiper/css/opencart.css');
+LINE: 9
+
+FILE: catalog/controller/extension/module/slideshow.php
+CODE: $this->document->addStyle('catalog/view/javascript/jquery/swiper/css/opencart.css');
+LINE: 9
+
+FILE: catalog/view/theme/simplica/template/common/footer.twig
+CODE: <p>{{ powered }}</p>
+LINE: 41
+----------------------------------------------------------------
+MOD: Tweak for OpenCart 3x Russkaya sborka
+
+FILE: admin/view/template/common/header.twig
+CODE: {% for link in links %}
+LINE: 36
+CODE: <li><a href="http://www.opencart.com" target="_blank"><i class="fa fa-opencart fa-fw"></i> {{ text_homepage }}</a></li>
+LINE: 67
+CODE: <li><a href="http://docs.opencart.com" target="_blank"><i class="fa fa-file-text-o fa-fw"></i> {{ text_documentation }}</a></li>
+LINE: 70
+CODE: <li><a href="http://forum.opencart.com" target="_blank"><i class="fa fa-comments-o fa-fw"></i> {{ text_support }}</a></li>
+LINE: 73
+
+FILE: admin/view/template/catalog/product_form.twig
+CODE: <label class="col-sm-2 control-label" for="input-sku"><span data-toggle="tooltip" title="{{ help_sku }}">{{ entry_sku }}</span></label>
+LINE: 104
+CODE: <label class="col-sm-2 control-label" for="input-sku">
+LINE: 110
+CODE: <label class="col-sm-2 control-label" for="input-location">{{ entry_location }}</label>
+LINE: 150
+CODE: <input type="text" name="model" value="{{ model }}" placeholder="{{ entry_model }}" id="input-model" class="form-control" />
+LINE: 97
+CODE: <li><a href="#tab-recurring" data-toggle="tab">{{ tab_recurring }}</a></li>
+LINE: 32
+
+FILE: admin/controller/common/filemanager.php
+CODE: $this->load->language('common/filemanager');
+LINE: 13
+CODE: // Parent
+LINE: 133
+CODE: $pagination = new Pagination();
+LINE: 194
+CODE: $directory = rtrim(DIR_IMAGE . 'catalog/' . str_replace('*', '', $this->request->get['directory']), '/');
+LINE: 33
+CODE: $directory = rtrim(DIR_IMAGE . 'catalog/' . str_replace('*', '', $this->request->get['directory']), '/');
+LINE: 33
+CODE: public function index() {
+LINE: 10
+CODE: $filename = basename(html_entity_decode($file['name'], ENT_QUOTES, 'UTF-8'));
+LINE: 260
+CODE: $folder = basename(html_entity_decode($this->request->post['folder'], ENT_QUOTES, 'UTF-8'));
+LINE: 340
+
+FILE: admin/view/template/common/filemanager.twig
+CODE: {% for image in images|batch(4) %}
+LINE: 34
+
+FILE: catalog/controller/tool/upload.php
+CODE: public function index() {
+LINE: 10
+CODE: $filename = basename(preg_replace('/[^a-zA-Z0-9\.\-\s+]/', '', html_entity_decode($this->request->files['file']['name'], ENT_QUOTES, 'UTF-8')));
+LINE: 17
+
+FILE: admin/controller/marketplace/extension.php
+CODE: $data['type'] = '';
+LINE: 26
+
+FILE: admin/view/template/marketplace/marketplace_list.twig
+CODE: {% if license.value == filter_license %}<a href="{{ license.href }}" class="btn btn-default active">{{ license.text }}</a>{% else %}<a href="{{ license.href }}" class="btn btn-default">{{ license.text }}</a>{% endif %}
+LINE: 49
+
+FILE: catalog/controller/information/contact.php
+CODE: if (isset($this->error['name'])) {
+LINE: 48
+CODE: $data['comment'] = $this->config->get('config_comment');
+LINE: 106
+CODE: return !$this->error;
+LINE: 205
+
+FILE: catalog/view/theme/default/template/information/contact.twig
+CODE: <div class="row">{{ column_left }}
+LINE: 12
+CODE: <div class="buttons">
+LINE: 154
+CODE: </form>
+LINE: 162
+CODE: $data['button_submit'] = $this->language->get('button_submit');
+LINE: 69
+----------------------------------------------------------------
+2019-01-20 21:17:25 - MOD: Modification Default
+
+FILE: system/engine/action.php
+REGEX: ~(require|include)(_once)?\(([^)]+)~
+LINE: 69
+
+FILE: system/engine/loader.php
+REGEX: ~(require|include)(_once)?\(([^)]+)~
+LINE: 77
+LINE: 151
+LINE: 168
+
+FILE: system/library/config.php
+REGEX: ~(require|include)(_once)?\(([^)]+)~
+LINE: 59
+
+FILE: system/library/language.php
+REGEX: ~(require|include)(_once)?\(([^)]+)~
+LINE: 67
+LINE: 73
+
+FILE: system/library/template/template.php
+REGEX: ~(require|include)(_once)?\(([^)]+)~
+LINE: 18
+
+FILE: system/library/template/twig.php
+CODE: $loader = new \Twig_Loader_Filesystem(DIR_TEMPLATE);
+LINE: 19
+----------------------------------------------------------------
+MOD: Simplica Theme
+
+FILE: catalog/view/theme/simplica/template/common/cart.twig
+CODE: <div id="cart" class="btn-group btn-block">
+LINE: 0
+
+FILE: catalog/controller/extension/module/carousel.php
+CODE: $this->document->addStyle('catalog/view/javascript/jquery/swiper/css/opencart.css');
+LINE: 9
+
+FILE: catalog/controller/extension/module/banner.php
+CODE: $this->document->addStyle('catalog/view/javascript/jquery/swiper/css/opencart.css');
+LINE: 9
+
+FILE: catalog/controller/extension/module/slideshow.php
+CODE: $this->document->addStyle('catalog/view/javascript/jquery/swiper/css/opencart.css');
+LINE: 9
+
+FILE: catalog/view/theme/simplica/template/common/footer.twig
+CODE: <p>{{ powered }}</p>
+LINE: 41
+----------------------------------------------------------------
+MOD: Tweak for OpenCart 3x Russkaya sborka
+
+FILE: admin/view/template/common/header.twig
+CODE: {% for link in links %}
+LINE: 36
+CODE: <li><a href="http://www.opencart.com" target="_blank"><i class="fa fa-opencart fa-fw"></i> {{ text_homepage }}</a></li>
+LINE: 67
+CODE: <li><a href="http://docs.opencart.com" target="_blank"><i class="fa fa-file-text-o fa-fw"></i> {{ text_documentation }}</a></li>
+LINE: 70
+CODE: <li><a href="http://forum.opencart.com" target="_blank"><i class="fa fa-comments-o fa-fw"></i> {{ text_support }}</a></li>
+LINE: 73
+
+FILE: admin/view/template/catalog/product_form.twig
+CODE: <label class="col-sm-2 control-label" for="input-sku"><span data-toggle="tooltip" title="{{ help_sku }}">{{ entry_sku }}</span></label>
+LINE: 104
+CODE: <label class="col-sm-2 control-label" for="input-sku">
+LINE: 110
+CODE: <label class="col-sm-2 control-label" for="input-location">{{ entry_location }}</label>
+LINE: 150
+CODE: <input type="text" name="model" value="{{ model }}" placeholder="{{ entry_model }}" id="input-model" class="form-control" />
+LINE: 97
+CODE: <li><a href="#tab-recurring" data-toggle="tab">{{ tab_recurring }}</a></li>
+LINE: 32
+
+FILE: admin/controller/common/filemanager.php
+CODE: $this->load->language('common/filemanager');
+LINE: 13
+CODE: // Parent
+LINE: 133
+CODE: $pagination = new Pagination();
+LINE: 194
+CODE: $directory = rtrim(DIR_IMAGE . 'catalog/' . str_replace('*', '', $this->request->get['directory']), '/');
+LINE: 33
+CODE: $directory = rtrim(DIR_IMAGE . 'catalog/' . str_replace('*', '', $this->request->get['directory']), '/');
+LINE: 33
+CODE: public function index() {
+LINE: 10
+CODE: $filename = basename(html_entity_decode($file['name'], ENT_QUOTES, 'UTF-8'));
+LINE: 260
+CODE: $folder = basename(html_entity_decode($this->request->post['folder'], ENT_QUOTES, 'UTF-8'));
+LINE: 340
+
+FILE: admin/view/template/common/filemanager.twig
+CODE: {% for image in images|batch(4) %}
+LINE: 34
+
+FILE: catalog/controller/tool/upload.php
+CODE: public function index() {
+LINE: 10
+CODE: $filename = basename(preg_replace('/[^a-zA-Z0-9\.\-\s+]/', '', html_entity_decode($this->request->files['file']['name'], ENT_QUOTES, 'UTF-8')));
+LINE: 17
+
+FILE: admin/controller/marketplace/extension.php
+CODE: $data['type'] = '';
+LINE: 26
+
+FILE: admin/view/template/marketplace/marketplace_list.twig
+CODE: {% if license.value == filter_license %}<a href="{{ license.href }}" class="btn btn-default active">{{ license.text }}</a>{% else %}<a href="{{ license.href }}" class="btn btn-default">{{ license.text }}</a>{% endif %}
+LINE: 49
+
+FILE: catalog/controller/information/contact.php
+CODE: if (isset($this->error['name'])) {
+LINE: 48
+CODE: $data['comment'] = $this->config->get('config_comment');
+LINE: 106
+CODE: return !$this->error;
+LINE: 205
+
+FILE: catalog/view/theme/default/template/information/contact.twig
+CODE: <div class="row">{{ column_left }}
+LINE: 12
+CODE: <div class="buttons">
+LINE: 154
+CODE: </form>
+LINE: 162
+CODE: $data['button_submit'] = $this->language->get('button_submit');
+LINE: 69
+----------------------------------------------------------------
+2019-01-21 22:24:10 - MOD: Modification Default
+
+FILE: system/engine/action.php
+REGEX: ~(require|include)(_once)?\(([^)]+)~
+LINE: 69
+
+FILE: system/engine/loader.php
+REGEX: ~(require|include)(_once)?\(([^)]+)~
+LINE: 77
+LINE: 151
+LINE: 168
+
+FILE: system/library/config.php
+REGEX: ~(require|include)(_once)?\(([^)]+)~
+LINE: 59
+
+FILE: system/library/language.php
+REGEX: ~(require|include)(_once)?\(([^)]+)~
+LINE: 67
+LINE: 73
+
+FILE: system/library/template/template.php
+REGEX: ~(require|include)(_once)?\(([^)]+)~
+LINE: 18
+
+FILE: system/library/template/twig.php
+CODE: $loader = new \Twig_Loader_Filesystem(DIR_TEMPLATE);
+LINE: 19
+----------------------------------------------------------------
+MOD: Simplica Theme
+
+FILE: catalog/view/theme/simplica/template/common/cart.twig
+CODE: <div id="cart" class="btn-group btn-block">
+LINE: 0
+
+FILE: catalog/controller/extension/module/carousel.php
+CODE: $this->document->addStyle('catalog/view/javascript/jquery/swiper/css/opencart.css');
+LINE: 9
+
+FILE: catalog/controller/extension/module/banner.php
+CODE: $this->document->addStyle('catalog/view/javascript/jquery/swiper/css/opencart.css');
+LINE: 9
+
+FILE: catalog/controller/extension/module/slideshow.php
+CODE: $this->document->addStyle('catalog/view/javascript/jquery/swiper/css/opencart.css');
+LINE: 9
+
+FILE: catalog/view/theme/simplica/template/common/footer.twig
+CODE: <p>{{ powered }}</p>
+LINE: 41
+----------------------------------------------------------------
+MOD: Tweak for OpenCart 3x Russkaya sborka
+
+FILE: admin/view/template/common/header.twig
+CODE: {% for link in links %}
+LINE: 36
+CODE: <li><a href="http://www.opencart.com" target="_blank"><i class="fa fa-opencart fa-fw"></i> {{ text_homepage }}</a></li>
+LINE: 67
+CODE: <li><a href="http://docs.opencart.com" target="_blank"><i class="fa fa-file-text-o fa-fw"></i> {{ text_documentation }}</a></li>
+LINE: 70
+CODE: <li><a href="http://forum.opencart.com" target="_blank"><i class="fa fa-comments-o fa-fw"></i> {{ text_support }}</a></li>
+LINE: 73
+
+FILE: admin/view/template/catalog/product_form.twig
+CODE: <label class="col-sm-2 control-label" for="input-sku"><span data-toggle="tooltip" title="{{ help_sku }}">{{ entry_sku }}</span></label>
+LINE: 104
+CODE: <label class="col-sm-2 control-label" for="input-sku">
+LINE: 110
+CODE: <label class="col-sm-2 control-label" for="input-location">{{ entry_location }}</label>
+LINE: 150
+CODE: <input type="text" name="model" value="{{ model }}" placeholder="{{ entry_model }}" id="input-model" class="form-control" />
+LINE: 97
+CODE: <li><a href="#tab-recurring" data-toggle="tab">{{ tab_recurring }}</a></li>
+LINE: 32
+
+FILE: admin/controller/common/filemanager.php
+CODE: $this->load->language('common/filemanager');
+LINE: 13
+CODE: // Parent
+LINE: 133
+CODE: $pagination = new Pagination();
+LINE: 194
+CODE: $directory = rtrim(DIR_IMAGE . 'catalog/' . str_replace('*', '', $this->request->get['directory']), '/');
+LINE: 33
+CODE: $directory = rtrim(DIR_IMAGE . 'catalog/' . str_replace('*', '', $this->request->get['directory']), '/');
+LINE: 33
+CODE: public function index() {
+LINE: 10
+CODE: $filename = basename(html_entity_decode($file['name'], ENT_QUOTES, 'UTF-8'));
+LINE: 260
+CODE: $folder = basename(html_entity_decode($this->request->post['folder'], ENT_QUOTES, 'UTF-8'));
+LINE: 340
+
+FILE: admin/view/template/common/filemanager.twig
+CODE: {% for image in images|batch(4) %}
+LINE: 34
+
+FILE: catalog/controller/tool/upload.php
+CODE: public function index() {
+LINE: 10
+CODE: $filename = basename(preg_replace('/[^a-zA-Z0-9\.\-\s+]/', '', html_entity_decode($this->request->files['file']['name'], ENT_QUOTES, 'UTF-8')));
+LINE: 17
+
+FILE: admin/controller/marketplace/extension.php
+CODE: $data['type'] = '';
+LINE: 26
+
+FILE: admin/view/template/marketplace/marketplace_list.twig
+CODE: {% if license.value == filter_license %}<a href="{{ license.href }}" class="btn btn-default active">{{ license.text }}</a>{% else %}<a href="{{ license.href }}" class="btn btn-default">{{ license.text }}</a>{% endif %}
+LINE: 49
+
+FILE: catalog/controller/information/contact.php
+CODE: if (isset($this->error['name'])) {
+LINE: 48
+CODE: $data['comment'] = $this->config->get('config_comment');
+LINE: 106
+CODE: return !$this->error;
+LINE: 205
+
+FILE: catalog/view/theme/default/template/information/contact.twig
+CODE: <div class="row">{{ column_left }}
+LINE: 12
+CODE: <div class="buttons">
+LINE: 154
+CODE: </form>
+LINE: 162
+CODE: $data['button_submit'] = $this->language->get('button_submit');
+LINE: 69
+----------------------------------------------------------------
+2019-01-28 21:15:12 - MOD: Modification Default
+
+FILE: system/engine/action.php
+REGEX: ~(require|include)(_once)?\(([^)]+)~
+LINE: 69
+
+FILE: system/engine/loader.php
+REGEX: ~(require|include)(_once)?\(([^)]+)~
+LINE: 77
+LINE: 151
+LINE: 168
+
+FILE: system/library/config.php
+REGEX: ~(require|include)(_once)?\(([^)]+)~
+LINE: 59
+
+FILE: system/library/language.php
+REGEX: ~(require|include)(_once)?\(([^)]+)~
+LINE: 67
+LINE: 73
+
+FILE: system/library/template/template.php
+REGEX: ~(require|include)(_once)?\(([^)]+)~
+LINE: 18
+
+FILE: system/library/template/twig.php
+CODE: $loader = new \Twig_Loader_Filesystem(DIR_TEMPLATE);
+LINE: 19
+----------------------------------------------------------------
+MOD: Simplica Theme
+
+FILE: catalog/view/theme/simplica/template/common/cart.twig
+CODE: <div id="cart" class="btn-group btn-block">
+LINE: 0
+
+FILE: catalog/controller/extension/module/carousel.php
+CODE: $this->document->addStyle('catalog/view/javascript/jquery/swiper/css/opencart.css');
+LINE: 9
+
+FILE: catalog/controller/extension/module/banner.php
+CODE: $this->document->addStyle('catalog/view/javascript/jquery/swiper/css/opencart.css');
+LINE: 9
+
+FILE: catalog/controller/extension/module/slideshow.php
+CODE: $this->document->addStyle('catalog/view/javascript/jquery/swiper/css/opencart.css');
+LINE: 9
+
+FILE: catalog/view/theme/simplica/template/common/footer.twig
+CODE: <p>{{ powered }}</p>
+LINE: 41
+----------------------------------------------------------------
+MOD: Tweak for OpenCart 3x Russkaya sborka
+
+FILE: admin/view/template/common/header.twig
+CODE: {% for link in links %}
+LINE: 36
+CODE: <li><a href="http://www.opencart.com" target="_blank"><i class="fa fa-opencart fa-fw"></i> {{ text_homepage }}</a></li>
+LINE: 67
+CODE: <li><a href="http://docs.opencart.com" target="_blank"><i class="fa fa-file-text-o fa-fw"></i> {{ text_documentation }}</a></li>
+LINE: 70
+CODE: <li><a href="http://forum.opencart.com" target="_blank"><i class="fa fa-comments-o fa-fw"></i> {{ text_support }}</a></li>
+LINE: 73
+
+FILE: admin/view/template/catalog/product_form.twig
+CODE: <label class="col-sm-2 control-label" for="input-sku"><span data-toggle="tooltip" title="{{ help_sku }}">{{ entry_sku }}</span></label>
+LINE: 104
+CODE: <label class="col-sm-2 control-label" for="input-sku">
+LINE: 110
+CODE: <label class="col-sm-2 control-label" for="input-location">{{ entry_location }}</label>
+LINE: 150
+CODE: <input type="text" name="model" value="{{ model }}" placeholder="{{ entry_model }}" id="input-model" class="form-control" />
+LINE: 97
+CODE: <li><a href="#tab-recurring" data-toggle="tab">{{ tab_recurring }}</a></li>
+LINE: 32
+
+FILE: admin/controller/common/filemanager.php
+CODE: $this->load->language('common/filemanager');
+LINE: 13
+CODE: // Parent
+LINE: 133
+CODE: $pagination = new Pagination();
+LINE: 194
+CODE: $directory = rtrim(DIR_IMAGE . 'catalog/' . str_replace('*', '', $this->request->get['directory']), '/');
+LINE: 33
+CODE: $directory = rtrim(DIR_IMAGE . 'catalog/' . str_replace('*', '', $this->request->get['directory']), '/');
+LINE: 33
+CODE: public function index() {
+LINE: 10
+CODE: $filename = basename(html_entity_decode($file['name'], ENT_QUOTES, 'UTF-8'));
+LINE: 260
+CODE: $folder = basename(html_entity_decode($this->request->post['folder'], ENT_QUOTES, 'UTF-8'));
+LINE: 340
+
+FILE: admin/view/template/common/filemanager.twig
+CODE: {% for image in images|batch(4) %}
+LINE: 34
+
+FILE: catalog/controller/tool/upload.php
+CODE: public function index() {
+LINE: 10
+CODE: $filename = basename(preg_replace('/[^a-zA-Z0-9\.\-\s+]/', '', html_entity_decode($this->request->files['file']['name'], ENT_QUOTES, 'UTF-8')));
+LINE: 17
+
+FILE: admin/controller/marketplace/extension.php
+CODE: $data['type'] = '';
+LINE: 26
+
+FILE: admin/view/template/marketplace/marketplace_list.twig
+CODE: {% if license.value == filter_license %}<a href="{{ license.href }}" class="btn btn-default active">{{ license.text }}</a>{% else %}<a href="{{ license.href }}" class="btn btn-default">{{ license.text }}</a>{% endif %}
+LINE: 49
+
+FILE: catalog/controller/information/contact.php
+CODE: if (isset($this->error['name'])) {
+LINE: 48
+CODE: $data['comment'] = $this->config->get('config_comment');
+LINE: 106
+CODE: return !$this->error;
+LINE: 205
+
+FILE: catalog/view/theme/default/template/information/contact.twig
+CODE: <div class="row">{{ column_left }}
+LINE: 12
+CODE: <div class="buttons">
+LINE: 154
+CODE: </form>
+LINE: 162
+CODE: $data['button_submit'] = $this->language->get('button_submit');
+LINE: 69
+----------------------------------------------------------------
+MOD: d_opencart_patch
+
+FILE: admin/controller/user/user_permission.php
+CODE: $path[] = $file . '/*';
+LINE: 337
+CODE: $permission = substr($controller, 0, strrpos($controller, '.'));
+LINE: 353
+
+FILE: admin/model/setting/extension.php
+CODE: $query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "extension_path` WHERE `extension_install_id` = '" . (int)$extension_install_id . "' ORDER BY `date_added` ASC");
+LINE: 72
+
+FILE: admin/model/setting/modification.php
+CODE: $this->db->query("DELETE FROM `" . DB_PREFIX . "modification` WHERE `extension_install_id` = '" . (int)$extension_install_id . "'");
+LINE: 11
+
+FILE: admin/controller/marketplace/install.php
+CODE: $this->model_setting_extension->deleteExtensionInstall($extension_install_id);
+LINE: 506
+CODE: $this->model_setting_modification->deleteModificationsByExtensionInstallId($extension_install_id);
+LINE: 514
+CODE: $files = glob($directory . '/' . $filter_name . '*.{jpg,jpeg,png,gif,JPG,JPEG,PNG,GIF}', GLOB_BRACE);
+LINE: 71
+CODE: 'jpg',
+LINE: 272
+CODE: 'image/jpeg',
+LINE: 285
+CODE: <img src="{{ image.thumb }}" alt="{{ image.name }}" title="{{ image.name }}" />
+LINE: 45
+CODE: </header>
+LINE: 88
+
+FILE: admin/model/tool/image.php
+CODE: public function resize($filename, $width, $height) {
+LINE: 18
+
+FILE: catalog/model/tool/image.php
+CODE: public function resize($filename, $width, $height) {
+LINE: 18
+----------------------------------------------------------------
+2019-01-28 21:15:40 - MOD: Modification Default
+FILE: system/engine/action.php
+REGEX: ~(require|include)(_once)?\(([^)]+)~
+LINE: 69
+FILE: system/engine/loader.php
+REGEX: ~(require|include)(_once)?\(([^)]+)~
+LINE: 77
+LINE: 151
+LINE: 168
+FILE: system/library/config.php
+REGEX: ~(require|include)(_once)?\(([^)]+)~
+LINE: 59
+FILE: system/library/language.php
+REGEX: ~(require|include)(_once)?\(([^)]+)~
+LINE: 67
+LINE: 73
+FILE: system/library/template/template.php
+REGEX: ~(require|include)(_once)?\(([^)]+)~
+LINE: 18
+FILE: system/library/template/twig.php
+CODE: $loader = new \Twig_Loader_Filesystem(DIR_TEMPLATE);
+LINE: 19
+----------------------------------------------------------------
+MOD: Simplica Theme
+FILE: catalog/view/theme/simplica/template/common/cart.twig
+CODE: <div id="cart" class="btn-group btn-block">
+LINE: 0
+FILE: catalog/controller/extension/module/carousel.php
+CODE: $this->document->addStyle('catalog/view/javascript/jquery/swiper/css/opencart.css');
+LINE: 9
+FILE: catalog/controller/extension/module/banner.php
+CODE: $this->document->addStyle('catalog/view/javascript/jquery/swiper/css/opencart.css');
+LINE: 9
+FILE: catalog/controller/extension/module/slideshow.php
+CODE: $this->document->addStyle('catalog/view/javascript/jquery/swiper/css/opencart.css');
+LINE: 9
+FILE: catalog/view/theme/simplica/template/common/footer.twig
+CODE: <p>{{ powered }}</p>
+LINE: 41
+----------------------------------------------------------------
+MOD: Tweak for OpenCart 3x Russkaya sborka
+FILE: admin/view/template/common/header.twig
+CODE: {% for link in links %}
+LINE: 36
+CODE: <li><a href="http://www.opencart.com" target="_blank"><i class="fa fa-opencart fa-fw"></i> {{ text_homepage }}</a></li>
+LINE: 67
+CODE: <li><a href="http://docs.opencart.com" target="_blank"><i class="fa fa-file-text-o fa-fw"></i> {{ text_documentation }}</a></li>
+LINE: 70
+CODE: <li><a href="http://forum.opencart.com" target="_blank"><i class="fa fa-comments-o fa-fw"></i> {{ text_support }}</a></li>
+LINE: 73
+FILE: admin/view/template/catalog/product_form.twig
+CODE: <label class="col-sm-2 control-label" for="input-sku"><span data-toggle="tooltip" title="{{ help_sku }}">{{ entry_sku }}</span></label>
+LINE: 104
+CODE: <label class="col-sm-2 control-label" for="input-sku">
+LINE: 110
+CODE: <label class="col-sm-2 control-label" for="input-location">{{ entry_location }}</label>
+LINE: 150
+CODE: <input type="text" name="model" value="{{ model }}" placeholder="{{ entry_model }}" id="input-model" class="form-control" />
+LINE: 97
+CODE: <li><a href="#tab-recurring" data-toggle="tab">{{ tab_recurring }}</a></li>
+LINE: 32
+FILE: admin/controller/common/filemanager.php
+CODE: $this->load->language('common/filemanager');
+LINE: 13
+CODE: // Parent
+LINE: 133
+CODE: $pagination = new Pagination();
+LINE: 194
+CODE: $directory = rtrim(DIR_IMAGE . 'catalog/' . str_replace('*', '', $this->request->get['directory']), '/');
+LINE: 33
+CODE: $directory = rtrim(DIR_IMAGE . 'catalog/' . str_replace('*', '', $this->request->get['directory']), '/');
+LINE: 33
+CODE: public function index() {
+LINE: 10
+CODE: $filename = basename(html_entity_decode($file['name'], ENT_QUOTES, 'UTF-8'));
+LINE: 260
+CODE: $folder = basename(html_entity_decode($this->request->post['folder'], ENT_QUOTES, 'UTF-8'));
+LINE: 340
+FILE: admin/view/template/common/filemanager.twig
+CODE: {% for image in images|batch(4) %}
+LINE: 34
+FILE: catalog/controller/tool/upload.php
+CODE: public function index() {
+LINE: 10
+CODE: $filename = basename(preg_replace('/[^a-zA-Z0-9\.\-\s+]/', '', html_entity_decode($this->request->files['file']['name'], ENT_QUOTES, 'UTF-8')));
+LINE: 17
+FILE: admin/controller/marketplace/extension.php
+CODE: $data['type'] = '';
+LINE: 26
+FILE: admin/view/template/marketplace/marketplace_list.twig
+CODE: {% if license.value == filter_license %}<a href="{{ license.href }}" class="btn btn-default active">{{ license.text }}</a>{% else %}<a href="{{ license.href }}" class="btn btn-default">{{ license.text }}</a>{% endif %}
+LINE: 49
+FILE: catalog/controller/information/contact.php
+CODE: if (isset($this->error['name'])) {
+LINE: 48
+CODE: $data['comment'] = $this->config->get('config_comment');
+LINE: 106
+CODE: return !$this->error;
+LINE: 205
+FILE: catalog/view/theme/default/template/information/contact.twig
+CODE: <div class="row">{{ column_left }}
+LINE: 12
+CODE: <div class="buttons">
+LINE: 154
+CODE: </form>
+LINE: 162
+CODE: $data['button_submit'] = $this->language->get('button_submit');
+LINE: 69
+----------------------------------------------------------------
+MOD: d_opencart_patch
+FILE: admin/controller/user/user_permission.php
+CODE: $path[] = $file . '/*';
+LINE: 337
+CODE: $permission = substr($controller, 0, strrpos($controller, '.'));
+LINE: 353
+FILE: admin/model/setting/extension.php
+CODE: $query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "extension_path` WHERE `extension_install_id` = '" . (int)$extension_install_id . "' ORDER BY `date_added` ASC");
+LINE: 72
+FILE: admin/model/setting/modification.php
+CODE: $this->db->query("DELETE FROM `" . DB_PREFIX . "modification` WHERE `extension_install_id` = '" . (int)$extension_install_id . "'");
+LINE: 11
+FILE: admin/controller/marketplace/install.php
+CODE: $this->model_setting_extension->deleteExtensionInstall($extension_install_id);
+LINE: 506
+CODE: $this->model_setting_modification->deleteModificationsByExtensionInstallId($extension_install_id);
+LINE: 514
+CODE: $files = glob($directory . '/' . $filter_name . '*.{jpg,jpeg,png,gif,JPG,JPEG,PNG,GIF}', GLOB_BRACE);
+LINE: 71
+CODE: 'jpg',
+LINE: 272
+CODE: 'image/jpeg',
+LINE: 285
+CODE: <img src="{{ image.thumb }}" alt="{{ image.name }}" title="{{ image.name }}" />
+LINE: 45
+CODE: </header>
+LINE: 88
+FILE: admin/model/tool/image.php
+CODE: public function resize($filename, $width, $height) {
+LINE: 18
+FILE: catalog/model/tool/image.php
+CODE: public function resize($filename, $width, $height) {
+LINE: 18
+----------------------------------------------------------------
+MOD: d_twig_manager
+CODE: $template = new Template($this->registry->get('config')->get('template_engine'));
+LINE: 118
+FILE: system/library/template.php
+CODE: public function __construct($adaptor) {
+LINE: 21
+CODE: $this->adaptor = new $class();
+LINE: 28
+CODE: private $data = array();
+LINE: 8
+CODE: public function __construct() {
+LINE: 10
+CODE: \Twig_Autoloader::register();
+LINE: 21
+CODE: $this->twig = new \Twig_Environment($loader, $config);
+LINE: 54
+FILE: catalog/controller/event/theme.php
+CODE: $twig = new \Twig_Environment($loader, $config);
+LINE: 26
+----------------------------------------------------------------
+2019-01-28 21:17:40 - MOD: Modification Default
+
+FILE: system/engine/action.php
+REGEX: ~(require|include)(_once)?\(([^)]+)~
+LINE: 69
+
+FILE: system/engine/loader.php
+REGEX: ~(require|include)(_once)?\(([^)]+)~
+LINE: 77
+LINE: 151
+LINE: 168
+
+FILE: system/library/config.php
+REGEX: ~(require|include)(_once)?\(([^)]+)~
+LINE: 59
+
+FILE: system/library/language.php
+REGEX: ~(require|include)(_once)?\(([^)]+)~
+LINE: 67
+LINE: 73
+
+FILE: system/library/template/template.php
+REGEX: ~(require|include)(_once)?\(([^)]+)~
+LINE: 18
+
+FILE: system/library/template/twig.php
+CODE: $loader = new \Twig_Loader_Filesystem(DIR_TEMPLATE);
+LINE: 19
+----------------------------------------------------------------
+MOD: Simplica Theme
+
+FILE: catalog/view/theme/simplica/template/common/cart.twig
+CODE: <div id="cart" class="btn-group btn-block">
+LINE: 0
+
+FILE: catalog/controller/extension/module/carousel.php
+CODE: $this->document->addStyle('catalog/view/javascript/jquery/swiper/css/opencart.css');
+LINE: 9
+
+FILE: catalog/controller/extension/module/banner.php
+CODE: $this->document->addStyle('catalog/view/javascript/jquery/swiper/css/opencart.css');
+LINE: 9
+
+FILE: catalog/controller/extension/module/slideshow.php
+CODE: $this->document->addStyle('catalog/view/javascript/jquery/swiper/css/opencart.css');
+LINE: 9
+
+FILE: catalog/view/theme/simplica/template/common/footer.twig
+CODE: <p>{{ powered }}</p>
+LINE: 41
+----------------------------------------------------------------
+MOD: Tweak for OpenCart 3x Russkaya sborka
+
+FILE: admin/view/template/common/header.twig
+CODE: {% for link in links %}
+LINE: 36
+CODE: <li><a href="http://www.opencart.com" target="_blank"><i class="fa fa-opencart fa-fw"></i> {{ text_homepage }}</a></li>
+LINE: 67
+CODE: <li><a href="http://docs.opencart.com" target="_blank"><i class="fa fa-file-text-o fa-fw"></i> {{ text_documentation }}</a></li>
+LINE: 70
+CODE: <li><a href="http://forum.opencart.com" target="_blank"><i class="fa fa-comments-o fa-fw"></i> {{ text_support }}</a></li>
+LINE: 73
+
+FILE: admin/view/template/catalog/product_form.twig
+CODE: <label class="col-sm-2 control-label" for="input-sku"><span data-toggle="tooltip" title="{{ help_sku }}">{{ entry_sku }}</span></label>
+LINE: 104
+CODE: <label class="col-sm-2 control-label" for="input-sku">
+LINE: 110
+CODE: <label class="col-sm-2 control-label" for="input-location">{{ entry_location }}</label>
+LINE: 150
+CODE: <input type="text" name="model" value="{{ model }}" placeholder="{{ entry_model }}" id="input-model" class="form-control" />
+LINE: 97
+CODE: <li><a href="#tab-recurring" data-toggle="tab">{{ tab_recurring }}</a></li>
+LINE: 32
+
+FILE: admin/controller/common/filemanager.php
+CODE: $this->load->language('common/filemanager');
+LINE: 13
+CODE: // Parent
+LINE: 133
+CODE: $pagination = new Pagination();
+LINE: 194
+CODE: $directory = rtrim(DIR_IMAGE . 'catalog/' . str_replace('*', '', $this->request->get['directory']), '/');
+LINE: 33
+CODE: $directory = rtrim(DIR_IMAGE . 'catalog/' . str_replace('*', '', $this->request->get['directory']), '/');
+LINE: 33
+CODE: public function index() {
+LINE: 10
+CODE: $filename = basename(html_entity_decode($file['name'], ENT_QUOTES, 'UTF-8'));
+LINE: 260
+CODE: $folder = basename(html_entity_decode($this->request->post['folder'], ENT_QUOTES, 'UTF-8'));
+LINE: 340
+
+FILE: admin/view/template/common/filemanager.twig
+CODE: {% for image in images|batch(4) %}
+LINE: 34
+
+FILE: catalog/controller/tool/upload.php
+CODE: public function index() {
+LINE: 10
+CODE: $filename = basename(preg_replace('/[^a-zA-Z0-9\.\-\s+]/', '', html_entity_decode($this->request->files['file']['name'], ENT_QUOTES, 'UTF-8')));
+LINE: 17
+
+FILE: admin/controller/marketplace/extension.php
+CODE: $data['type'] = '';
+LINE: 26
+
+FILE: admin/view/template/marketplace/marketplace_list.twig
+CODE: {% if license.value == filter_license %}<a href="{{ license.href }}" class="btn btn-default active">{{ license.text }}</a>{% else %}<a href="{{ license.href }}" class="btn btn-default">{{ license.text }}</a>{% endif %}
+LINE: 49
+
+FILE: catalog/controller/information/contact.php
+CODE: if (isset($this->error['name'])) {
+LINE: 48
+CODE: $data['comment'] = $this->config->get('config_comment');
+LINE: 106
+CODE: return !$this->error;
+LINE: 205
+
+FILE: catalog/view/theme/default/template/information/contact.twig
+CODE: <div class="row">{{ column_left }}
+LINE: 12
+CODE: <div class="buttons">
+LINE: 154
+CODE: </form>
+LINE: 162
+CODE: $data['button_submit'] = $this->language->get('button_submit');
+LINE: 69
+----------------------------------------------------------------
+MOD: d_opencart_patch
+
+FILE: admin/controller/user/user_permission.php
+CODE: $path[] = $file . '/*';
+LINE: 337
+CODE: $permission = substr($controller, 0, strrpos($controller, '.'));
+LINE: 353
+
+FILE: admin/model/setting/extension.php
+CODE: $query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "extension_path` WHERE `extension_install_id` = '" . (int)$extension_install_id . "' ORDER BY `date_added` ASC");
+LINE: 72
+
+FILE: admin/model/setting/modification.php
+CODE: $this->db->query("DELETE FROM `" . DB_PREFIX . "modification` WHERE `extension_install_id` = '" . (int)$extension_install_id . "'");
+LINE: 11
+
+FILE: admin/controller/marketplace/install.php
+CODE: $this->model_setting_extension->deleteExtensionInstall($extension_install_id);
+LINE: 506
+CODE: $this->model_setting_modification->deleteModificationsByExtensionInstallId($extension_install_id);
+LINE: 514
+CODE: $files = glob($directory . '/' . $filter_name . '*.{jpg,jpeg,png,gif,JPG,JPEG,PNG,GIF}', GLOB_BRACE);
+LINE: 71
+CODE: 'jpg',
+LINE: 272
+CODE: 'image/jpeg',
+LINE: 285
+CODE: <img src="{{ image.thumb }}" alt="{{ image.name }}" title="{{ image.name }}" />
+LINE: 45
+CODE: </header>
+LINE: 88
+
+FILE: admin/model/tool/image.php
+CODE: public function resize($filename, $width, $height) {
+LINE: 18
+
+FILE: catalog/model/tool/image.php
+CODE: public function resize($filename, $width, $height) {
+LINE: 18
+----------------------------------------------------------------
+MOD: d_twig_manager
+CODE: $template = new Template($this->registry->get('config')->get('template_engine'));
+LINE: 118
+
+FILE: system/library/template.php
+CODE: public function __construct($adaptor) {
+LINE: 21
+CODE: $this->adaptor = new $class();
+LINE: 28
+CODE: private $data = array();
+LINE: 8
+CODE: public function __construct() {
+LINE: 10
+CODE: \Twig_Autoloader::register();
+LINE: 21
+CODE: $this->twig = new \Twig_Environment($loader, $config);
+LINE: 54
+
+FILE: catalog/controller/event/theme.php
+CODE: $twig = new \Twig_Environment($loader, $config);
+LINE: 26
+----------------------------------------------------------------
+2019-01-28 21:18:51 - MOD: Modification Default
+FILE: system/engine/action.php
+REGEX: ~(require|include)(_once)?\(([^)]+)~
+LINE: 69
+FILE: system/engine/loader.php
+REGEX: ~(require|include)(_once)?\(([^)]+)~
+LINE: 77
+LINE: 151
+LINE: 168
+FILE: system/library/config.php
+REGEX: ~(require|include)(_once)?\(([^)]+)~
+LINE: 59
+FILE: system/library/language.php
+REGEX: ~(require|include)(_once)?\(([^)]+)~
+LINE: 67
+LINE: 73
+FILE: system/library/template/template.php
+REGEX: ~(require|include)(_once)?\(([^)]+)~
+LINE: 18
+FILE: system/library/template/twig.php
+CODE: $loader = new \Twig_Loader_Filesystem(DIR_TEMPLATE);
+LINE: 19
+----------------------------------------------------------------
+MOD: Simplica Theme
+FILE: catalog/view/theme/simplica/template/common/cart.twig
+CODE: <div id="cart" class="btn-group btn-block">
+LINE: 0
+FILE: catalog/controller/extension/module/carousel.php
+CODE: $this->document->addStyle('catalog/view/javascript/jquery/swiper/css/opencart.css');
+LINE: 9
+FILE: catalog/controller/extension/module/banner.php
+CODE: $this->document->addStyle('catalog/view/javascript/jquery/swiper/css/opencart.css');
+LINE: 9
+FILE: catalog/controller/extension/module/slideshow.php
+CODE: $this->document->addStyle('catalog/view/javascript/jquery/swiper/css/opencart.css');
+LINE: 9
+FILE: catalog/view/theme/simplica/template/common/footer.twig
+CODE: <p>{{ powered }}</p>
+LINE: 41
+----------------------------------------------------------------
+MOD: Tweak for OpenCart 3x Russkaya sborka
+FILE: admin/view/template/common/header.twig
+CODE: {% for link in links %}
+LINE: 36
+CODE: <li><a href="http://www.opencart.com" target="_blank"><i class="fa fa-opencart fa-fw"></i> {{ text_homepage }}</a></li>
+LINE: 67
+CODE: <li><a href="http://docs.opencart.com" target="_blank"><i class="fa fa-file-text-o fa-fw"></i> {{ text_documentation }}</a></li>
+LINE: 70
+CODE: <li><a href="http://forum.opencart.com" target="_blank"><i class="fa fa-comments-o fa-fw"></i> {{ text_support }}</a></li>
+LINE: 73
+FILE: admin/view/template/catalog/product_form.twig
+CODE: <label class="col-sm-2 control-label" for="input-sku"><span data-toggle="tooltip" title="{{ help_sku }}">{{ entry_sku }}</span></label>
+LINE: 104
+CODE: <label class="col-sm-2 control-label" for="input-sku">
+LINE: 110
+CODE: <label class="col-sm-2 control-label" for="input-location">{{ entry_location }}</label>
+LINE: 150
+CODE: <input type="text" name="model" value="{{ model }}" placeholder="{{ entry_model }}" id="input-model" class="form-control" />
+LINE: 97
+CODE: <li><a href="#tab-recurring" data-toggle="tab">{{ tab_recurring }}</a></li>
+LINE: 32
+FILE: admin/controller/common/filemanager.php
+CODE: $this->load->language('common/filemanager');
+LINE: 13
+CODE: // Parent
+LINE: 133
+CODE: $pagination = new Pagination();
+LINE: 194
+CODE: $directory = rtrim(DIR_IMAGE . 'catalog/' . str_replace('*', '', $this->request->get['directory']), '/');
+LINE: 33
+CODE: $directory = rtrim(DIR_IMAGE . 'catalog/' . str_replace('*', '', $this->request->get['directory']), '/');
+LINE: 33
+CODE: public function index() {
+LINE: 10
+CODE: $filename = basename(html_entity_decode($file['name'], ENT_QUOTES, 'UTF-8'));
+LINE: 260
+CODE: $folder = basename(html_entity_decode($this->request->post['folder'], ENT_QUOTES, 'UTF-8'));
+LINE: 340
+FILE: admin/view/template/common/filemanager.twig
+CODE: {% for image in images|batch(4) %}
+LINE: 34
+FILE: catalog/controller/tool/upload.php
+CODE: public function index() {
+LINE: 10
+CODE: $filename = basename(preg_replace('/[^a-zA-Z0-9\.\-\s+]/', '', html_entity_decode($this->request->files['file']['name'], ENT_QUOTES, 'UTF-8')));
+LINE: 17
+FILE: admin/controller/marketplace/extension.php
+CODE: $data['type'] = '';
+LINE: 26
+FILE: admin/view/template/marketplace/marketplace_list.twig
+CODE: {% if license.value == filter_license %}<a href="{{ license.href }}" class="btn btn-default active">{{ license.text }}</a>{% else %}<a href="{{ license.href }}" class="btn btn-default">{{ license.text }}</a>{% endif %}
+LINE: 49
+FILE: catalog/controller/information/contact.php
+CODE: if (isset($this->error['name'])) {
+LINE: 48
+CODE: $data['comment'] = $this->config->get('config_comment');
+LINE: 106
+CODE: return !$this->error;
+LINE: 205
+FILE: catalog/view/theme/default/template/information/contact.twig
+CODE: <div class="row">{{ column_left }}
+LINE: 12
+CODE: <div class="buttons">
+LINE: 154
+CODE: </form>
+LINE: 162
+CODE: $data['button_submit'] = $this->language->get('button_submit');
+LINE: 69
+----------------------------------------------------------------
+MOD: Ajax Quick Checkout
+FILE: catalog/controller/checkout/checkout.php
+CODE: if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/checkout/checkout.tpl')) {
+NOT FOUND!
+CODE: $this->response->setOutput($this->load->view('checkout/checkout', $data));
+LINE: 94
+CODE: $data['header'] = $this->load->controller('common/header');
+LINE: 97
+FILE: system/library/cart/tax.php
+CODE: final class Tax {
+LINE: 8
+----------------------------------------------------------------
+MOD: d_opencart_patch
+FILE: admin/controller/user/user_permission.php
+CODE: $path[] = $file . '/*';
+LINE: 337
+CODE: $permission = substr($controller, 0, strrpos($controller, '.'));
+LINE: 353
+FILE: admin/model/setting/extension.php
+CODE: $query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "extension_path` WHERE `extension_install_id` = '" . (int)$extension_install_id . "' ORDER BY `date_added` ASC");
+LINE: 72
+FILE: admin/model/setting/modification.php
+CODE: $this->db->query("DELETE FROM `" . DB_PREFIX . "modification` WHERE `extension_install_id` = '" . (int)$extension_install_id . "'");
+LINE: 11
+FILE: admin/controller/marketplace/install.php
+CODE: $this->model_setting_extension->deleteExtensionInstall($extension_install_id);
+LINE: 506
+CODE: $this->model_setting_modification->deleteModificationsByExtensionInstallId($extension_install_id);
+LINE: 514
+CODE: $files = glob($directory . '/' . $filter_name . '*.{jpg,jpeg,png,gif,JPG,JPEG,PNG,GIF}', GLOB_BRACE);
+LINE: 71
+CODE: 'jpg',
+LINE: 272
+CODE: 'image/jpeg',
+LINE: 285
+CODE: <img src="{{ image.thumb }}" alt="{{ image.name }}" title="{{ image.name }}" />
+LINE: 45
+CODE: </header>
+LINE: 88
+FILE: admin/model/tool/image.php
+CODE: public function resize($filename, $width, $height) {
+LINE: 18
+FILE: catalog/model/tool/image.php
+CODE: public function resize($filename, $width, $height) {
+LINE: 18
+----------------------------------------------------------------
+MOD: d_twig_manager
+CODE: $template = new Template($this->registry->get('config')->get('template_engine'));
+LINE: 118
+FILE: system/library/template.php
+CODE: public function __construct($adaptor) {
+LINE: 21
+CODE: $this->adaptor = new $class();
+LINE: 28
+CODE: private $data = array();
+LINE: 8
+CODE: public function __construct() {
+LINE: 10
+CODE: \Twig_Autoloader::register();
+LINE: 21
+CODE: $this->twig = new \Twig_Environment($loader, $config);
+LINE: 54
+FILE: catalog/controller/event/theme.php
+CODE: $twig = new \Twig_Environment($loader, $config);
+LINE: 26
+----------------------------------------------------------------
