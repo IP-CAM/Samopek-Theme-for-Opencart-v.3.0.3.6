@@ -3,6 +3,8 @@ class ControllerCheckoutSuccess extends Controller {
 	public function index() {
 		$this->load->language('checkout/success');
 
+        $data['header_text'] = sprintf($this->language->get('text_order'), $this->session->data['order_id']);
+
 		if (isset($this->session->data['order_id'])) {
 			$this->cart->clear();
 
