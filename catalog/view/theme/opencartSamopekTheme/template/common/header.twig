@@ -43,7 +43,28 @@
     {{ language }}
     <div id="top-links" class="nav pull-right">
       <ul class="list-inline">
-        <li><a href="{{ contact }}"><i class="fa fa-phone"></i></a> <span class="hidden-xs hidden-sm hidden-md">{{ telephone }}</span></li>
+        <li class="number dropdown">
+          <span class="dropdown-toogle" data-hover="dropdown" data-toggle="dropdown"><i class="fa fa-mobile-phone"></i> <a href="tel:89306661466" class="tel">{{ telephone }}</a> <i class="fa fa-caret-down"></i></span>
+          <ul class="dropdown-menu keep_open">
+            <li class="dropdown-header">Режим работы</li>
+            <li class="text-left" >
+              <div style="padding:3px 20px"><i class="fa fa-lg fa-fw fa-clock-o"></i>ПН - ЧТ: с 9:00 до 19:00
+                <br>ПТ: с 9:00 до 18:00
+                <br>СБ: с 11:00 до 17:00
+                <br>ВС: выходной</div></li>
+
+            <li class="divider"></li>
+            <li class="dropdown-header">Отправить письмо</li>
+            <li class="text-left"><a href="mailto:evgenia.kochukova@samopek.ru" target="_blank"><span><i class="fa fa-lg fa-fw fa-envelope-o"></i>evgenia.kochukova@samopek.ru</span></a></li>
+            <li class="divider"></li>
+            <li class="dropdown-header">Пункт самовывоза</li>
+            <li class="text-left"><a href="/index.php?route=information/contact"><span><i class="fa fa-lg fa-fw fa-home"></i>г.Нижний Новгород</span>
+                <br>Мещерский бульвар 3,к2<br>оф.№3</a></li>
+            <li class="divider"></li>
+            <li class="dropdown-header">Доставка по России</li>
+
+          </ul>
+        </li>
         <li class="dropdown"><a href="{{ account }}" title="{{ text_account }}" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <span class="hidden-xs hidden-sm hidden-md">{{ text_account }}</span> <span class="caret"></span></a>
           <ul class="dropdown-menu dropdown-menu-right">
             {% if logged %}
