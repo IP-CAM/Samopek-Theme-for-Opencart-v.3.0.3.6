@@ -233,8 +233,7 @@ h2.price { margin: 0; }
 .product-thumb .price-new { font-weight: 600; }
 .product-thumb .price-old { color: #999; text-decoration: line-through; margin-left: 10px; }
 .product-thumb .price-tax { color: #999; font-size: 12px; display: block; }
-.product-thumb .button-group {background-color: #eee; overflow: auto; visibility:hidden;}
-.product-thumb:hover .button-group{visibility:visible;}
+.product-thumb .button-group {background-color: #eee; overflow: auto;}
 .product-list .product-thumb .button-group {visibility:visible;}
 .product-list .product-thumb .caption > p{display:block;}
 @media (max-width: 768px) {
