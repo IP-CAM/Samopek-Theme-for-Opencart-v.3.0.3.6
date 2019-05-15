@@ -13,7 +13,12 @@ class ControllerExtensionModuleFeatured extends Controller {
 			$setting['limit'] = 4;
 		}
 
-		if (!empty($setting['product'])) {
+        // mako0216 cust start
+        // On page where featured loaded all other extensions are also affected by script in footer
+        $this->document->addScript('catalog/view/javascript/samopek/utils.js', 'footer');
+        // mako0216 cust end
+
+        if (!empty($setting['product'])) {
 			$products = array_slice($setting['product'], 0, (int)$setting['limit']);
 
 			foreach ($products as $product_id) {
