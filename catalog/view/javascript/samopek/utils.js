@@ -8,7 +8,7 @@
       a.innerHTML = a.innerHTML.substring(0, 30) + '...';
     } else {
       var l = a.innerHTML.length
-      for (var j = 0; j < (30 - l); j++ ) {
+      for (var j = 0; j < (30 - l); j++) {
         a.innerHTML = a.innerHTML + '&nbsp;';
       }
     }

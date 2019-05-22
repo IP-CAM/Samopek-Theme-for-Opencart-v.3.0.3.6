@@ -9,6 +9,11 @@ class ControllerProductCategory extends Controller {
 
 		$this->load->model('tool/image');
 
+        // mako0216 cust start
+        // On page where featured loaded all other extensions are also affected by script in footer
+        $this->document->addScript('catalog/view/javascript/samopek/alignThumbs2.js', 'footer');
+        // mako0216 cust end
+
 		if (isset($this->request->get['filter'])) {
 			$filter = $this->request->get['filter'];
 		} else {
@@ -193,6 +198,12 @@ class ControllerProductCategory extends Controller {
 					$rating = false;
 				}
 
+                if ((int)$result['quantity']) {
+                    $quantity = $result['quantity'];
+                } else {
+                    $quantity = 0;
+                }
+
 				$data['products'][] = array(
 					'product_id'  => $result['product_id'],
 					'thumb'       => $image,
@@ -203,7 +214,8 @@ class ControllerProductCategory extends Controller {
 					'tax'         => $tax,
 					'minimum'     => $result['minimum'] > 0 ? $result['minimum'] : 1,
 					'rating'      => $result['rating'],
-					'href'        => $this->url->link('product/product', 'path=' . $this->request->get['path'] . '&product_id=' . $result['product_id'] . $url)
+					'href'        => $this->url->link('product/product', 'path=' . $this->request->get['path'] . '&product_id=' . $result['product_id'] . $url),
+                    'quantity'    => $quantity
 				);
 			}
 

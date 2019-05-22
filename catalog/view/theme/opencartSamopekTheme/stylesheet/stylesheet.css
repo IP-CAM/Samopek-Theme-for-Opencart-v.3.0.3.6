@@ -229,6 +229,15 @@ footer li a:hover{color:#fff; text-decoration:underline;}
 .rating .fa-star { color: #FC0; font-size: 15px; }
 .rating .fa-star + .fa-star-o { color: #E69500; }
 h2.price { margin: 0; }
+
+.product-thumb .quantity {
+ text-align: right;
+ padding-right: 10px;
+ font-size: 15px;
+ color: #888;
+ background-color: #eee;
+ overflow: auto;
+}
 .product-thumb .price { color: #444; }
 .product-thumb .price-new { font-weight: 600; }
 .product-thumb .price-old { color: #999; text-decoration: line-through; margin-left: 10px; }
@@ -303,3 +312,4 @@ h2.price { margin: 0; }
 }
 /* Missing focus and border color to overwrite bootstrap */
 .btn-info:hover, .btn-info:active, .btn-info.active, .btn-info.disabled, .btn-info[disabled] { background-image: none; background-color: #df5c39; }
+

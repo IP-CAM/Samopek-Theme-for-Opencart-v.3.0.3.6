@@ -43,6 +43,12 @@ class ControllerExtensionModuleFeatured extends Controller {
 						$special = false;
 					}
 
+                    if ((int)$product_info['quantity']) {
+                        $quantity = $product_info['quantity'];
+                    } else {
+                        $quantity = 0;
+                    }
+
 					if ($this->config->get('config_tax')) {
 						$tax = $this->currency->format((float)$product_info['special'] ? $product_info['special'] : $product_info['price'], $this->session->data['currency']);
 					} else {
@@ -64,7 +70,8 @@ class ControllerExtensionModuleFeatured extends Controller {
 						'special'     => $special,
 						'tax'         => $tax,
 						'rating'      => $rating,
-						'href'        => $this->url->link('product/product', 'product_id=' . $product_info['product_id'])
+						'href'        => $this->url->link('product/product', 'product_id=' . $product_info['product_id']),
+                        'quantity'    => $quantity
 					);
 				}
 			}
