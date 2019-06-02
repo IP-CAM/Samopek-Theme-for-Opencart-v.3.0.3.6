@@ -1,1 +1,35 @@
-﻿
+﻿@media (max-width: 1200px) {
+ .product-thumb .button-group button, .product-thumb .button-group button + button {
+ width: 100%;
+}
+}
+@media (max-width: 767px) {
+ .product-thumb .button-group button, .product-thumb .button-group button + button {
+ width: 100%;
+}
+}
+
+.product-thumb .button-group {
+  border: none;
+  display: flex;
+  background-color: #FFFFFF; /* mako #eee -> #FFFFFF */
+  overflow: auto;
+}
+
+.product-thumb .button-group button {
+  width: 50%; /* mako 60% -> 100% */ 
+  margin: 0 auto;
+  border: solid;
+  -moz-border-radius: 45px;
+  -webkit-border-radius: 45px;
+  border-radius: 45px;
+  display: inline-block;
+  float: left;
+  background-color: #4e97b0; /* mako #eee -> #FFFFFF */
+  color: #FFFFFF;  /* mako #888 -> #FFFFFF */
+  line-height: 38px;
+  font-weight: bold;
+  text-align: center;
+  text-transform: uppercase;
+  background-size: 100%;
+}
