@@ -17,7 +17,7 @@
 }
 
 .product-thumb .button-group button {
-  width: 50%; /* mako 60% -> 100% */ 
+  width: 70%; /* mako 60% -> 70% */ 
   margin: 0 auto;
   border: solid;
   -moz-border-radius: 45px;
@@ -32,4 +32,76 @@
   text-align: center;
   text-transform: uppercase;
   background-size: 100%;
+  font-family: "Roboto Condensed";
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 18px;
+  padding: 5px;
+}
+
+.product-thumb .image {
+  text-align: center;
+  padding: 10px 10px;
+}
+
+.product-layout {
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+.product-thumb .caption {
+  padding: 0 20px;
+  min-height: 0px;
+}
+
+.product-thumb .price {
+  color: #444;
+  text-align: center;
+  /*Font*/
+  font-family: "Roboto Condensed";
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 29px;
+}
+
+.product-thumb h4 {
+  font-weight: bold;
+  margin-bottom: 40px;
+}
+
+/* top */
+#top {
+  background-color: #FFF;
+  border-bottom: none;
+  padding: 4px 0px 3px 0;
+  margin: 0 0 20px 0;
+  min-height: 40px;
+}
+
+#top .btn-link, #top-links li, #top-links a {
+  color: #000;
+  text-shadow: 0 1px 0 #FFF;
+  text-decoration: none;
+  
+  font-family: "Roboto Condensed";
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 18px;
+  
+  margin-right: 10px;
+}
+
+#banner_cupcakes {
+  margin-bottom: 0%;
+}
+
+.row .no-float {
+  display: table-cell;
+  float: none;
+  vertical-align: middle;
+}
+
+#search {
+  margin-bottom: 0px;
+  width: 100%
 }
