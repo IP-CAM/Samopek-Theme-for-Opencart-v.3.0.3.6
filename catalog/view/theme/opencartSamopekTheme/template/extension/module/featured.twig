@@ -18,19 +18,19 @@
           {% endfor %}
         </div>
         {% endif %}
-        {% if product.price %}
+      </div>
+      {% if product.price %}
         <p class="price">
           {% if not product.special %}
-          {{ product.price }}
+            {{ product.price }}
           {% else %}
-          <span class="price-new">{{ product.special }}</span> <span class="price-old">{{ product.price }}</span>
+            <span class="price-new">{{ product.special }}</span> <span class="price-old">{{ product.price }}</span>
           {% endif %}
           <!--{% if product.tax %}
           <span class="price-tax">{{ text_tax }} {{ product.tax }}</span>
           {% endif %}-->
         </p>
-        {% endif %}
-      </div>
+      {% endif %}
       <div class="button-group">
         <button type="button" onclick="cart.add('{{ product.product_id }}');"><i class="fa fa-shopping-cart hidden-lg hidden-md"></i> <span class="hidden-xs hidden-sm">{{ button_cart }}</span></button>
       </div>

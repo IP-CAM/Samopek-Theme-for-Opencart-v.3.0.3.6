@@ -11,3 +11,11 @@ insert into oc_language set name = "Russian", code = "ru-ru", locale = "ru_RU.UT
 --Update language settings for store 0
 update oc_setting set value = 'ru-ru' where `key`='config_language' and store_id = 0;
 update oc_setting set value = 'ru-ru' where `key`='config_admin_language' and store_id = 0;
+
+--Set Russian as a First language
+update oc_language set language_id = 2 where name = 'English';
+update oc_language set language_id = 1 where name = 'Russian';
+
+--Include into OMsI
+create table oc_ms_samopek_category (category_id int, ms_group_uuid TEXT);
+create table oc_ms_samopek_product (product_id int, ms_id int, ms_version int);
