@@ -45,8 +45,8 @@
     {{ language }}-->
     <div id="top-links" class="nav pull-right">
       <ul class="list-inline">
-        <li><a href="{{ delivery }}"><i class="fa fa-truck"></i></a> <span class="hidden-xs hidden-sm hidden-md">{{ text_shipping }}</span></li>
-        <li><a href="{{ contact }}"><i class="fa fa-envelope"></i></a> <span class="hidden-xs hidden-sm hidden-md">{{ text_contacts }}</span></li>
+        <li><a href="{{ delivery }}" id="shipping" title="{{ text_shipping }}"><i class="fa fa-truck"></i><span class="hidden-xs hidden-sm hidden-md">{{ text_shipping }}</span></a></li>
+        <li><a href="{{ contact }}" id="contact" title="{{ text_contacts }}"><i class="fa fa-envelope"></i><span class="hidden-xs hidden-sm hidden-md">{{ text_contacts }}</span></a></li>
 
         <li><a href="{{ wishlist }}" id="wishlist-total" title="{{ text_wishlist }}"><i class="fa fa-heart"></i> <span class="hidden-xs hidden-sm hidden-md">{{ text_wishlist }}</span></a></li>
         <li><a href="{{ shopping_cart }}" title="{{ text_shopping_cart }}"><i class="fa fa-shopping-cart"></i> <span class="hidden-xs hidden-sm hidden-md">{{ text_shopping_cart }}</span></a></li>
