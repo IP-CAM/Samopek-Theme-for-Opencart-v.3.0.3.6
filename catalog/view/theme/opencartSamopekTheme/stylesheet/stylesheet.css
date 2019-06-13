@@ -49,8 +49,15 @@
   padding-right: 0px;
 }
 
+.product-thumb-featured {
+  height: 400px !important;
+}
+
+.product-thumb-category {
+  height: 500px !important;
+}
+
 .product-thumb {
-  height: 400px;
   flex-direction: column;
   display: flex;
   margin-bottom: 20px;
