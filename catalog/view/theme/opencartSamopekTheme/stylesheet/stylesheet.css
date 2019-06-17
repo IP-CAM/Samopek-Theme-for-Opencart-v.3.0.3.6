@@ -53,6 +53,10 @@
   height: 400px !important;
 }
 
+.product-thumb-latest {
+  height: 400px !important;
+}
+
 .product-thumb-category {
   height: 500px !important;
 }
@@ -111,6 +115,10 @@
 
 #banner_cupcakes {
   margin-bottom: 0%;
+}
+
+#banner_cupcakes > img {
+  width: inherit;
 }
 
 .row .no-float {

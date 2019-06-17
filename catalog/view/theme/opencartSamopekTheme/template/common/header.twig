@@ -70,12 +70,15 @@
   </div>
 </nav>
 <header>
+    {% if home_page %}
   <div class="container">
+    {% if home_page %}
     <div class="row">
-      <div id="banner_cupcakes" class="col-sm-12">
+      <div id="banner_cupcakes" class="col-md-12 hidden-sm hidden-xs">
           <img src="catalog/view/theme/opencartSamopekTheme/image/banner_top_cupcakes.png" alt="image">
       </div>
     </div>
+    {% endif %}
     <div class="row">
       <div class="col-sm-4 no-float">
         <div id="logo">
@@ -91,4 +94,5 @@
       <!--<div class="col-sm-3">{{ cart }}</div>-->
     </div>
   </div>
+    {% endif %}
 </header>

@@ -23,6 +23,19 @@ update oc_setting set value = 'RUB' where `key`='config_currency' and store_id =
 insert into oc_currency set title = "", code = "RUB", symbol_left = "", symbol_right = ".", decimal_place = 0, value = 1.00000000, status = 1, date_modified = NOW();
 Manually change name of currency and symbol_right in admin panel. For some reasons russian text is not inserted through SSH.
 
+--Insert information
+mysql -u root -p765b91475e opencart_samopek < oc_information.sql
+mysql -u root -p765b91475e opencart_samopek < oc_information_description.sql
+
 --Include into OMsI
 create table oc_ms_samopek_category (category_id int, ms_group_uuid TEXT);
 create table oc_ms_samopek_product (product_id int, ms_id int, ms_version int);
+
+--Turn off vouchers, shipping estimation, gift cards - Extensions->checkout.
+--Extensions->shipping: Turn on SelfShipping, change Geographic Zone to AllAreas.
+--Extensions->shipping: Turn on FixedPriceShipping, change Geographic Zone to AllAreas, Tax->No tax, price = 200
+
+--Extensions->payment. Activate Cash,
+--Extensions->Modules -> New Arrivals - Activate(update settings). + select it in Template HOME
+
+--Install CDEK integration http://cdek.opencart.ru/documentation/
