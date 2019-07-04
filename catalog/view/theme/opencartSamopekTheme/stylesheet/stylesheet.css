@@ -1,4 +1,13 @@
-﻿@media (max-width: 1200px) {
+﻿body {
+  font-family: "Roboto Condensed";
+  font-weight: 400;
+  color: #666;
+  font-size: 12px;
+  line-height: 20px;
+  width: 100%;
+}
+
+@media (max-width: 1200px) {
  .product-thumb .button-group button, .product-thumb .button-group button + button {
  width: 100%;
 }
