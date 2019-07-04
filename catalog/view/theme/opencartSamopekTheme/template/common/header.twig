@@ -89,12 +89,13 @@
 <header id="head">
   <div class="container">
     <div class="row">
-      <div class="col-sm-9">
-        <div id="logo">{% if logo %}<a href="{{ home }}"><img src="{{ logo }}" title="{{ name }}" alt="{{ name }}" class="img-responsive" /></a>{% else %}
+      <div class="col-sm-12">
+        <div id="logo">{% if logo %}<a href="{{ home }}">
+            <img src="{{ logo }}" title="{{ name }}" alt="{{ name }}" class="img-responsive logo-img"/></a>{% else %}
           <h1><a href="{{ home }}">{{ name }}</a></h1>
           {% endif %}</div>
       </div>
-      <div class="col-sm-3">{{ cart }} {{ search }}</div>
+      <div class="col-sm-12">{{ search }}</div>
     </div>
   </div>
 </header>
