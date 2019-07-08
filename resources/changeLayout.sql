@@ -28,7 +28,7 @@ mysql -u root -p765b91475e opencart_samopek < oc_information.sql
 mysql -u root -p765b91475e opencart_samopek < oc_information_description.sql
 
 --Include into OMsI
-create table oc_ms_samopek_category (category_id int, ms_group_uuid TEXT);
+create table oc_ms_samopek_category (category_id int, ms_group_uuid TEXT, ms_version int);
 create table oc_ms_samopek_product (product_id int, ms_id int, ms_version int);
 
 --Turn off vouchers, shipping estimation, gift cards - Extensions->checkout.

@@ -18,6 +18,12 @@
 }
 }
 
+.product-thumb {
+  border: 1px solid #E6E6E6;
+  margin-bottom: 20px;
+  overflow: auto;
+}
+
 .product-thumb .button-group {
   border: none;
   display: flex;
@@ -26,26 +32,21 @@
 }
 
 .product-thumb .button-group button {
-  width: 70%; /* mako 60% -> 70% */ 
   margin: 0 auto;
-  border: solid;
+  border: 1px solid #E6E6E6;
   -moz-border-radius: 45px;
-  -webkit-border-radius: 45px;
-  border-radius: 45px;
-  display: inline-block;
-  float: left;
-  background-color: #4e97b0; /* mako #eee -> #FFFFFF */
-  color: #FFFFFF;  /* mako #888 -> #FFFFFF */
-  line-height: 38px;
-  font-weight: bold;
+  -webkit-border-radius: 4px;
+  padding: 5px;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 16px;
+  align-items: flex-end;
   text-align: center;
   text-transform: uppercase;
-  background-size: 100%;
-  font-family: "Roboto Condensed";
-  font-size: 15px;
-  font-weight: 700;
-  line-height: 18px;
-  padding: 5px;
+  background: #FFFFFF;
+  color: #E6E6E6;
 }
 
 .product-thumb .image {
@@ -85,19 +86,26 @@
 }
 
 .product-thumb .price {
-  margin-top: auto;
-  color: #444;
-  text-align: center;
-  /*Font*/
-  font-family: "Roboto Condensed";
-  font-size: 24px;
-  font-weight: 400;
-  line-height: 29px;
+  padding: 0 20px;
+  color: #1799B2;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 16px;
+  display: flex;
+  align-items: flex-end;
 }
 
-.product-thumb h4 {
-  font-weight: bold;
-  margin-bottom: 40px;
+.product-thumb h4>a {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+  /* identical to box height, or 143% */
+
+  color: #000000;
 }
 
 /* top */
@@ -109,25 +117,59 @@
   min-height: 40px;
 }
 
-#top .btn-link, #top-links li, #top-links a {
+.delimiter {
+  margin-left: 25px;
+}
+
+#top-links {
+  padding-top: 6px;
+  width: 100%;
+}
+
+#top-links > ul {
+  align-items: stretch;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+.search_label {
+  margin-bottom: 0px;
+}
+
+.search_box {
+  border: none;
+  margin-left: 10px;
+}
+
+#top-links li:first-child {
+  margin-right: 200px;
+}
+
+#top .btn-link, #top-links li, #top-links a, #top-links label {
   color: #000;
-  text-shadow: 0 1px 0 #FFF;
   text-decoration: none;
   
-  font-family: "Roboto Condensed";
-  font-size: 15px;
-  font-weight: 400;
-  line-height: 18px;
-  
-  margin-right: 10px;
+  font-family: "Roboto";
+  font-size: 12px;
+  font-weight: normal;
+  font-style: normal;
+  line-height: 160%;
+
+  display: flex;
+  align-items: flex-end;
+  text-align: right;
 }
 
 #banner_cupcakes {
   margin-bottom: 0%;
+  text-align: center;
 }
 
 #banner_cupcakes > img {
-  width: inherit;
+  width: 20%;
 }
 
 .row .no-float {
@@ -142,7 +184,7 @@
 }
 
 #menu {
-  background-color: white;
+  background-color: #1799B2;
   background-image: none;
   background-repeat: repeat-x;
   border: none;
@@ -150,18 +192,59 @@
 }
 
 #menu .nav > li > a {
-  color: #4e97b0;
-  font-family: "Roboto Condensed";
-  font-size: 18px;
-  font-weight: 400;
-  line-height: 22px;
-  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+  color: white;
+  text-transform: uppercase;
+  font-family: "Roboto";
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  line-height: 19px;
+  display: flex;
+  align-items: center;
   padding: 10px 15px 10px 15px;
   min-height: 15px;
   background-color: transparent;
 }
 
 #menu .navbar-nav {
-  float: right;
-  margin: 0;
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.col-xs-5ths,
+.col-sm-5ths,
+.col-md-5ths,
+.col-lg-5ths {
+  position: relative;
+  min-height: 1px;
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+.col-xs-5ths {
+  width: 20%;
+  float: left;
+}
+
+@media (min-width: 768px) {
+  .col-sm-5ths {
+    width: 20%;
+    float: left;
+  }
+}
+
+@media (min-width: 992px) {
+  .col-md-5ths {
+    width: 20%;
+    float: left;
+  }
+}
+
+@media (min-width: 1200px) {
+  .col-lg-5ths {
+    width: 20%;
+    float: left;
+  }
 }

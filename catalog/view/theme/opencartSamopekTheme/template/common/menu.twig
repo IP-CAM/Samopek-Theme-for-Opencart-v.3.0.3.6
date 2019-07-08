@@ -19,8 +19,16 @@
               {% endfor %}</div>
             <a href="{{ category.href }}" class="see-all">{{ text_all }} {{ category.name }}</a> </div>
         </li>
+        <li>
+          <a class="delimiter"> | </a>
+        </li>
         {% else %}
-        <li><a href="{{ category.href }}">{{ category.name }}</a></li>
+        <li>
+          <a href="{{ category.href }}">{{ category.name }}</a>
+        </li>
+        <li>
+          <a class="delimiter"> | </a>
+        </li>
         {% endif %}
         {% endfor %}
       </ul>

@@ -27,6 +27,7 @@
     <link href="catalog/view/theme/default/stylesheet/stylesheet.css" rel="stylesheet">
     <link href="catalog/view/theme/opencartSamopekTheme/stylesheet/stylesheet.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
     {% for style in styles %}
         <link href="{{ style.href }}" type="text/css" rel="{{ style.rel }}" media="{{ style.media }}"/>
     {% endfor %}
@@ -46,33 +47,44 @@
     <div class="container"><!--{{ currency }}
     {{ language }}-->
         <div id="top-links" class="nav pull-right">
-            <ul class="list-inline">
+            <ul>
+
+                <li>
+                    {{ search }}
+                </li>
+
                 <li>
                     <a href="{{ delivery }}" id="shipping" title="{{ text_shipping }}">
-                        <i class="fa fa-truck"></i>
-                        <span class="hidden-xs hidden-sm hidden-md">{{ text_shipping }}</span>
+                        <span class="hidden-xs hidden-sm hidden-md">+7 (950) 622-22-58</span>
                     </a>
+                    <span class="delimiter"> | </span>
                 </li>
 
                 <li>
                     <a href="{{ contact }}" id="contact" title="{{ text_contacts }}">
-                        <i class="fa fa-envelope"></i>
                         <span class="hidden-xs hidden-sm hidden-md">{{ text_contacts }}</span>
                     </a>
+                    <span class="delimiter"> | </span>
+                </li>
+
+                <li>
+                    <a href="{{ delivery }}" id="shipping" title="{{ text_shipping }}">
+                        <span class="hidden-xs hidden-sm hidden-md">{{ text_shipping }}</span>
+                    </a>
+                    <span class="delimiter"> | </span>
                 </li>
 
                 <li>
                     <a href="{{ wishlist }}" id="wishlist-total" title="{{ text_wishlist }}">
-                        <i class="fa fa-heart"></i>
                         <span class="hidden-xs hidden-sm hidden-md">{{ text_wishlist }}</span>
                     </a>
+                    <span class="delimiter"> | </span>
                 </li>
-                <li><a href="{{ shopping_cart }}" title="{{ text_shopping_cart }}"><i class="fa fa-shopping-cart"></i>
-                        <span class="hidden-xs hidden-sm hidden-md">{{ text_shopping_cart }}</span></a></li>
+
                 <li class="dropdown"><a href="{{ account }}" title="{{ text_account }}" class="dropdown-toggle"
-                                        data-toggle="dropdown"><i class="fa fa-user"></i> <span
-                                class="hidden-xs hidden-sm hidden-md">{{ text_account }}</span> <span
-                                class="caret"></span></a>
+                                        data-toggle="dropdown">
+                        <span class="hidden-xs hidden-sm hidden-md">{{ text_account }}</span>
+                        <span class="caret"></span></a>
                     <ul class="dropdown-menu dropdown-menu-right">
                         {% if logged %}
                             <li><a href="{{ account }}">{{ text_account }}</a></li>
@@ -85,6 +97,12 @@
                             <li><a href="{{ login }}">{{ text_login }}</a></li>
                         {% endif %}
                     </ul>
+                    <span class="delimiter"> | </span>
+                </li>
+
+                <li><a href="{{ shopping_cart }}" title="{{ text_shopping_cart }}">
+                        <span class="hidden-xs hidden-sm hidden-md">{{ text_shopping_cart }}</span>
+                    </a>
                 </li>
                 <!--<li><a href="{{ checkout }}" title="{{ text_checkout }}"><i class="fa fa-share"></i> <span class="hidden-xs hidden-sm hidden-md">{{ text_checkout }}</span></a></li>-->
             </ul>
@@ -97,22 +115,12 @@
             {% if home_page %}
                 <div class="row">
                     <div id="banner_cupcakes" class="col-md-12 hidden-sm hidden-xs">
-                        <img src="catalog/view/theme/opencartSamopekTheme/image/banner_top_cupcakes.png" alt="image">
+                        <img src="{{ logo }}" alt="image">
                     </div>
                 </div>
             {% endif %}
             <div class="row">
-                <div class="col-lg-4 col-md-4 hidden-sm hidden-xs no-float">
-                    <div id="logo">
-                        {% if logo %}
-                            <a href="{{ home }}">
-                                <img src="{{ logo }}" title="{{ name }}" alt="{{ name }}" class="img-responsive"/>
-                            </a>
-                        {% else %}
-                            <h1><a href="{{ home }}">{{ name }}</a></h1>
-                        {% endif %}</div>
-                </div>
-                <div class="col-md-8 hidden-sm hidden-xs no-float">{{ search }} {{ menu }}</div>
+                <div class="col-lg-1 col-md-1 hidden-sm hidden-xs no-float"> {{ menu }}</div>
                 <!--<div class="col-sm-3">{{ cart }}</div>-->
             </div>
             <div class="row">
