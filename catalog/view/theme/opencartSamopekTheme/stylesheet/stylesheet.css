@@ -38,6 +38,11 @@ div.required .control-label:before { content: '* '; color: #F00; font-weight: bo
 #top .container { padding: 0 20px; background-color: #b5e5ee; border: solid; border-color: #a4ced8;}
 #top #form-currency .currency-select, #top #form-language .language-select { text-align: left; color:#333; font-size:13px; padding:3px 16px;}
 #top #form-currency .currency-select:hover, #top #form-language .language-select:hover { text-shadow: none; text-decoration:none; color: #007acc; background-color: #eee;}
+
+#top-links > ul > li:nth-child(2) {
+ margin-left: 30%;
+}
+
 #top .btn-group > .btn-link, #top-links > ul > li, #top-links > ul > li > a { color: #000; background:none; text-decoration: none; }
 #top .btn-group > .btn-link:hover, #top-links > ul > li > a:hover { color: #eee;}
 #top-links .dropdown-menu a { text-shadow: none; font-size:13px; }
