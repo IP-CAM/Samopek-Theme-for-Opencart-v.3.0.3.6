@@ -41,10 +41,10 @@
 <nav id="top">
   <div class="container">{{ currency }}
     {{ language }}
-    <div id="top-links" class="nav">
+    <div id="top-links" class="nav {% if not logged %}pull-right{% endif %}">
       <ul class="list-inline">
-        <li>{{greeting_customer}}, {{customer_name}}</li>
-        <li class="number dropdown">
+        {% if logged %}<li>{{greeting_customer}}, {{customer_name}}</li>{% endif %}
+        <li class="{% if logged %}contacts{% endif %} dropdown">
           <span class="dropdown-toogle" data-hover="dropdown" data-toggle="dropdown"><i class="fa fa-mobile-phone"></i> <a href="tel:89306661466" class="tel">{{ telephone }}</a> <i class="fa fa-caret-down"></i></span>
           <ul class="dropdown-menu keep_open">
             <li class="dropdown-header">Режим работы</li>

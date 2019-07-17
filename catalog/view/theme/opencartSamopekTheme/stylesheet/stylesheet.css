@@ -39,7 +39,7 @@ div.required .control-label:before { content: '* '; color: #F00; font-weight: bo
 #top #form-currency .currency-select, #top #form-language .language-select { text-align: left; color:#333; font-size:13px; padding:3px 16px;}
 #top #form-currency .currency-select:hover, #top #form-language .language-select:hover { text-shadow: none; text-decoration:none; color: #007acc; background-color: #eee;}
 
-#top-links > ul > li:nth-child(2) {
+.contacts {
  margin-left: 30%;
 }
 
