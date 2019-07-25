@@ -3,9 +3,17 @@
  {% for product in products %}
   <div class="product-layout col-lg-5ths col-md-5ths col-sm-6 col-xs-12">
     <div class="product-thumb transition product-thumb-featured">
+      <div class="row featured_buttons_group_fav_preview">
+        <button class="fav_preview_buttons">
+          <img src="catalog/view/theme/opencartSamopekTheme/image/preview.svg">
+        </button>
+        <button class="fav_preview_buttons">
+          <img src="catalog/view/theme/opencartSamopekTheme/image/favorite.svg">
+        </button>
+      </div>
       <div class="image"><a href="{{ product.href }}"><img src="{{ product.thumb }}" alt="{{ product.name }}" title="{{ product.name }}" class="img-responsive" /></a></div>
       <div class="button-group">
-        <button type="button" onclick="cart.add('{{ product.product_id }}');"><i class="fa fa-shopping-cart hidden-lg hidden-md"></i> <span class="hidden-xs hidden-sm">{{ button_cart }}</span></button>
+        <button type="button" onclick="cart.add('{{ product.product_id }}');"><i class="fa fa-shopping-cart"></i> <span class="hidden-xs hidden-sm">{{ button_cart }}</span></button>
       </div>
       <div class="caption">
         <h4><a href="{{ product.href }}">{{ product.name }}</a></h4>

@@ -50,7 +50,12 @@
             <ul>
 
                 <li>
-                    {{ search }}
+                    <label class="search_label">
+                        {{ text_search }}
+                        <span class="delimiter"> | </span>
+                        <input type="text" name="search" value="" class="search_box"/>
+                        <span class="delimiter"> | </span>
+                    </label>
                 </li>
 
                 <li>
@@ -122,6 +127,9 @@
             <div class="row">
                 <div class="col-lg-1 col-md-1 hidden-sm hidden-xs no-float"> {{ menu }}</div>
                 <!--<div class="col-sm-3">{{ cart }}</div>-->
+            </div>
+            <div class="row row_search_main">
+                <div class="col-lg-4 col-lg-offset-4 hidden-sm hidden-xs"> {{ search }}</div>
             </div>
             <div class="row">
                 <div class="hidden-lg hidden-md col-xs-12 no-float">{{ search }} {{ menu }}</div>
