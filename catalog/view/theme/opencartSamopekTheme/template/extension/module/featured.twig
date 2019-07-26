@@ -4,10 +4,10 @@
   <div class="product-layout col-lg-5ths col-md-5ths col-sm-6 col-xs-12">
     <div class="product-thumb transition product-thumb-featured">
       <div class="row featured_buttons_group_fav_preview">
-        <button class="fav_preview_buttons">
+        <button class="fav_preview_buttons" onclick="window.location.href='/page2'">
           <img src="catalog/view/theme/opencartSamopekTheme/image/preview.svg">
         </button>
-        <button class="fav_preview_buttons">
+        <button class="fav_preview_buttons" onclick="wishlist.add('{{ product.product_id }}');">
           <img src="catalog/view/theme/opencartSamopekTheme/image/favorite.svg">
         </button>
       </div>
