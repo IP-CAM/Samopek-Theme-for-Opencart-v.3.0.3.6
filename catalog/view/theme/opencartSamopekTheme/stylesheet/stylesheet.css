@@ -312,3 +312,19 @@ footer {
   margin-top: 5%;
   margin-right: 5%;
 }
+
+#banner_logo {
+  background-color: #1799B2;
+  text-align: center;
+}
+
+.samopek_breadcrumb {
+  list-style: none;
+  display: flex;
+}
+
+.samopek_breadcrumb > li+li:before {
+  padding: 0 5px;
+  color: #ccc;
+  content: ">";
+}
