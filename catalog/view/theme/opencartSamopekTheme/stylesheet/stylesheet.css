@@ -392,3 +392,12 @@ footer {
   font-size: 14px;
   text-transform: uppercase;
 }
+
+.alert {
+  padding-right: 35px; /* Needed to override padding which is set in core stylesheet.css. 35px
+   corresponds to .alert-dismissable, .alert-dismissible bootstrap styles */
+  position: fixed;
+  top: 0;
+  z-index: 999;
+  display: none;
+}
