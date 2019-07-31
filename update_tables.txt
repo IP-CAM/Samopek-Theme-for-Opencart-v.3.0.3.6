@@ -1,0 +1,2 @@
+updates in tables:
+1. update oc_setting set value = '+7 950 622-22-58' where `key` = 'config_telephone';
