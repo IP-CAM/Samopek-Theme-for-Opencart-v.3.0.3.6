@@ -52,8 +52,21 @@
             </div>
           {% endif %}
         </div>
-        <div class="col-lg-2">
-          <button type="button" id="button-cart" data-loading-text="{{ text_loading }}" class="btn btn-primary btn-lg btn-block">{{ button_cart }}</button>
+        <div class="col-lg-2 product_details_section_buy">
+          <div class="row">
+            <div>{{ text_stock }}
+            {% for i in 1..4 %}
+              <svg width="8" height="8" viewBox="0 0 8 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                {% if stock / 10 >= i %}
+                  <circle cx="4" cy="4" r="4" fill="#3AC2D7"/>
+                {% else %}
+                  <circle cx="4" cy="4" r="4" fill="#E7E7E7"/>
+                {% endif %}
+              </svg>
+            {% endfor %}
+            </div>
+          </div>
+          <button type="button" id="button-cart" data-loading-text="{{ text_loading }}" class="btn btn-primary btn-md btn-block">{{ button_cart }}</button>
         </div>
       </div>
     </div>
