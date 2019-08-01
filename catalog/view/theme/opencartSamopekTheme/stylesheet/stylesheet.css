@@ -347,6 +347,7 @@ footer {
     line-height: 26px;
 
     color: #000000;
+    margin-top: 5%;
 }
 
 .product_details_price {
@@ -357,6 +358,18 @@ footer {
     line-height: 23px;
 
     color: #3AC2D7;
+    margin-top: 5%;
+}
+
+.product_details_description {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 180%;
+
+  color: #000000;
+  margin-top: 5%;
 }
 
 .product_details_row {
@@ -451,4 +464,8 @@ footer {
   font-weight: normal;
   font-size: 18px;
   line-height: 21px;
+}
+
+.samopek_breadcrumb {
+  padding-left: 0px;
 }
