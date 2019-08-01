@@ -443,7 +443,7 @@ footer {
   justify-content: center;
 }
 
-.quantity_more_less_btn {
+.quantity_more_less_btn_plus, .quantity_more_less_btn_minus {
   border: 0;
   background: none;
   font-family: Roboto;
