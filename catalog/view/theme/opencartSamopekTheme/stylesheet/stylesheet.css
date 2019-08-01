@@ -456,9 +456,14 @@ footer {
   justify-content: center;
 }
 
-.quantity_more_less_btn_plus, .quantity_more_less_btn_minus {
+.samopek_button_wo_borders {
   border: 0;
   background: none;
+  display: block;
+  margin: auto;
+}
+
+.quantity_more_less_btn_plus, .quantity_more_less_btn_minus {
   font-family: Roboto;
   font-style: normal;
   font-weight: normal;
@@ -468,4 +473,26 @@ footer {
 
 .samopek_breadcrumb {
   padding-left: 0px;
+}
+
+.cart_product_row td {
+  vertical-align: middle !important;
+}
+
+.cart_model {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 10px;
+  line-height: 12px;
+  color: #999999;
+}
+
+.cart_product_name {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 22px;
+  line-height: 26px;
+  color: #000000;
 }
