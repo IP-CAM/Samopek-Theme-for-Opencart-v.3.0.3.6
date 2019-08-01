@@ -401,3 +401,26 @@ footer {
   z-index: 999;
   display: none;
 }
+
+.quantity {
+  position: relative;
+
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.quantity .quantity_tooltiptext {
+  position: relative;
+  visibility: hidden;
+
+  width: 120px;
+  bottom: 100%;
+  left: 50%;
+  margin-left: -60px; /* Use half of the width (120/2 = 60), to center the tooltip */
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.quantity:hover .quantity_tooltiptext {
+  visibility: visible;
+}

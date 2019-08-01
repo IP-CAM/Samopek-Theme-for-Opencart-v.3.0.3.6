@@ -8,6 +8,7 @@ $_['text_reward']              = 'Бонусные баллы:';
 $_['text_points']              = 'Цена в бонусных баллах:';
 // Change samopek start
 $_['text_stock']               = 'В наличии';
+$_['text_out_of_stock']        = 'Нет в наличии';
 // Change samopek end
 $_['text_instock']             = 'Есть в наличии';
 $_['text_tax']                 = 'Без НДС:';
