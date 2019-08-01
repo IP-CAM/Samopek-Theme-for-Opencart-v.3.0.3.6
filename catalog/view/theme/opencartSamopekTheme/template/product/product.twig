@@ -74,8 +74,11 @@
           </div>
           <br>
 
-          <label class="control-label" for="input-quantity">{{ entry_qty }}</label>
-          <input type="text" name="quantity" value="{{ minimum }}" size="2" id="input-quantity" class="form-control"/>
+          <div class="quantity_group">
+            <button class="quantity_more_less_btn">+</button>
+            <input type="text" name="quantity" value="{{ minimum }}" size="2" id="input-quantity" class="form-control"/>
+            <button class="quantity_more_less_btn">-</button>
+          </div>
           <input type="hidden" name="product_id" value="{{ product_id }}"/>
 
           <button type="button" id="button-cart" data-loading-text="{{ text_loading }}"

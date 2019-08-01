@@ -391,6 +391,7 @@ footer {
 .btn-md {
   font-size: 14px;
   text-transform: uppercase;
+  margin-top: 20%;
 }
 
 .alert {
@@ -405,9 +406,12 @@ footer {
 .quantity {
   position: relative;
 
-  display: flex;
-  justify-content: space-evenly;
   align-items: center;
+
+  margin-top: 20%;
+  margin-left: 10%;
+
+  width: 80%;
 }
 
 .quantity .quantity_tooltiptext {
@@ -423,4 +427,28 @@ footer {
 /* Show the tooltip text when you mouse over the tooltip container */
 .quantity:hover .quantity_tooltiptext {
   visibility: visible;
+}
+
+#input-quantity {
+  border: 0;
+  border-width: 0px;
+  -webkit-appearance: none;
+  box-shadow: none;
+  width: 20%;
+  align-self: center;
+}
+
+.quantity_group {
+  display: flex;
+  justify-content: center;
+}
+
+.quantity_more_less_btn {
+  border: 0;
+  background: none;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 21px;
 }
