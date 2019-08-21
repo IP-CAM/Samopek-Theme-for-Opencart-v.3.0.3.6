@@ -37,6 +37,8 @@
         {% if weight %}
         &nbsp;({{ weight }})
         {% endif %} </h1>
+      <div class="row">
+        <div class="col-lg-10">
       <form action="{{ action }}" method="post" enctype="multipart/form-data">
         <div class="table-responsive">
           <table class="table">
@@ -73,14 +75,24 @@
                 <small>{{ product.reward }}</small> {% endif %}
                 {% if product.recurring %} <br />
                 <span class="label label-info">{{ text_recurring_item }}</span> <small>{{ product.recurring }}</small> {% endif %}</td>
-              <td class="text-left"><div class="input-group btn-block" style="max-width: 200px;">
-                  <input type="text" name="quantity[{{ product.cart_id }}]" value="{{ product.quantity }}" size="1" class="form-control" />
+              <td class="text-left">
+                <div class="input-group btn-block" style="max-width: 200px;">
+                  <div class="quantity_group">
+                    <button class="quantity_more_less_btn_minus_cart samopek_button_wo_borders">-</button>
+                    <input type="text" name="quantity[{{ product.cart_id }}]" value="{{ product.quantity }}" size="2" id="input-quantity" class="form-control"/>
+                    <button class="quantity_more_less_btn_plus_cart samopek_button_wo_borders">+</button>
+                  </div>
+                </div>
+              </td>
+              <td class="text-left">
+                <div class="input-group btn-block" style="max-width: 200px;">
                   <span class="input-group-btn">
-                  <button type="submit" data-toggle="tooltip" title="{{ button_update }}" class="btn btn-primary"><i class="fa fa-refresh"></i></button>
-                  <button type="button" data-toggle="tooltip" title="{{ button_remove }}" class="btn btn-danger" onclick="cart.remove('{{ product.cart_id }}');"><i class="fa fa-times-circle"></i></button>
-                  </span></div></td>
+                    <button type="submit" data-toggle="tooltip" title="{{ button_update }}" class="btn btn-primary"><i class="fa fa-refresh"></i></button>
+                  </span>
+                </div>
+              </td>
               <td class="text-right">{{ product.price }}</td>
-              <td class="text-right">{{ product.total }}</td>
+              <td class="product_total text-right">{{ product.total }}</td>
             </tr>
             {% endfor %}
             {% for voucher in vouchers %}
@@ -109,7 +121,20 @@
         {{ module }}
         {% endfor %} </div>
       {% endif %} <br />
-      <div class="row">
+        </div>
+        <div class="col-lg-2">
+          <div id="totals">
+            {{ totals[0].title }}
+            <br>
+            {{ totals[0].text }}
+            <br>
+            <br>
+            <br>
+            <a href="{{ checkout }}" class="btn btn-cart-continue">{{ button_checkout }}</a>
+          </div>
+        </div>
+      </div>
+     <!-- <div class="row">
         <div class="col-sm-4 col-sm-offset-8">
           <table class="table table-bordered">
             {% for total in totals %}
@@ -125,7 +150,8 @@
         <div class="pull-left"><a href="{{ continue }}" class="btn btn-default">{{ button_shopping }}</a></div>
         <div class="pull-right"><a href="{{ checkout }}" class="btn btn-primary">{{ button_checkout }}</a></div>
       </div>
-      {{ content_bottom }}</div>
+      {{ content_bottom }} -->
+    </div>
     {{ column_right }}</div>
 </div>
 {{ footer }} 

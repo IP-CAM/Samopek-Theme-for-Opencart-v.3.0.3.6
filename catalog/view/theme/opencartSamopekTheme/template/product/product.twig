@@ -118,24 +118,6 @@
     });
     //--></script>
 <script type="text/javascript"><!--
-    $(document).ready(function () {
-        $('.quantity_more_less_btn_minus').click(function () {
-            var $input = $(this).parent().find('input');
-            var count = parseInt($input.val()) - 1;
-            count = count < 1 ? 1 : count;
-            $input.val(count);
-            $input.change();
-            return false;
-        });
-        $('.quantity_more_less_btn_plus').click(function () {
-            var $input = $(this).parent().find('input');
-            $input.val(parseInt($input.val()) + 1);
-            $input.change();
-            return false;
-        });
-    });
-    //--></script>
-<script type="text/javascript"><!--
     $('#button-cart').on('click', function () {
         $.ajax({
             url: 'index.php?route=checkout/cart/add',

@@ -401,6 +401,20 @@ footer {
   border: none;
 }
 
+.btn-cart-continue {
+  background: #FFFFFF;
+  text-align: center;
+  text-transform: uppercase;
+  color: #000000;
+  border: none;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 14px;
+}
+
+
 .btn-md {
   font-size: 14px;
   text-transform: uppercase;
@@ -449,6 +463,7 @@ footer {
   box-shadow: none;
   width: 20%;
   align-self: center;
+  text-align: center;
 }
 
 .quantity_group {
@@ -463,7 +478,7 @@ footer {
   margin: auto;
 }
 
-.quantity_more_less_btn_plus, .quantity_more_less_btn_minus {
+.quantity_more_less_btn_plus, .quantity_more_less_btn_minus, .quantity_more_less_btn_minus_cart, .quantity_more_less_btn_plus_cart {
   font-family: Roboto;
   font-style: normal;
   font-weight: normal;
@@ -495,4 +510,31 @@ footer {
   font-size: 22px;
   line-height: 26px;
   color: #000000;
+}
+
+.product_total {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 23px;
+    text-align: center;
+
+    color: #3AC2D7;
+}
+
+#totals {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 22px;
+    line-height: 26px;
+    /* identical to box height */
+
+    text-align: center;
+    text-transform: uppercase;
+
+    color: #000000;
+
+    background-color: #FFC341;
 }
