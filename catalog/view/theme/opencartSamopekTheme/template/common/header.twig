@@ -49,7 +49,7 @@
         <div id="top-links" class="nav pull-right">
             <ul>
 
-                <li>
+                <li class="hidden-xs hidden-sm hidden-md">
                     <label class="search_label">
                         {{ text_search }}
                         <span class="delimiter"> | </span>
@@ -59,37 +59,44 @@
                 </li>
 
                 <li>
-                    <a href="{{ delivery }}" id="shipping" title="{{ text_shipping }}">
+                    <a href="{{ delivery }}" id="shipping" title="{{ text_shipping }}" class="hidden-xs hidden-sm hidden-md">
                         <span class="hidden-xs hidden-sm hidden-md">+7 (950) 622-22-58</span>
                     </a>
+                    <i class="fa fa-phone hidden-lg"></i>
                     <span class="delimiter"> | </span>
                 </li>
 
                 <li>
-                    <a href="{{ contact }}" id="contact" title="{{ text_contacts }}">
+                    <a href="{{ contact }}" id="contact" title="{{ text_contacts }}" class="hidden-xs hidden-sm hidden-md">
                         <span class="hidden-xs hidden-sm hidden-md">{{ text_contacts }}</span>
                     </a>
+                    <i class="fa fa-info hidden-lg"></i>
                     <span class="delimiter"> | </span>
                 </li>
 
                 <li>
-                    <a href="{{ delivery }}" id="shipping" title="{{ text_shipping }}">
+                    <a href="{{ delivery }}" id="shipping" title="{{ text_shipping }}" class="hidden-xs hidden-sm hidden-md">
                         <span class="hidden-xs hidden-sm hidden-md">{{ text_shipping }}</span>
                     </a>
+                    <i class="fa fa-truck hidden-lg"></i>
                     <span class="delimiter"> | </span>
                 </li>
 
                 <li>
-                    <a href="{{ wishlist }}" id="wishlist-total" title="{{ text_wishlist }}">
+                    <a href="{{ wishlist }}" id="wishlist-total" title="{{ text_wishlist }}" class="hidden-xs hidden-sm hidden-md">
                         <span class="hidden-xs hidden-sm hidden-md">{{ text_wishlist }}</span>
                     </a>
+                    <i class="fa fa-heart hidden-lg"></i>
                     <span class="delimiter"> | </span>
                 </li>
 
-                <li class="dropdown"><a href="{{ account }}" title="{{ text_account }}" class="dropdown-toggle"
+                <li class="dropdown">
+                    <a href="{{ account }}" title="{{ text_account }}" class="dropdown-toggle"
                                         data-toggle="dropdown">
                         <span class="hidden-xs hidden-sm hidden-md">{{ text_account }}</span>
-                        <span class="caret"></span></a>
+                        <i class="fa fa-user hidden-lg"></i>
+                        <span class="caret"></span>
+                    </a>
                     <ul class="dropdown-menu dropdown-menu-right">
                         {% if logged %}
                             <li><a href="{{ account }}">{{ text_account }}</a></li>
@@ -105,9 +112,11 @@
                     <span class="delimiter"> | </span>
                 </li>
 
-                <li><a href="{{ shopping_cart }}" title="{{ text_shopping_cart }}">
+                <li>
+                    <a href="{{ shopping_cart }}" title="{{ text_shopping_cart }}" class="hidden-xs hidden-sm hidden-md">
                         <span class="hidden-xs hidden-sm hidden-md">{{ text_shopping_cart }}</span>
                     </a>
+                    <i class="fa fa-shopping-cart hidden-lg"></i>
                 </li>
                 <!--<li><a href="{{ checkout }}" title="{{ text_checkout }}"><i class="fa fa-share"></i> <span class="hidden-xs hidden-sm hidden-md">{{ text_checkout }}</span></a></li>-->
             </ul>
@@ -129,7 +138,7 @@
                 <!--<div class="col-sm-3">{{ cart }}</div>-->
             </div>
             <div class="row row_search_main">
-                <div class="col-lg-4 col-lg-offset-4 hidden-sm hidden-xs"> {{ search }}</div>
+                <div class="col-lg-6 col-lg-offset-3 hidden-sm hidden-xs"> {{ search }}</div>
             </div>
             <div class="row">
                 <div class="hidden-lg hidden-md col-xs-12 no-float">{{ search }} {{ menu }}</div>
