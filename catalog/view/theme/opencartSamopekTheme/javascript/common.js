@@ -157,7 +157,7 @@ var cart = {
 				}
 
 				if (json['success']) {
-					$('#content').parent().before('<div class="alert alert-success alert-dismissible"><i class="fa fa-check-circle"></i> ' + json['success'] + ' <button type="button" class="close" data-dismiss="alert">&times;</button></div>');
+					$('#content').parent().before('<div class="alert-add-product alert-success alert-dismissible"><i class="fa fa-check-circle"></i> ' + json['success'] + ' <button type="button" class="close" data-dismiss="alert">&times;</button></div>');
 
 					// Need to set timeout otherwise it wont update the total
 					setTimeout(function () {
@@ -168,7 +168,7 @@ var cart = {
 					//$('html, body').animate({ scrollTop: 0 }, 'slow');
 
 					// But we do want to show and hide after some time
-					$('.alert').show(0).delay(4000).fadeOut('slow');
+					$('.alert-add-product').show(0).delay(4000).fadeOut('slow');
 
 					$('#cart > ul').load('index.php?route=common/cart/info ul li');
 				}
@@ -288,13 +288,17 @@ var wishlist = {
 				}
 
 				if (json['success']) {
-					$('#content').parent().before('<div class="alert alert-success alert-dismissible"><i class="fa fa-check-circle"></i> ' + json['success'] + ' <button type="button" class="close" data-dismiss="alert">&times;</button></div>');
+					$('#content').parent().before('<div class="alert-add-product alert-success alert-dismissible"><i class="fa fa-check-circle"></i> ' + json['success'] + ' <button type="button" class="close" data-dismiss="alert">&times;</button></div>');
 				}
 
 				$('#wishlist-total span').html(json['total']);
 				$('#wishlist-total').attr('title', json['total']);
 
-				$('html, body').animate({ scrollTop: 0 }, 'slow');
+				// We don't want to srcoll to bottom every time
+				//$('html, body').animate({ scrollTop: 0 }, 'slow');
+
+				// But we do want to show and hide after some time
+				$('.alert-add-product').show(0).delay(4000).fadeOut('slow');
 			},
 			error: function(xhr, ajaxOptions, thrownError) {
 				alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
@@ -554,7 +558,7 @@ $(document).delegate('.agree', 'click', function(e) {
                         //$('html, body').animate({scrollTop: 0}, 'slow');
 
                         // But we do want to show and hide after some time
-                        $('.alert').show(0).delay(4000).fadeOut('slow');
+                        $('.alert-add-product').show(0).delay(4000).fadeOut('slow');
 
                         $('#cart > ul').load('index.php?route=common/cart/info ul li');
                     }
