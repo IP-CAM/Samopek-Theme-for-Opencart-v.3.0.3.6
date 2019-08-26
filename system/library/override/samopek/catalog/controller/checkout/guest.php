@@ -110,17 +110,58 @@ class samopek_ControllerCheckoutGuest extends ControllerCheckoutGuest {
 
 			$this->session->data['payment_address']['firstname'] = $this->request->post['firstname'];
 			$this->session->data['payment_address']['lastname'] = $this->request->post['lastname'];
-			/*$this->session->data['payment_address']['company'] = $this->request->post['company'];
-			$this->session->data['payment_address']['address_1'] = $this->request->post['address_1'];
-			$this->session->data['payment_address']['address_2'] = $this->request->post['address_2'];
-			$this->session->data['payment_address']['postcode'] = $this->request->post['postcode'];
-			$this->session->data['payment_address']['city'] = $this->request->post['city'];
-			$this->session->data['payment_address']['country_id'] = $this->request->post['country_id'];
-			$this->session->data['payment_address']['zone_id'] = $this->request->post['zone_id'];*/
+
+            if (isset($this->request->post['company'])) {
+			    $this->session->data['payment_address']['company'] = $this->request->post['company'];
+			} else {
+                $this->session->data['payment_address']['company'] = '';
+			}
+
+            if (isset($this->request->post['address_1'])) {
+                $this->session->data['payment_address']['address_1'] = $this->request->post['address_1'];
+            } else {
+                $this->session->data['payment_address']['address_1'] = '';
+            }
+
+            if (isset($this->request->post['address_2'])) {
+                $this->session->data['payment_address']['address_2'] = $this->request->post['address_2'];
+            } else {
+                $this->session->data['payment_address']['address_2'] = '';
+            }
+
+            if (isset($this->request->post['postcode'])) {
+                $this->session->data['payment_address']['postcode'] = $this->request->post['postcode'];
+            } else {
+                $this->session->data['payment_address']['postcode'] = '';
+            }
+
+            if (isset($this->request->post['city'])) {
+                $this->session->data['payment_address']['city'] = $this->request->post['city'];
+            } else {
+                $this->session->data['payment_address']['city'] = '';
+            }
+
+            if (isset($this->request->post['country_id'])) {
+                $this->session->data['payment_address']['country_id'] = $this->request->post['country_id'];
+            } else {
+                $this->session->data['payment_address']['country_id'] = '';
+            }
+
+            if (isset($this->request->post['zone_id'])) {
+                $this->session->data['payment_address']['zone_id'] = $this->request->post['zone_id'];
+            } else {
+                $this->session->data['payment_address']['zone_id'] = '';
+            }
+
+            $this->session->data['payment_address']['country_id'] = 176;
+            $this->session->data['payment_address']['zone_id'] = 2766;
 
 			$this->load->model('localisation/country');
 
-			/*$country_info = $this->model_localisation_country->getCountry($this->request->post['country_id']);
+
+			/*$country_info = $this->model_localisation_country->getCountry($this->request->post['country_id']);*/
+
+            $country_info = $this->model_localisation_country->getCountry(176);
 
 			if ($country_info) {
 				$this->session->data['payment_address']['country'] = $country_info['name'];
@@ -132,7 +173,7 @@ class samopek_ControllerCheckoutGuest extends ControllerCheckoutGuest {
 				$this->session->data['payment_address']['iso_code_2'] = '';
 				$this->session->data['payment_address']['iso_code_3'] = '';
 				$this->session->data['payment_address']['address_format'] = '';
-			}*/
+			}
 
 			if (isset($this->request->post['custom_field']['address'])) {
 				$this->session->data['payment_address']['custom_field'] = $this->request->post['custom_field']['address'];
@@ -142,7 +183,9 @@ class samopek_ControllerCheckoutGuest extends ControllerCheckoutGuest {
 
 			$this->load->model('localisation/zone');
 
-			/*$zone_info = $this->model_localisation_zone->getZone($this->request->post['zone_id']);
+			/*$zone_info = $this->model_localisation_zone->getZone($this->request->post['zone_id']);*/
+
+            $zone_info = $this->model_localisation_zone->getZone(2766);
 
 			if ($zone_info) {
 				$this->session->data['payment_address']['zone'] = $zone_info['name'];
@@ -150,7 +193,7 @@ class samopek_ControllerCheckoutGuest extends ControllerCheckoutGuest {
 			} else {
 				$this->session->data['payment_address']['zone'] = '';
 				$this->session->data['payment_address']['zone_code'] = '';
-			}*/
+			}
 
 			if (!empty($this->request->post['shipping_address'])) {
 				$this->session->data['guest']['shipping_address'] = $this->request->post['shipping_address'];
@@ -161,13 +204,50 @@ class samopek_ControllerCheckoutGuest extends ControllerCheckoutGuest {
 			if ($this->session->data['guest']['shipping_address']) {
 				$this->session->data['shipping_address']['firstname'] = $this->request->post['firstname'];
 				$this->session->data['shipping_address']['lastname'] = $this->request->post['lastname'];
-				/*$this->session->data['shipping_address']['company'] = $this->request->post['company'];
-				$this->session->data['shipping_address']['address_1'] = $this->request->post['address_1'];
-				$this->session->data['shipping_address']['address_2'] = $this->request->post['address_2'];
-				$this->session->data['shipping_address']['postcode'] = $this->request->post['postcode'];
-				$this->session->data['shipping_address']['city'] = $this->request->post['city'];
-				$this->session->data['shipping_address']['country_id'] = $this->request->post['country_id'];
-				$this->session->data['shipping_address']['zone_id'] = $this->request->post['zone_id'];
+                if (isset($this->request->post['company'])) {
+                    $this->session->data['shipping_address']['company'] = $this->request->post['company'];
+                } else {
+                    $this->session->data['shipping_address']['company'] = '';
+                }
+
+                if (isset($this->request->post['company'])) {
+                    $this->session->data['shipping_address']['address_1'] = $this->request->post['address_1'];
+                } else {
+                    $this->session->data['shipping_address']['address_1'] = '';
+                }
+
+                if (isset($this->request->post['company'])) {
+                    $this->session->data['shipping_address']['address_2'] = $this->request->post['address_2'];
+                } else {
+                    $this->session->data['shipping_address']['address_2'] = '';
+                }
+
+                if (isset($this->request->post['company'])) {
+                    $this->session->data['shipping_address']['postcode'] = $this->request->post['postcode'];
+                } else {
+                    $this->session->data['shipping_address']['postcode'] = '';
+                }
+
+                if (isset($this->request->post['company'])) {
+                    $this->session->data['shipping_address']['city'] = $this->request->post['city'];
+                } else {
+                    $this->session->data['shipping_address']['city'] = '';
+                }
+
+                if (isset($this->request->post['company'])) {
+                    $this->session->data['shipping_address']['country_id'] = $this->request->post['country_id'];
+                } else {
+                    $this->session->data['shipping_address']['country_id'] = '';
+                }
+
+                if (isset($this->request->post['company'])) {
+                    $this->session->data['shipping_address']['zone_id'] = $this->request->post['zone_id'];
+                } else {
+                    $this->session->data['shipping_address']['zone_id'] = '';
+                }
+
+                $this->session->data['shipping_address']['country_id'] = 176;
+                $this->session->data['shipping_address']['zone_id'] = 2766;
 
 				if ($country_info) {
 					$this->session->data['shipping_address']['country'] = $country_info['name'];
@@ -187,7 +267,7 @@ class samopek_ControllerCheckoutGuest extends ControllerCheckoutGuest {
 				} else {
 					$this->session->data['shipping_address']['zone'] = '';
 					$this->session->data['shipping_address']['zone_code'] = '';
-				}*/
+				}
 
 				if (isset($this->request->post['custom_field']['address'])) {
 					$this->session->data['shipping_address']['custom_field'] = $this->request->post['custom_field']['address'];
