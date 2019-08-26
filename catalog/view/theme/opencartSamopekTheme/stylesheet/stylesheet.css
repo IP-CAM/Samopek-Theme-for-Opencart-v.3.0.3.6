@@ -319,6 +319,11 @@ footer {
   text-align: center;
 }
 
+#banner_logo > img {
+  margin-top: 2%;
+  margin-bottom: 2%;
+}
+
 .samopek_breadcrumb {
   list-style: none;
   display: flex;
@@ -422,7 +427,7 @@ footer {
   margin-top: 20%;
 }
 
-.alert {
+.alert-add-product {
   padding-right: 35px; /* Needed to override padding which is set in core stylesheet.css. 35px
    corresponds to .alert-dismissable, .alert-dismissible bootstrap styles */
   position: fixed;

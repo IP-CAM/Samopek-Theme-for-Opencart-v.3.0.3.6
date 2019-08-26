@@ -546,11 +546,11 @@ $(document).delegate('.agree', 'click', function(e) {
                     }
 
                     if (json['success']) {
-                        $('.samopek_breadcrumb').after('<div class="alert alert-success alert-dismissible">' + json['success'] + '<button type="button" class="close" data-dismiss="alert">&times;</button></div>');
+                        $('.samopek_breadcrumb').after('<div class="alert-add-product alert-success alert-dismissible">' + json['success'] + '<button type="button" class="close" data-dismiss="alert">&times;</button></div>');
 
                         $('#cart > button').html('<span id="cart-total"><i class="fa fa-shopping-cart"></i> ' + json['total'] + '</span>');
 
-                        // We don't want to srcoll to bottom every time
+                        // We don't want to scroll to top every time
                         //$('html, body').animate({scrollTop: 0}, 'slow');
 
                         // But we do want to show and hide after some time

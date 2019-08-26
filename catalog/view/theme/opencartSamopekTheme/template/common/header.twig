@@ -129,7 +129,11 @@
             {% if home_page %}
                 <div class="row">
                     <div id="banner_cupcakes" class="col-md-12 hidden-sm hidden-xs">
-                        <img src="{{ logo }}" alt="image">
+                        {% if logo %}
+                        <!--<a href="{{ home }}">
+                          <img src="{{ logo }}" alt="image">
+                        </a>-->
+                        {% endif %}
                     </div>
                 </div>
             {% endif %}
@@ -144,6 +148,29 @@
                 <div class="hidden-lg hidden-md col-xs-12 no-float">{{ search }} {{ menu }}</div>
                 <!--<div class="col-sm-3">{{ cart }}</div>-->
             </div>
+        </div>
+    {% elseif %}
+
+        <div class="row">
+            <div id="banner_logo" class="col-md-12 hidden-sm hidden-xs">
+                <img src="catalog/view/theme/opencartSamopekTheme/image/logo_footer_white.png" alt="image">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-1 col-md-1 hidden-sm hidden-xs no-float"> {{ menu }}</div>
+            <!--<div class="col-sm-3">{{ cart }}</div>-->
+        </div>
+
+        <div class="row">
+            <div class="col-lg-1 col-md-1 hidden-sm hidden-xs no-float"> {{ menu }}</div>
+            <!--<div class="col-sm-3">{{ cart }}</div>-->
+        </div>
+        <div class="row row_search_main">
+            <div class="col-lg-6 col-lg-offset-3 hidden-sm hidden-xs"> {{ search }}</div>
+        </div>
+        <div class="row">
+            <div class="hidden-lg hidden-md col-xs-12 no-float">{{ search }} {{ menu }}</div>
+            <!--<div class="col-sm-3">{{ cart }}</div>-->
         </div>
     {% endif %}
 </header>

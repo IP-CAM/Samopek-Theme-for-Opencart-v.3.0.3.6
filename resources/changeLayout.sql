@@ -39,3 +39,7 @@ create table oc_ms_samopek_product (product_id int, ms_id int, ms_version int);
 --Extensions->Modules -> New Arrivals - Activate(update settings). + select it in Template HOME
 
 --Install CDEK integration http://cdek.opencart.ru/documentation/
+
+--
+--
+-- Localize Stock options. System->localization->Stock.
