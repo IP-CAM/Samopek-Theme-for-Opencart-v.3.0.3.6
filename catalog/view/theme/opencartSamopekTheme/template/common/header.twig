@@ -59,34 +59,34 @@
                 </li>
 
                 <li>
-                    <a href="{{ delivery }}" id="shipping" title="{{ text_shipping }}" class="hidden-xs hidden-sm hidden-md">
+                    <a href="{{ delivery }}" id="shipping" title="{{ text_shipping }}">
                         <span class="hidden-xs hidden-sm hidden-md">+7 (950) 622-22-58</span>
+                        <i class="fa fa-phone hidden-lg"></i>
                     </a>
-                    <i class="fa fa-phone hidden-lg"></i>
                     <span class="delimiter"> | </span>
                 </li>
 
                 <li>
-                    <a href="{{ contact }}" id="contact" title="{{ text_contacts }}" class="hidden-xs hidden-sm hidden-md">
+                    <a href="{{ contact }}" id="contact" title="{{ text_contacts }}">
                         <span class="hidden-xs hidden-sm hidden-md">{{ text_contacts }}</span>
+                        <i class="fa fa-info hidden-lg"></i>
                     </a>
-                    <i class="fa fa-info hidden-lg"></i>
                     <span class="delimiter"> | </span>
                 </li>
 
                 <li>
-                    <a href="{{ delivery }}" id="shipping" title="{{ text_shipping }}" class="hidden-xs hidden-sm hidden-md">
+                    <a href="{{ delivery }}" id="shipping" title="{{ text_shipping }}">
                         <span class="hidden-xs hidden-sm hidden-md">{{ text_shipping }}</span>
+                        <i class="fa fa-truck hidden-lg"></i>
                     </a>
-                    <i class="fa fa-truck hidden-lg"></i>
                     <span class="delimiter"> | </span>
                 </li>
 
                 <li>
-                    <a href="{{ wishlist }}" id="wishlist-total" title="{{ text_wishlist }}" class="hidden-xs hidden-sm hidden-md">
+                    <a href="{{ wishlist }}" id="wishlist-total" title="{{ text_wishlist }}">
                         <span class="hidden-xs hidden-sm hidden-md">{{ text_wishlist }}</span>
+                        <i class="fa fa-heart hidden-lg"></i>
                     </a>
-                    <i class="fa fa-heart hidden-lg"></i>
                     <span class="delimiter"> | </span>
                 </li>
 
@@ -113,10 +113,10 @@
                 </li>
 
                 <li>
-                    <a href="{{ shopping_cart }}" title="{{ text_shopping_cart }}" class="hidden-xs hidden-sm hidden-md">
+                    <a href="{{ shopping_cart }}" title="{{ text_shopping_cart }}">
                         <span class="hidden-xs hidden-sm hidden-md">{{ text_shopping_cart }}</span>
+                        <i class="fa fa-shopping-cart hidden-lg"></i>
                     </a>
-                    <i class="fa fa-shopping-cart hidden-lg"></i>
                 </li>
                 <!--<li><a href="{{ checkout }}" title="{{ text_checkout }}"><i class="fa fa-share"></i> <span class="hidden-xs hidden-sm hidden-md">{{ text_checkout }}</span></a></li>-->
             </ul>
@@ -149,7 +149,7 @@
                 <!--<div class="col-sm-3">{{ cart }}</div>-->
             </div>
         </div>
-    {% elseif %}
+    {% else %}
 
         <div class="row">
             <div id="banner_logo" class="col-md-12 hidden-sm hidden-xs">
