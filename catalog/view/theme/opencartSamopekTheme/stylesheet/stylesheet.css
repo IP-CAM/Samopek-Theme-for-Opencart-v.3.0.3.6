@@ -91,10 +91,10 @@
   font-family: Roboto;
   font-style: normal;
   font-weight: 600;
-  font-size: 14px;
+  font-size: 24px;
   line-height: 16px;
   display: flex;
-  align-items: flex-end;
+  align-self: flex-end;
 }
 
 .product-thumb h4>a {
@@ -210,6 +210,15 @@
   background-color: transparent;
 }
 
+@media(min-width: 1200px) {
+#menu .navbar-nav {
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+  width: 100%;
+}
+}
+
 #menu .navbar-nav {
   /*display: flex;*/
   align-items: stretch;
@@ -320,7 +329,7 @@ footer {
   text-align: center;
 }
 
-#banner_logo > img {
+#banner_logo > a > img {
   margin-top: 2%;
   margin-bottom: 2%;
 }
@@ -385,7 +394,6 @@ footer {
     list-style: none;
     padding: 0;
     margin: 0;
-    margin-left: -20px;
 
     display: flex;
     flex-wrap: wrap;
@@ -505,6 +513,13 @@ footer {
   padding-left: 0px;
 }
 
+@media(max-width: 767px) {
+  .cart_product_row td {
+    vertical-align: middle !important;
+    white-space: unset !important;
+  }
+}
+
 .cart_product_row td {
   vertical-align: middle !important;
 }
@@ -518,11 +533,22 @@ footer {
   color: #999999;
 }
 
+@media (min-width: 767px) {
+  .cart_product_name {
+    font-size: 22px;
+  }
+}
+
+@media (max-width: 767px) {
+  .cart_product_name {
+    font-size: 13px;
+  }
+}
+
 .cart_product_name {
   font-family: Roboto;
   font-style: normal;
   font-weight: 500;
-  font-size: 22px;
   line-height: 26px;
   color: #000000;
 }

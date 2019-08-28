@@ -27,6 +27,33 @@ Manually change name of currency and symbol_right in admin panel. For some reaso
 mysql -u root -p765b91475e opencart_samopek < oc_information.sql
 mysql -u root -p765b91475e opencart_samopek < oc_information_description.sql
 
+mysql -u root -p765b91475e opencart_samopek < oc_customer.sql
+mysql -u root -p765b91475e opencart_samopek < oc_customer_activity.sql
+mysql -u root -p765b91475e opencart_samopek < oc_customer_affiliate.sql
+mysql -u root -p765b91475e opencart_samopek < oc_customer_approval.sql
+mysql -u root -p765b91475e opencart_samopek < oc_customer_group.sql
+mysql -u root -p765b91475e opencart_samopek < oc_customer_group_description.sql
+mysql -u root -p765b91475e opencart_samopek < oc_customer_history.sql
+mysql -u root -p765b91475e opencart_samopek < oc_customer_ip.sql
+mysql -u root -p765b91475e opencart_samopek < oc_customer_login.sql
+mysql -u root -p765b91475e opencart_samopek < oc_customer_online.sql
+mysql -u root -p765b91475e opencart_samopek < oc_customer_reward.sql
+mysql -u root -p765b91475e opencart_samopek < oc_customer_search.sql
+mysql -u root -p765b91475e opencart_samopek < oc_customer_transaction.sql
+mysql -u root -p765b91475e opencart_samopek < oc_customer_wishlist.sql
+
+mysql -u root -p765b91475e opencart_samopek < oc_order.sql
+mysql -u root -p765b91475e opencart_samopek < oc_order_history.sql
+mysql -u root -p765b91475e opencart_samopek < oc_order_option.sql
+mysql -u root -p765b91475e opencart_samopek < oc_order_product.sql
+mysql -u root -p765b91475e opencart_samopek < oc_order_recurring.sql
+mysql -u root -p765b91475e opencart_samopek < oc_order_recurring_transaction.sql
+mysql -u root -p765b91475e opencart_samopek < oc_order_shipment.sql
+mysql -u root -p765b91475e opencart_samopek < oc_order_status.sql
+mysql -u root -p765b91475e opencart_samopek < oc_order_total.sql
+mysql -u root -p765b91475e opencart_samopek < oc_order_voucher.sql
+
+
 --Include into OMsI
 create table oc_ms_samopek_category (category_id int, ms_group_uuid TEXT, ms_version int);
 create table oc_ms_samopek_product (product_id int, ms_id int, ms_version int);
