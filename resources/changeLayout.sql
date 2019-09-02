@@ -55,8 +55,12 @@ mysql -u root -p765b91475e opencart_samopek < oc_order_voucher.sql
 
 
 --Include into OMsI
-create table oc_ms_samopek_category (category_id int, ms_group_uuid TEXT, ms_version int);
-create table oc_ms_samopek_product (product_id int, ms_id int, ms_version int);
+
+create table oc_ms_samopek_product (product_id int(11) NOT NULL, ms_id int(11) NOT NULL, ms_uuid varchar(64) NOT NULL, ms_version int(3) NOT NULL, PRIMARY KEY (product_id));
+create table oc_ms_samopek_category (category_id int(11) NOT NULL, ms_group_uuid varchar(64) NOT NULL, ms_version int(3) NOT NULL);
+
+create table oc_ms_samopek_option (option_id int(11) NOT NULL, ms_variant_uuid varchar(64) NOT NULL, PRIMARY KEY (option_id));
+create table oc_ms_samopek_product_option (product_option_value_id int(11) NOT NULL, ms_product_variant_uuid varchar(64) NOT NULL, ms_prodcut_variant_code int(11) NOT NULL, PRIMARY KEY (product_option_value_id));
 
 --Turn off vouchers, shipping estimation, gift cards - Extensions->checkout.
 --Extensions->shipping: Turn on SelfShipping, change Geographic Zone to AllAreas.
@@ -70,3 +74,19 @@ create table oc_ms_samopek_product (product_id int, ms_id int, ms_version int);
 --
 --
 -- Localize Stock options. System->localization->Stock.
+
+
+delete from oc_option;
+delete from oc_option_description;
+delete from oc_option_value;
+delete from oc_option_value_description;
+
+-- ALTERNATIVE
+--drop table oc_option;
+--create table oc_option (option_id int(11) NOT NULL AUTO_INCREMENT, type varchar(32) NOT NULL, sort_order int(3) NOT NULL, PRIMARY KEY (option_id));
+--drop table oc_option_description;
+--create table oc_option_description (option_id int(11) NOT NULL, language_id int(11) NOT NULL, name varchar(128) NOT NULL, PRIMARY KEY (option_id, language_id)) DEFAULT CHARSET=utf8;
+--drop table oc_option_value;
+--create table oc_option_value (option_value_id int(11) NOT NULL AUTO_INCREMENT, option_id int(11) NOT NULL, image varchar(255) NOT NULL, sort_order int(3) NOT NULL, PRIMARY KEY (option_value_id)) DEFAULT CHARSET=utf8;
+--drop table oc_option_value_description;
+--create table oc_option_value_description (option_value_id int(11) NOT NULL, language_id int(11) NOT NULL, option_id int(11) NOT NULL, name varchar(128) NOT NULL, PRIMARY KEY (option_value_id)) DEFAULT CHARSET=utf8;

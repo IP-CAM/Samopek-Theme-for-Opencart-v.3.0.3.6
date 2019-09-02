@@ -5,9 +5,9 @@
       <div class="image"><a href="{{ product.href }}"><img src="{{ product.thumb }}" alt="{{ product.name }}" title="{{ product.name }}" class="img-responsive" /></a></div>
       <div class="button-group">
         {% if product.quantity <= 0 %}
-          <button type="button" disabled="disabled" style="background: #FFA854;">{{ text_out_of_stock }}</button>
+          <button type="button" disabled="disabled" style="background: #FFC341;">{{ text_out_of_stock }}</button>
         {% else %}
-          <button type="button" onclick="cart.add('{{ product.product_id }}');"><i class="fa fa-shopping-cart"></i> <span class="hidden-xs hidden-sm">{{ button_cart }}</span></button>
+          <button type="button" onclick="cart.add('{{ product.product_id }}');"><i class="fa fa-shopping-cart hidden-md hidden-lg"></i> <span class="hidden-xs hidden-sm">{{ button_cart }}</span></button>
         {% endif %}
         <button type="button" data-toggle="tooltip" title="{{ button_wishlist }}" onclick="wishlist.add('{{ product.product_id }}');" class="hidden-lg hidden-md"><i class="fa fa-heart"></i></button>
       </div>
