@@ -92,4 +92,6 @@ delete from oc_option_value_description;
 --create table oc_option_value_description (option_value_id int(11) NOT NULL, language_id int(11) NOT NULL, option_id int(11) NOT NULL, name varchar(128) NOT NULL, PRIMARY KEY (option_value_id)) DEFAULT CHARSET=utf8;
 
 Размер изображения товаров в корзине:
-Модули->темы->самопек->изменить
+Модули->темы->самопек->изменить:
+ - Размер большого изображения товара 376x376
+ - Размер изображений товаров в корзине 87x87
