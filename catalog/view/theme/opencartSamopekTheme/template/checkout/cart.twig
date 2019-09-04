@@ -24,15 +24,15 @@
     {% set class = 'col-sm-12' %}
     {% endif %}
     <div id="content" class="{{ class }}">{{ content_top }}
-      <h1>{{ heading_title }}
+      <h1 class="cart_head_title">{{ heading_title }}
         {% if weight %}
         &nbsp;({{ weight }})
         {% endif %} </h1>
-      <div class="row cart_row">
-        <div class="col-lg-10 col-xs-12">
+      <div class="row">
+        <div class="col-md-12 col-xs-hidden">
       <form action="{{ action }}" method="post" enctype="multipart/form-data">
         <div class="table-responsive">
-          <table class="table">
+          <table class="table cart_table">
             <!--<thead>
               <tr>
                 <td class="text-center">{{ column_image }}</td>
@@ -44,7 +44,14 @@
               </tr>
             </thead>-->
             <tbody>
-            
+
+            {% set notInStock = 0 %}
+            {% for product in products %}
+              {% if not product.stock %}
+                {% set notInStock = 1 %}
+              {% endif %}
+            {% endfor %}
+
             {% for product in products %}
             <tr class="cart_product_row">
               <td>
@@ -57,7 +64,9 @@
                 <span class="cart_model">{{ text_model }} {{ product.model }}</span>
                 <br>
                 <a class="cart_product_name" href="{{ product.href }}">{{ product.name }}</a>
-                {% if not product.stock %} <span class="text-danger">***</span> {% endif %}
+                {% if not product.stock %}
+                  <span class="text-danger">***</span>
+                {% endif %}
                 {% if product.option %}
                 {% for option in product.option %} <br />
                 <small>{{ option.name }}: {{ option.value }}</small> {% endfor %}
@@ -84,6 +93,23 @@
               </td>
               <td class="text-right">{{ product.price }}</td>
               <td class="product_total text-right">{{ product.total }}</td>
+              {% if loop.index0 == 0 %}
+              <td rowspan="{{ products|length }}" class="totals_cell">
+                  {% if notInStock == 0 %}
+                    <div class="totals_in_stock">
+                      {{ text_all_products_in_stock }}
+                    </div>
+                  {% endif %}
+
+                  <div class="totals_title">
+                    {{ totals[0].title }}
+                  </div>
+                  <div class="totals_text">
+                    {{ totals[0].text }}
+                  </div>
+                  <a href="{{ checkout }}" class="btn btn-cart-continue">{{ button_continue }}</a>
+              </td>
+              {% endif %}
             </tr>
             {% endfor %}
             {% for voucher in vouchers %}
@@ -112,17 +138,6 @@
         {{ module }}
         {% endfor %} </div>
       {% endif %} <br />
-        </div>
-        <div class="col-lg-2 col-xs-12">
-          <div id="totals">
-            {{ totals[0].title }}
-            <br>
-            {{ totals[0].text }}
-            <br>
-            <br>
-            <br>
-            <a href="{{ checkout }}" class="btn btn-cart-continue">{{ button_checkout }}</a>
-          </div>
         </div>
       </div>
      <!-- <div class="row">

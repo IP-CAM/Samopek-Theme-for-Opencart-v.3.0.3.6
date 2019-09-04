@@ -34,6 +34,7 @@ $_['button_cancel']         = 'Отмена';
 $_['button_compare']        = 'В сравнение';
 $_['button_wishlist']       = 'В закладки';
 $_['button_checkout']       = 'Оформление заказа';
+$_['button_continue']       = 'Продолжить';
 $_['button_confirm']        = 'Подтверждение заказа';
 $_['button_coupon']         = 'Применение купона';
 $_['button_delete']         = 'Удалить';

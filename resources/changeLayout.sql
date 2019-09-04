@@ -90,3 +90,6 @@ delete from oc_option_value_description;
 --create table oc_option_value (option_value_id int(11) NOT NULL AUTO_INCREMENT, option_id int(11) NOT NULL, image varchar(255) NOT NULL, sort_order int(3) NOT NULL, PRIMARY KEY (option_value_id)) DEFAULT CHARSET=utf8;
 --drop table oc_option_value_description;
 --create table oc_option_value_description (option_value_id int(11) NOT NULL, language_id int(11) NOT NULL, option_id int(11) NOT NULL, name varchar(128) NOT NULL, PRIMARY KEY (option_value_id)) DEFAULT CHARSET=utf8;
+
+Размер изображения товаров в корзине:
+Модули->темы->самопек->изменить

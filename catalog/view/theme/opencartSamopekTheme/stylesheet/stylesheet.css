@@ -417,10 +417,10 @@ footer {
 }
 
 .btn-cart-continue {
-  background: #FFFFFF;
+  background: #FFC341;
   text-align: center;
   text-transform: uppercase;
-  color: #000000;
+  color: #FFFFFF;
   border: none;
   font-family: Roboto;
   font-style: normal;
@@ -492,6 +492,12 @@ footer {
 .quantity_group {
   display: flex;
   justify-content: center;
+
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 21px;
 }
 
 .samopek_button_wo_borders {
@@ -522,10 +528,55 @@ footer {
 
 .cart_product_row td {
   vertical-align: middle !important;
+  padding-top: 2% !important;
+  padding-bottom: 2% !important;
 }
 
-.cart_row {
+.totals_cell {
+  border-left: 1px solid #ddd;
+  text-align: center;
+}
+
+.cart_table {
   border: 1px solid #ddd;
+}
+
+.totals_in_stock {
+  /* Text */
+
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 180%;
+
+  margin-bottom: 40%;
+}
+
+.totals_title {
+  /* H2 */
+
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 22px;
+  line-height: 26px;
+
+  color: #E6E6E6;
+  text-transform: uppercase;
+}
+
+.totals_text {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 36px;
+  line-height: 42px;
+  text-align: center;
+
+  color: #3AC2D7;
+
+  margin-bottom: 50%;
 }
 
 .cart_model {
@@ -552,9 +603,20 @@ footer {
 .cart_product_name {
   font-family: Roboto;
   font-style: normal;
-  font-weight: 500;
+  font-weight: 600;
   line-height: 26px;
   color: #000000;
+}
+
+.cart_head_title {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 36px;
+  line-height: 42px;
+  text-transform: uppercase;
+
+  color: #FFC341;
 }
 
 .product_total {
@@ -580,8 +642,6 @@ footer {
     text-transform: uppercase;
 
     color: #000000;
-
-    background-color: #FFC341;
 
     padding-top: 10%;
     padding-bottom: 10%;
