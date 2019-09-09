@@ -58,6 +58,14 @@ class samopek_ControllerExtensionModuleLatest extends ControllerExtensionModuleL
                     $quantity = 0;
                 }
 
+                if ($result['quantity'] <= 0) {
+                    $stock = $result['stock_status'];
+                } elseif ($this->config->get('config_stock_display')) {
+                    $stock = $result['quantity'];
+                } else {
+                    $stock = $this->language->get('text_instock');
+                }
+
 				$data['products'][] = array(
 					'product_id'  => $result['product_id'],
 					'thumb'       => $image,
@@ -68,7 +76,8 @@ class samopek_ControllerExtensionModuleLatest extends ControllerExtensionModuleL
 					'tax'         => $tax,
 					'rating'      => $rating,
 					'href'        => $this->url->link('product/product', 'product_id=' . $result['product_id']),
-                    'quantity'    => $quantity
+                    'quantity'    => $quantity,
+                    'stock'       => $stock
 				);
 			}
 

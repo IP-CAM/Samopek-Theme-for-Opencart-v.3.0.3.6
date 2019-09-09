@@ -170,6 +170,8 @@ var cart = {
 					// But we do want to show and hide after some time
 					$('.alert-add-product').show(0).delay(4000).fadeOut('slow');
 
+					$('#cart-header').html(json['total']);
+
 					$('#cart > ul').load('index.php?route=common/cart/info ul li');
 				}
 			},

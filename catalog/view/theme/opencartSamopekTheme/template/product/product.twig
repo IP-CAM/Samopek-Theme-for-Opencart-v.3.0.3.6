@@ -1,8 +1,8 @@
 {{ header }}
 <div id="product-product" class="container">
-  <div class="row row_breadcrumbs">
+  <div class="row">
     <div id="content" class="col-lg-12">
-      <div class="row">
+      <div class="row row_breadcrumbs">
         <div class="col-lg-6">
         </div>
         <div class="col-lg-6">
@@ -54,8 +54,8 @@
         </div>
         <div id="product" class="col-lg-2 col-xs-12 product_details_section_buy">
           <div class="row">
+            {% if stock > 0 %}
             <div class="quantity">
-              {% if stock > 0 %}
                 <div class="product_text_stock">
                   {{ text_stock }}
                 </div>
@@ -68,14 +68,16 @@
                     {% endif %}
                   </svg>
                 {% endfor %}
-              {% else %}
-                {{ text_out_of_stock }}
-              {% endif %}
               <span class="quantity_tooltiptext"> {{ stock }} </span>
+              {% else %}
+              <div class="not_in_stock">
+                {{ text_out_of_stock }} <br> <br><br>{{ text_call_us_about_product }}
+              {% endif %}
             </div>
           </div>
           <br>
 
+          {% if stock > 0 %}
           <div class="quantity_group">
             <button class="quantity_more_less_btn_minus samopek_button_wo_borders">-</button>
             <input type="text" name="quantity" value="{{ minimum }}" size="2" id="input-quantity" class="form-control"/>
@@ -85,6 +87,7 @@
 
           <button type="button" id="button-cart" data-loading-text="{{ text_loading }}"
                   class="btn btn-primary btn-md btn-block">{{ button_cart }}</button>
+          {% endif %}
         </div>
       </div>
       {% if products %}
@@ -145,7 +148,7 @@
 
 
 
-
+      <div id="product">
       {% if options %}
         <hr>
         <h3>{{ text_option }}</h3>
@@ -248,6 +251,7 @@
           {% endif %}
         {% endfor %}
       {% endif %}
+      </div>
 
 
 
@@ -320,7 +324,7 @@
                 }
 
                 if (json['success']) {
-                    $('.samopek_breadcrumb').after('<div class="alert alert-success alert-dismissible">' + json['success'] + '<button type="button" class="close" data-dismiss="alert">&times;</button></div>');
+                    $('#content').parent().before('<div class="alert-add-product alert-success alert-dismissible">' + json['success'] + '<button type="button" class="close" data-dismiss="alert">&times;</button></div>');
 
                     $('#cart > button').html('<span id="cart-total"><i class="fa fa-shopping-cart"></i> ' + json['total'] + '</span>');
 
@@ -328,7 +332,7 @@
                     //$('html, body').animate({scrollTop: 0}, 'slow');
 
                     // But we do want to show and hide after some time
-                    $('.alert').show(0).delay(4000).fadeOut('slow');
+                    $('.alert-add-product').show(0).delay(4000).fadeOut('slow');
 
                     $('#cart > ul').load('index.php?route=common/cart/info ul li');
                 }

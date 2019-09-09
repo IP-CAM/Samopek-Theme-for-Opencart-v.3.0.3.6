@@ -68,7 +68,7 @@
 }
 
 .product-thumb-category {
-  height: 500px !important;
+  height: 400px !important;
 }
 
 .product-thumb {
@@ -511,7 +511,7 @@ footer {
   border-width: 0px;
   -webkit-appearance: none;
   box-shadow: none;
-  width: 20%;
+  width: 40%;
   align-self: center;
   text-align: center;
 }
@@ -531,7 +531,6 @@ footer {
   border: 0;
   background: none;
   display: block;
-  margin: auto;
 }
 
 .quantity_more_less_btn_plus, .quantity_more_less_btn_minus, .quantity_more_less_btn_minus_cart, .quantity_more_less_btn_plus_cart {
@@ -642,6 +641,16 @@ footer {
   color: #FFC341;
 }
 
+.not_in_stock {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 23px;
+  text-align: center;
+  color: #FFC341;
+}
+
 .product_total {
     font-family: Roboto;
     font-style: normal;
@@ -688,11 +697,16 @@ footer {
 }
 
 .title_samopek {
-  text-align: center;
-  font-family: cursive;
-  font-style: normal;
-  font-weight: bold;
-  font-size: 25px;
-  line-height: 21px;
   padding-bottom: 20px;
+  width: 50%;
+  margin-left: 25%;
+}
+
+.quantity_price_row {
+  display: flex;
+}
+
+.quantity_ind {
+  flex-grow: 1;
+  padding-left: 20px;
 }
