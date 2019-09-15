@@ -141,8 +141,13 @@
   margin-bottom: 0px;
 }
 
+.search_box {
+  border: none;
+  margin-left: 10px;
+}
+
 #top-links li:first-child {
-  margin-right: 200px;
+  margin-left: 200px;
 }
 
 #top .btn-link, #top-links li, #top-links a, #top-links label {
