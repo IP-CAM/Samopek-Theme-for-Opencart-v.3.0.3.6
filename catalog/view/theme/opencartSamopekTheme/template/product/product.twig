@@ -15,7 +15,7 @@
       </div>
       <div class="row product_details_row">
         <div class="col-md-6 col-xs-12">
-          <div class="row">
+          <div class="row thumbnails">
             <div class="col-lg-2">
               {% if images %}
                 {% for image in images %}
@@ -51,6 +51,28 @@
             <div class="product_details_description">
               {{ description }}
             </div>
+
+          {% if attribute_groups %}
+            <div class="tab-pane" id="tab-specification">
+              <table class="table">
+                {% for attribute_group in attribute_groups %}
+                  <thead>
+                  <tr>
+                    <td colspan="2"><strong>{{ attribute_group.name }}</strong></td>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  {% for attribute in attribute_group.attribute %}
+                    <tr>
+                      <td class="product_details_attr_name">{{ attribute.name }}</td>
+                      <td class="product_details_attr_value">{{ attribute.text }}</td>
+                    </tr>
+                  {% endfor %}
+                  </tbody>
+                {% endfor %}
+              </table>
+            </div>
+          {% endif %}
         </div>
         <div id="product" class="col-lg-2 col-xs-12 product_details_section_buy">
           <div class="row">

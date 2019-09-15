@@ -710,3 +710,42 @@ footer {
   flex-grow: 1;
   padding-left: 20px;
 }
+
+.product_details_attr_name {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 180%;
+  /* or 25px */
+
+
+  color: #000000;
+}
+
+.product_details_attr_value {
+  /* Text */
+
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 180%;
+  /* or 25px */
+
+
+  color: #3AC2D7;
+}
+
+.cart-header-text-style {
+  padding-right: 10%;
+}
+
+.cart-header-total-style {
+  padding-left: 5px;
+  padding-right: 5px;
+  background-color: #3AC2D7;
+  color: white;
+  border-radius: 10px;
+  white-space: pre;
+}

@@ -30,7 +30,6 @@ class samopek_ControllerCommonHeader extends ControllerCommonHeader {
 
         // Display prices
         if ($this->customer->isLogged() || !$this->config->get('config_customer_price')) {
-            error_log("ACASCSACAAAAAAAAAAAAAAAAAAAAAAAAAA");
             $sort_order = array();
 
             $results = $this->model_setting_extension->getExtensions('total');
@@ -43,7 +42,6 @@ class samopek_ControllerCommonHeader extends ControllerCommonHeader {
 
             foreach ($results as $result) {
                 if ($this->config->get('total_' . $result['code'] . '_status')) {
-                    error_log("BBBBB" . $result['code']);
                     $this->load->model('extension/total/' . $result['code']);
 
                     // We have to put the totals in an array so that they pass by reference.
@@ -54,7 +52,6 @@ class samopek_ControllerCommonHeader extends ControllerCommonHeader {
             $sort_order = array();
 
             foreach ($totals as $key => $value) {
-                error_log("CCCC" . $key . $value['value']);
                 $sort_order[$key] = $value['sort_order'];
             }
 
@@ -64,15 +61,10 @@ class samopek_ControllerCommonHeader extends ControllerCommonHeader {
         }
 
         $totalFormatted = sprintf($this->language->get('text_items'), $this->cart->countProducts() + (isset($this->session->data['vouchers']) ? count($this->session->data['vouchers']) : 0), $this->currency->format($total, $this->session->data['currency']));
-        error_log("EEE" . $totalFormatted);
 
-        $totalFormatted1 = sprintf($this->language->get('text_shopping_cart'), $totalFormatted);
-        error_log("DDD" . $totalFormatted1);
         // Shopping cart
-        $data['text_shopping_cart1'] = $totalFormatted;
+        $data['shopping_cart_total'] = $totalFormatted;
 
-        error_log("assad");
-        error_log($data['home_page']);
         return parent::preRender($template_buffer, $template_name, $data);
     }
 }

@@ -62,6 +62,8 @@ create table oc_ms_samopek_category (category_id int(11) NOT NULL, ms_group_uuid
 create table oc_ms_samopek_option (option_id int(11) NOT NULL, ms_variant_uuid varchar(64) NOT NULL, PRIMARY KEY (option_id));
 create table oc_ms_samopek_product_option (product_option_value_id int(11) NOT NULL, ms_product_variant_uuid varchar(64) NOT NULL, ms_prodcut_variant_code int(11) NOT NULL, PRIMARY KEY (product_option_value_id));
 
+create table oc_ms_samopek_attributes (attribute_id int(11) NOT NULL, ms_attribute_uuid varchar(64) NOT NULL, PRIMARY KEY (attribute_id));
+
 --Turn off vouchers, shipping estimation, gift cards - Extensions->checkout.
 --Extensions->shipping: Turn on SelfShipping, change Geographic Zone to AllAreas.
 --Extensions->shipping: Turn on FixedPriceShipping, change Geographic Zone to AllAreas, Tax->No tax, price = 200
@@ -76,10 +78,16 @@ create table oc_ms_samopek_product_option (product_option_value_id int(11) NOT N
 -- Localize Stock options. System->localization->Stock.
 
 
-delete from oc_option;
-delete from oc_option_description;
-delete from oc_option_value;
-delete from oc_option_value_description;
+truncate oc_option;
+truncate oc_option_description;
+truncate oc_option_value;
+truncate oc_option_value_description;
+
+truncate oc_ms_samopek_attributes;
+truncate oc_attribute;
+truncate oc_attribute_description;
+truncate oc_attribute_group;
+truncate oc_attribute_group_description;
 
 -- ALTERNATIVE
 --drop table oc_option;

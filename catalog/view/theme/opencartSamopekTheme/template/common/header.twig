@@ -113,8 +113,9 @@
                 </li>
 
                 <li>
-                    <a href="{{ shopping_cart }}" id="cart-header" title="{{ text_shopping_cart1 }}">
-                        <span class="hidden-xs hidden-sm hidden-md">{{ text_shopping_cart }} </span> <span> {{ text_shopping_cart1 }} </span>
+                    <a href="{{ shopping_cart }}" id="cart-header" title="{{ shopping_cart_total }}">
+                        <span class="cart-header-text-style hidden-xs hidden-sm hidden-md">{{ text_shopping_cart }} </span>
+                        <span class="cart-header-total-style"> {{ shopping_cart_total }} </span>
                         <i class="fa fa-shopping-cart hidden-lg"></i>
                     </a>
                 </li>
