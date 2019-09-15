@@ -317,7 +317,9 @@ footer {
 }
 
 .fav_preview_buttons:hover {
-  background: aliceblue;
+  background: none;
+  border: none;
+  cursor: pointer;
 }
 
 .featured_buttons_group_fav_preview {
@@ -748,4 +750,24 @@ footer {
   color: white;
   border-radius: 10px;
   white-space: pre;
+}
+
+#samopek_button:hover svg {
+  transform: scale(1.5);
+  fill: #3AC2D7;
+}
+
+#samopek_button::-moz-focus-inner {
+  border: 0;
+}
+
+#samopek_button svg {
+  outline: none;
+  transition: transform 0.3s linear;
+}
+
+#samopek_button {
+  border: none;
+  background: none;
+  cursor: pointer;
 }

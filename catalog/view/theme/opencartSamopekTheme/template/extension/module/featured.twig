@@ -8,8 +8,10 @@
         <!--<button class="fav_preview_buttons" onclick="window.location.href='/page2'">
           <img src="catalog/view/theme/opencartSamopekTheme/image/preview.svg">
         </button>-->
-        <button class="fav_preview_buttons" onclick="wishlist.add('{{ product.product_id }}');">
-          <img src="catalog/view/theme/opencartSamopekTheme/image/favorite.svg">
+        <button id="samopek_button" onclick="wishlist.add('{{ product.product_id }}');">
+          <svg width="16" height="14" viewBox="0 0 16 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M7.57398 2.39614L7.99992 3.08916L8.42591 2.39616C9.09964 1.30014 10.3031 0.570057 11.6792 0.570057C13.7894 0.570057 15.5 2.28062 15.5 4.39077C15.5 5.53858 14.992 6.56581 14.1882 7.26704L14.1753 7.27824L14.1633 7.29029L8.04068 13.4131C8.0299 13.4239 8.01527 13.43 7.99995 13.43C7.98464 13.43 7.97001 13.4239 7.95923 13.4131C7.95922 13.4131 7.95922 13.4131 7.95922 13.4131L1.83663 7.29029L1.82459 7.27824L1.81175 7.26705C1.00791 6.56582 0.5 5.5386 0.5 4.39077C0.5 2.28054 2.21017 0.570057 4.32026 0.570057C5.69641 0.570057 6.90039 1.30021 7.57398 2.39614Z" stroke="#E6E6E6"/>
+          </svg>
         </button>
       </div>
       <div class="image"><a href="{{ product.href }}"><img src="{{ product.thumb }}" alt="{{ product.name }}" title="{{ product.name }}" class="img-responsive" /></a></div>
