@@ -157,7 +157,7 @@ var cart = {
 				}
 
 				if (json['success']) {
-					$('#content').parent().before('<div class="alert-add-product alert-success alert-dismissible"><i class="fa fa-check-circle"></i> ' + json['success'] + ' <button type="button" class="close" data-dismiss="alert">&times;</button></div>');
+					$('#content').parent().before('<div class="alert-add-product alert-success alert-dismissible"><i class="fa fa-check-circle"></i> ' + json['success'] + ' <button type="button" class="close" data-dismiss="alert-add-product">&times;</button></div>');
 
 					// Need to set timeout otherwise it wont update the total
 					setTimeout(function () {
@@ -577,5 +577,13 @@ $(document).delegate('.agree', 'click', function(e) {
             $input.change();
             return false;
         });
+
     });
 
+$(document).on('change', 'input[name=\'payment_method\']', function() {
+	if (this.value == 'bank_card') {
+		$('#yandex_pay').attr('disabled', false);
+	} else {
+		$('#yandex_pay').attr('disabled', true);
+	}
+});

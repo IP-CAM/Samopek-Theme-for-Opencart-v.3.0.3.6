@@ -55,8 +55,6 @@ class samopek_ControllerCommonHeader extends ControllerCommonHeader {
                 $sort_order[$key] = $value['sort_order'];
             }
 
-            error_log("GGG" . $total);
-
             array_multisort($sort_order, SORT_ASC, $totals);
         }
 

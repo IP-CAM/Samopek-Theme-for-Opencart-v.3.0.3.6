@@ -5,6 +5,8 @@ class samopek_ControllerExtensionModuleFeatured extends ControllerExtensionModul
 
 		$this->load->model('catalog/product');
 
+        $this->load->model('account/wishlist');
+
 		$this->load->model('tool/image');
 
 		$data['products'] = array();
@@ -12,6 +14,8 @@ class samopek_ControllerExtensionModuleFeatured extends ControllerExtensionModul
 		if (!$setting['limit']) {
 			$setting['limit'] = 4;
 		}
+
+        $wishListProductsIds = $this->model_account_wishlist->getWishlistProductsList();
 
 		if (!empty($setting['product'])) {
 			$products = array_slice($setting['product'], 0, (int)$setting['limit']);
@@ -77,7 +81,8 @@ class samopek_ControllerExtensionModuleFeatured extends ControllerExtensionModul
 						'rating'      => $rating,
 						'href'        => $this->url->link('product/product', 'product_id=' . $product_info['product_id']),
                         'quantity'    => $quantity,
-                        'stock'       => $stock
+                        'stock'       => $stock,
+                        'in_wishlist' => in_array($product_info['product_id'], $wishListProductsIds)
 					);
 				}
 			}
