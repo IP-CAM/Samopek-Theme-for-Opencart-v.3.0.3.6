@@ -579,11 +579,3 @@ $(document).delegate('.agree', 'click', function(e) {
         });
 
     });
-
-$(document).on('change', 'input[name=\'payment_method\']', function() {
-	if (this.value == 'bank_card') {
-		$('#yandex_pay').attr('disabled', false);
-	} else {
-		$('#yandex_pay').attr('disabled', true);
-	}
-});
