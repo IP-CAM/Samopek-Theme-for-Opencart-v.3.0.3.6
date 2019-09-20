@@ -76,7 +76,7 @@
         </div>
         <div id="product" class="col-lg-2 col-xs-12 product_details_section_buy">
           <div class="row">
-            {% if stock > 0 %}
+            {% if (stock > 0) or (options) %}
             <div class="quantity">
                 <div class="product_text_stock">
                   {{ text_stock }}
@@ -99,7 +99,7 @@
           </div>
           <br>
 
-          {% if stock > 0 %}
+          {% if (stock > 0) or (options) %}
           <div class="quantity_group">
             <button class="quantity_more_less_btn_minus samopek_button_wo_borders">-</button>
             <input type="text" name="quantity" value="{{ minimum }}" size="2" id="input-quantity" class="form-control"/>

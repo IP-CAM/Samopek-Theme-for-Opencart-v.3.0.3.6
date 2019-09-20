@@ -31,8 +31,8 @@
       <div class="row">
         <div class="col-md-12 col-xs-hidden">
       <form action="{{ action }}" method="post" enctype="multipart/form-data">
-        <div class="table-responsive">
-          <table class="table cart_table">
+        <div class="table-responsive cart_product_table">
+          <table class="table">
             <!--<thead>
               <tr>
                 <td class="text-center">{{ column_image }}</td>
@@ -53,14 +53,20 @@
             {% endfor %}
 
             {% for product in products %}
-            <tr class="cart_product_row">
-              <td>
+            <div class="cart_product_row">
+              <div class="cart_product_delete">
                 <button class="samopek_button_wo_borders" onclick="cart.remove('{{ product.cart_id }}');">
                   <img src="catalog/view/theme/opencartSamopekTheme/image/cross_delete_from_cart.svg"/>
                 </button>
-              </td>
-              <td class="text-center">{% if product.thumb %} <a href="{{ product.href }}"><img src="{{ product.thumb }}" alt="{{ product.name }}" title="{{ product.name }}" /></a> {% endif %}</td>
-              <td class="text-left">
+              </div>
+              <div class="cart_product_thumb">
+                {% if product.thumb %}
+                  <a href="{{ product.href }}">
+                    <img src="{{ product.thumb }}" alt="{{ product.name }}" title="{{ product.name }}" />
+                  </a>
+                {% endif %}
+              </div>
+              <div class="cart_product_title">
                 <span class="cart_model">{{ text_model }} {{ product.model }}</span>
                 <br>
                 <a class="cart_product_name" href="{{ product.href }}">{{ product.name }}</a>
@@ -74,44 +80,50 @@
                 {% if product.reward %} <br />
                 <small>{{ product.reward }}</small> {% endif %}
                 {% if product.recurring %} <br />
-                <span class="label label-info">{{ text_recurring_item }}</span> <small>{{ product.recurring }}</small> {% endif %}</td>
-              <td class="text-left">
-                <div class="input-group btn-block" style="max-width: 200px;">
-                  <div class="quantity_group">
-                    <button class="quantity_more_less_btn_minus_cart samopek_button_wo_borders">-</button>
-                    <input type="text" name="quantity[{{ product.cart_id }}]" value="{{ product.quantity }}" size="2" id="input-quantity" class="form-control"/>
-                    <button class="quantity_more_less_btn_plus_cart samopek_button_wo_borders">+</button>
+                <span class="label label-info">{{ text_recurring_item }}</span> <small>{{ product.recurring }}</small> {% endif %}
+              </div>
+              <div class="cart_product_quantity_price">
+                <div class="cart_product_quantity">
+                  <div class="input-group btn-block" style="max-width: 200px;">
+                    <div class="quantity_group">
+                      <button class="quantity_more_less_btn_minus_cart samopek_button_wo_borders">-</button>
+                      <input type="text" name="quantity[{{ product.cart_id }}]" value="{{ product.quantity }}" size="2" id="input-quantity" class="form-control"/>
+                      <button class="quantity_more_less_btn_plus_cart samopek_button_wo_borders">+</button>
+                    </div>
                   </div>
                 </div>
-              </td>
-              <td class="text-left">
-                <div class="input-group btn-block" style="max-width: 200px;">
-                  <span class="input-group-btn">
-                    <button type="submit" data-toggle="tooltip" title="{{ button_update }}" class="btn btn-primary"><i class="fa fa-refresh"></i></button>
-                  </span>
+                <div class="cart_product_update">
+                  <div class="input-group btn-block" style="max-width: 200px;">
+                    <span class="input-group-btn">
+                      <button type="submit" data-toggle="tooltip" title="{{ button_update }}" class="btn btn-primary"><i class="fa fa-refresh"></i></button>
+                    </span>
+                  </div>
                 </div>
-              </td>
-              <td class="text-right">{{ product.price }}</td>
-              <td class="product_total text-right">{{ product.total }}</td>
-              {% if loop.index0 == 0 %}
-              <td rowspan="{{ products|length }}" class="totals_cell">
+                <div class="cart_product_price">{{ product.price }}</div>
+                <div class="cart_product_total">{{ product.total }}</div>
+              </div>
+            </div>
+            {% endfor %}
+            <div class="cart_product_row_totals">
                   {% if notInStock == 0 %}
-                    <div class="totals_in_stock">
+                    <div class="cart_product_totals_in_stock">
                       {{ text_all_products_in_stock }}
                     </div>
                   {% endif %}
 
-                  <div class="totals_title">
+                  <div class="cart_product_totals_title">
                     {{ totals[0].title }}
                   </div>
-                  <div class="totals_text">
+                  <div class="cart_product_totals_value totals_text">
                     {{ totals[0].text }}
                   </div>
-                  <a href="{{ checkout }}" class="btn btn-cart-continue">{{ button_continue }}</a>
-              </td>
-              {% endif %}
-            </tr>
-            {% endfor %}
+            </div>
+            <div class="cart_product_row_buttons">
+              <div class="cart_product_button_continue">
+                <a href="{{ checkout }}" class="btn btn-cart-continue">{{ button_continue }}</a>
+              </div>
+            </div>
+
             {% for voucher in vouchers %}
             <tr>
               <td></td>
