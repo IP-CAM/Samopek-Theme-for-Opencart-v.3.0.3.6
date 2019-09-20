@@ -8,14 +8,15 @@
 }
 
 @media (max-width: 1200px) {
- .product-thumb .button-group button, .product-thumb .button-group button + button {
- width: 100%;
+  .product-thumb .button-group button, .product-thumb .button-group button + button {
+    width: 100%;
+  }
 }
-}
+
 @media (max-width: 767px) {
- .product-thumb .button-group button, .product-thumb .button-group button + button {
- width: 100%;
-}
+  .product-thumb .button-group button, .product-thumb .button-group button + button {
+    width: 100%;
+  }
 }
 
 .product-thumb {
@@ -99,7 +100,7 @@
   align-self: flex-end;
 }
 
-.product-thumb h4>a {
+.product-thumb h4 > a {
   font-family: Roboto;
   font-style: normal;
   font-weight: 500;
@@ -146,14 +147,16 @@
   margin-left: 10px;
 }
 
-#top-links li:first-child {
-  margin-left: 200px;
+@media (min-width: 1200px) {
+  #top-links li:first-child {
+    margin-left: 200px;
+  }
 }
 
 #top .btn-link, #top-links li, #top-links a, #top-links label {
   color: #000;
   text-decoration: none;
-  
+
   font-family: "Roboto";
   font-size: 12px;
   font-weight: normal;
@@ -197,6 +200,15 @@
   min-height: 40px;
 }
 
+#menu .dropdown-inner a {
+  color: white;
+  font-family: "Roboto";
+  font-size: 12px;
+  font-weight: normal;
+  font-style: normal;
+  line-height: 19px;
+}
+
 #menu .nav > li > a {
   color: white;
   text-transform: uppercase;
@@ -212,13 +224,13 @@
   background-color: transparent;
 }
 
-@media(min-width: 1200px) {
-#menu .navbar-nav {
-  display: flex;
-  align-items: stretch;
-  justify-content: space-between;
-  width: 100%;
-}
+@media (min-width: 1200px) {
+  #menu .navbar-nav {
+    display: flex;
+    align-items: stretch;
+    justify-content: space-between;
+    width: 100%;
+  }
 }
 
 #menu .navbar-nav {
@@ -226,6 +238,17 @@
   align-items: stretch;
   justify-content: space-between;
   width: 100%;
+}
+
+#menu .dropdown-menu {
+  padding-bottom: 0;
+  background-color: #1799B2;
+  min-width: 200px;
+}
+
+.thumbnails .image-additional {
+  float: left;
+  margin-left: 0px !important;
 }
 
 /* 5-column bootstrap START */
@@ -266,7 +289,6 @@
 }
 
 /* 5-column bootstrap END */
-
 footer {
   margin-top: 30px;
   padding: 30px 0px;
@@ -355,44 +377,44 @@ footer {
   color: #000000;
 }
 
-.samopek_breadcrumbs > li+li:before {
+.samopek_breadcrumbs > li + li:before {
   padding: 0 5px;
   color: #ccc;
   content: ">";
 }
 
 .product_details_model {
-    font-family: Roboto;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 10px;
-    line-height: 12px;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 10px;
+  line-height: 12px;
 
-    padding-top: 10%;
+  padding-top: 10%;
 
-    color: #999999;
+  color: #999999;
 }
 
 .product_details_title {
-    font-family: Roboto;
-    font-style: normal;
-    font-weight: 600;
-    font-size: 22px;
-    line-height: 26px;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 22px;
+  line-height: 26px;
 
-    color: #000000;
-    margin-top: 5%;
+  color: #000000;
+  margin-top: 5%;
 }
 
 .product_details_price {
-    font-family: Roboto;
-    font-style: normal;
-    font-weight: 500;
-    font-size: 20px;
-    line-height: 23px;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 23px;
 
-    color: #3AC2D7;
-    margin-top: 5%;
+  color: #3AC2D7;
+  margin-top: 5%;
 }
 
 .product_details_description {
@@ -407,19 +429,19 @@ footer {
 }
 
 .product_details_row {
-    overflow: auto;
-    clear: both;
-    list-style: none;
-    padding: 0;
-    margin: 0;
+  overflow: auto;
+  clear: both;
+  list-style: none;
+  padding: 0;
+  margin: 0;
 
-    display: flex;
-    flex-wrap: wrap;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .product_details_row > [class*='col-'] {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 .product_details_section_buy {
@@ -466,8 +488,9 @@ footer {
 }
 
 .alert-add-product {
-  padding-right: 35px; /* Needed to override padding which is set in core stylesheet.css. 35px
-   corresponds to .alert-dismissable, .alert-dismissible bootstrap styles */
+  padding-right: 35px;
+  /* Needed to override padding which is set in core stylesheet.css. 35px
+    corresponds to .alert-dismissable, .alert-dismissible bootstrap styles */
   padding-left: 10px;
   padding-top: 5px;
   padding-bottom: 5px;
@@ -551,7 +574,7 @@ footer {
   line-height: 21px;
 }
 
-@media(max-width: 767px) {
+@media (max-width: 767px) {
   .cart_product_row td {
     vertical-align: middle !important;
     white-space: unset !important;
@@ -662,31 +685,31 @@ footer {
 }
 
 .product_total {
-    font-family: Roboto;
-    font-style: normal;
-    font-weight: 500;
-    font-size: 20px;
-    line-height: 23px;
-    text-align: center;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 23px;
+  text-align: center;
 
-    color: #3AC2D7;
+  color: #3AC2D7;
 }
 
 #totals {
-    font-family: Roboto;
-    font-style: normal;
-    font-weight: 500;
-    font-size: 22px;
-    line-height: 26px;
-    /* identical to box height */
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 22px;
+  line-height: 26px;
+  /* identical to box height */
 
-    text-align: center;
-    text-transform: uppercase;
+  text-align: center;
+  text-transform: uppercase;
 
-    color: #000000;
+  color: #000000;
 
-    padding-top: 10%;
-    padding-bottom: 10%;
+  padding-top: 10%;
+  padding-bottom: 10%;
 }
 
 .btn-search {
@@ -706,10 +729,20 @@ footer {
 
 }
 
-.title_samopek {
-  padding-bottom: 20px;
-  width: 50%;
-  margin-left: 25%;
+@media (max-width: 767px) {
+  .title_samopek {
+    padding-bottom: 20px;
+    width: 100%;
+    margin-left: 1%;
+  }
+}
+
+@media (min-width: 767px) {
+  .title_samopek {
+    padding-bottom: 20px;
+    width: 50%;
+    margin-left: 25%;
+  }
 }
 
 .quantity_price_row {
@@ -758,6 +791,7 @@ footer {
   color: white;
   border-radius: 10px;
   white-space: pre;
+  margin-left: 5px;
 }
 
 #samopek_button:hover svg {

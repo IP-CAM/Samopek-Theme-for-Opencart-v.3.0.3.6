@@ -12,8 +12,9 @@ update oc_language set status = 0 where code = "en-gb";
 insert into oc_language set name = "Russian", code = "ru-ru", locale = "ru_RU.UTF-8,ru_RU,russian", image = "ru.png", directory = "russian", sort_order = 1, status = 1;
 
 --Set Russian as a First language
-update oc_language set language_id = 2 where name = 'English';
+update oc_language set language_id = 3 where name = 'English';
 update oc_language set language_id = 1 where name = 'Russian';
+update oc_language set language_id = 2 where name = 'English';
 
 --Update language settings for store 0
 update oc_setting set value = 'ru-ru' where `key`='config_language' and store_id = 0;
@@ -23,7 +24,7 @@ update oc_setting set value = 'RUB' where `key`='config_currency' and store_id =
 insert into oc_currency set title = "", code = "RUB", symbol_left = "", symbol_right = ".", decimal_place = 0, value = 1.00000000, status = 1, date_modified = NOW();
 Manually change name of currency and symbol_right in admin panel. For some reasons russian text is not inserted through SSH.
 
---Insert information
+--Import customers information
 mysql -u root -p765b91475e opencart_samopek < oc_information.sql
 mysql -u root -p765b91475e opencart_samopek < oc_information_description.sql
 
@@ -58,11 +59,44 @@ mysql -u root -p765b91475e opencart_samopek < oc_order_voucher.sql
 
 create table oc_ms_samopek_product (product_id int(11) NOT NULL, ms_id int(11) NOT NULL, ms_uuid varchar(64) NOT NULL, ms_version int(3) NOT NULL, PRIMARY KEY (product_id));
 create table oc_ms_samopek_category (category_id int(11) NOT NULL, ms_group_uuid varchar(64) NOT NULL, ms_version int(3) NOT NULL);
-
 create table oc_ms_samopek_option (option_id int(11) NOT NULL, ms_variant_uuid varchar(64) NOT NULL, PRIMARY KEY (option_id));
 create table oc_ms_samopek_product_option (product_option_value_id int(11) NOT NULL, ms_product_variant_uuid varchar(64) NOT NULL, ms_prodcut_variant_code int(11) NOT NULL, PRIMARY KEY (product_option_value_id));
-
 create table oc_ms_samopek_attributes (attribute_id int(11) NOT NULL, ms_attribute_uuid varchar(64) NOT NULL, PRIMARY KEY (attribute_id));
+
+truncate oc_option;
+truncate oc_option_description;
+truncate oc_option_value;
+truncate oc_option_value_description;
+truncate oc_attribute;
+truncate oc_attribute_description;
+truncate oc_attribute_group;
+truncate oc_attribute_group_description;
+
+-- Install Override Engine
+/*Installation
+============
+
+
+Before proceeding with the installation:
+ 
+Log into the admin backend, proceed to 'Extensions > Modifications', 
+and click on the Clear button located near the top right corner.
+
+Now simply upload the folders and files from the 'upload' directory 
+via FTP to your OpenCart server's main directory.
+
+The following files are newly added during the upload:
+
+  system/library/override/google_site_verification/*
+  system/library/override/override_engine/*
+  system/library/override/factory.php
+  system/library/override/modifier.php
+  system/override-engine.ocmod.xml
+  
+Finally go to 'Extensions > Modifications' again and click on the Refresh button.
+
+That's it!*/
+
 
 --Turn off vouchers, shipping estimation, gift cards - Extensions->checkout.
 --Extensions->shipping: Turn on SelfShipping, change Geographic Zone to AllAreas.
@@ -78,16 +112,7 @@ create table oc_ms_samopek_attributes (attribute_id int(11) NOT NULL, ms_attribu
 -- Localize Stock options. System->localization->Stock.
 
 
-truncate oc_option;
-truncate oc_option_description;
-truncate oc_option_value;
-truncate oc_option_value_description;
 
-truncate oc_ms_samopek_attributes;
-truncate oc_attribute;
-truncate oc_attribute_description;
-truncate oc_attribute_group;
-truncate oc_attribute_group_description;
 
 -- ALTERNATIVE
 --drop table oc_option;
@@ -104,5 +129,7 @@ truncate oc_attribute_group_description;
  - Размер большого изображения товара 376x376
  - Размер изображений товаров в корзине 87x87
  
+ -- Update Featured
+ update oc_module set setting = '{"name":"Home Page","product":["135"],"limit":"16","width":"200","height":"200","status":"1"}' where code = 'featured' and name = 'Home Page';
  
 Install Yandex Kassa
