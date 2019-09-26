@@ -133,3 +133,9 @@ That's it!*/
  update oc_module set setting = '{"name":"Home Page","product":["135"],"limit":"16","width":"200","height":"200","status":"1"}' where code = 'featured' and name = 'Home Page';
  
 Install Yandex Kassa
+
+Система->настройки->магазин - изменить default layout на default instead of Home
+
+
+модули->аналитика->GoogleAnalytics - установить счётчик Яндекса
+модули->модули->новые поступления->включить, добавить на MainPage

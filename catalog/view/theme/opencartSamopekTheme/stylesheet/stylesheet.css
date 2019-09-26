@@ -886,3 +886,7 @@ footer {
   background: none;
   cursor: pointer;
 }
+
+#information-information {
+  font-size: 14px;
+}
