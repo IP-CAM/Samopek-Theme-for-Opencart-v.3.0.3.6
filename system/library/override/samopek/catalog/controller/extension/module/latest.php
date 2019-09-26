@@ -66,6 +66,8 @@ class samopek_ControllerExtensionModuleLatest extends ControllerExtensionModuleL
                     $stock = $this->language->get('text_instock');
                 }
 
+                $hasOptions = $this->model_catalog_product->hasOptions($result['product_id']);
+                error_log("MAKOOO" . ($hasOptions ? 'true' : 'false'));
 				$data['products'][] = array(
 					'product_id'  => $result['product_id'],
 					'thumb'       => $image,
@@ -77,7 +79,8 @@ class samopek_ControllerExtensionModuleLatest extends ControllerExtensionModuleL
 					'rating'      => $rating,
 					'href'        => $this->url->link('product/product', 'product_id=' . $result['product_id']),
                     'quantity'    => $quantity,
-                    'stock'       => $stock
+                    'stock'       => $stock,
+                    'hasOptions'  => $hasOptions
 				);
 			}
 

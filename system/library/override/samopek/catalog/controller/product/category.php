@@ -209,6 +209,8 @@ class samopek_ControllerProductCategory extends ControllerProductCategory {
                     $stock = $this->language->get('text_instock');
                 }
 
+                $hasOptions = $this->model_catalog_product->hasOptions($result['product_id']);
+
                 $data['products'][] = array(
                     'product_id'  => $result['product_id'],
                     'thumb'       => $image,
@@ -221,7 +223,8 @@ class samopek_ControllerProductCategory extends ControllerProductCategory {
                     'rating'      => $result['rating'],
                     'href'        => $this->url->link('product/product', 'path=' . $this->request->get['path'] . '&product_id=' . $result['product_id'] . $url),
                     'quantity'    => $quantity,
-                    'stock'       => $stock
+                    'stock'       => $stock,
+                    'hasOptions'  => $hasOptions
                 );
             }
 

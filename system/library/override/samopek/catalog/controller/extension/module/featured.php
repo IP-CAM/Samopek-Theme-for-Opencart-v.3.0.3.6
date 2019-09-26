@@ -70,6 +70,8 @@ class samopek_ControllerExtensionModuleFeatured extends ControllerExtensionModul
                         $stock = $this->language->get('text_instock');
                     }
 
+                    $hasOptions = $this->model_catalog_product->hasOptions($product_info['product_id']);
+
 					$data['products'][] = array(
 						'product_id'  => $product_info['product_id'],
 						'thumb'       => $image,
@@ -82,7 +84,8 @@ class samopek_ControllerExtensionModuleFeatured extends ControllerExtensionModul
 						'href'        => $this->url->link('product/product', 'product_id=' . $product_info['product_id']),
                         'quantity'    => $quantity,
                         'stock'       => $stock,
-                        'in_wishlist' => in_array($product_info['product_id'], $wishListProductsIds)
+                        'in_wishlist' => in_array($product_info['product_id'], $wishListProductsIds),
+                        'hasOptions'  => $hasOptions
 					);
 				}
 			}
