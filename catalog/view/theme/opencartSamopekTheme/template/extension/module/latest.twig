@@ -1,5 +1,7 @@
 <h3>{{ heading_title }}</h3>
-<div class="row"> {% for product in products %}
+<div class="row">
+  {% for product in products %}
+    {% if product.quantity > 0 %}
   <div class="product-layout col-lg-5ths col-md-5ths col-sm-6 col-xs-12">
     <div class="product-thumb transition product-thumb-latest">
       <div class="row featured_buttons_group_fav_preview">
@@ -58,4 +60,6 @@
       </div>
     </div>
   </div>
-  {% endfor %} </div>
+    {% endif %}
+  {% endfor %}
+</div>
