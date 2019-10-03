@@ -23,6 +23,8 @@ class samopek_ControllerExtensionModuleFeatured extends ControllerExtensionModul
 			foreach ($products as $product_id) {
 				$product_info = $this->model_catalog_product->getProduct($product_id);
 
+				$product_path = $this->model_catalog_product->getPath($product_id);
+
 				if ($product_info) {
 					if ($product_info['image']) {
 						$image = $this->model_tool_image->resize($product_info['image'], $setting['width'], $setting['height']);
@@ -81,7 +83,7 @@ class samopek_ControllerExtensionModuleFeatured extends ControllerExtensionModul
 						'special'     => $special,
 						'tax'         => $tax,
 						'rating'      => $rating,
-						'href'        => $this->url->link('product/product', 'product_id=' . $product_info['product_id']),
+						'href'        => $this->url->link('product/product', $product_path . '&product_id=' . $product_info['product_id']),
                         'quantity'    => $quantity,
                         'stock'       => $stock,
                         'in_wishlist' => in_array($product_info['product_id'], $wishListProductsIds),

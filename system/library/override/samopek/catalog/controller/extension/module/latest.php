@@ -20,6 +20,9 @@ class samopek_ControllerExtensionModuleLatest extends ControllerExtensionModuleL
 
 		if ($results) {
 			foreach ($results as $result) {
+
+                $product_path = $this->model_catalog_product->getPath($result['product_id']);
+
 				if ($result['image']) {
 					$image = $this->model_tool_image->resize($result['image'], $setting['width'], $setting['height']);
 				} else {
@@ -67,7 +70,7 @@ class samopek_ControllerExtensionModuleLatest extends ControllerExtensionModuleL
                 }
 
                 $hasOptions = $this->model_catalog_product->hasOptions($result['product_id']);
-                error_log("MAKOOO" . ($hasOptions ? 'true' : 'false'));
+
 				$data['products'][] = array(
 					'product_id'  => $result['product_id'],
 					'thumb'       => $image,
@@ -77,7 +80,7 @@ class samopek_ControllerExtensionModuleLatest extends ControllerExtensionModuleL
 					'special'     => $special,
 					'tax'         => $tax,
 					'rating'      => $rating,
-					'href'        => $this->url->link('product/product', 'product_id=' . $result['product_id']),
+					'href'        => $this->url->link('product/product', $product_path . '&product_id=' . $result['product_id']),
                     'quantity'    => $quantity,
                     'stock'       => $stock,
                     'hasOptions'  => $hasOptions
