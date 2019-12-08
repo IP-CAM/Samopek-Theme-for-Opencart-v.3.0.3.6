@@ -9,7 +9,7 @@ class samopek_ModelCatalogProduct extends ModelCatalogProduct {
     }
 
     public function getPath($product_id) {
-        $result = $this->db->query("SELECT path_id FROM " . DB_PREFIX . "category_path WHERE category_id = (SELECT category_id FROM " . DB_PREFIX . "product_to_category WHERE product_id = " . (int)$product_id . ") ORDER BY level");
+        $result = $this->db->query("SELECT path_id FROM " . DB_PREFIX . "category_path WHERE category_id IN (SELECT category_id FROM " . DB_PREFIX . "product_to_category WHERE product_id = " . (int)$product_id . ") ORDER BY level");
         ob_start();                    // start buffer capture
         var_dump( $result );           // dump the values
         $contents = ob_get_contents(); // put the buffer into a variable
