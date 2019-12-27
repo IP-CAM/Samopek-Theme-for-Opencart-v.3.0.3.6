@@ -10,14 +10,17 @@
         {% if category.children %}
         <li class="dropdown"><a data-target="{{ category.href }}" href="{{ category.href }}" class="dropdown-toggle" data-toggle="dropdown">{{ category.name }}</a>
           <div class="dropdown-menu">
-            <div class="dropdown-inner"> {% for children in category.children|batch(category.children|length / category.column|round(1, 'ceil')) %}
-              <ul class="list-unstyled">
-                {% for child in children %}
-                <li><a href="{{ child.href }}">{{ child.name }}</a></li>
-                {% endfor %}
-              </ul>
-              {% endfor %}</div>
-            <a href="{{ category.href }}" class="see-all">{{ text_all }} {{ category.name }}</a> </div>
+            <a href="{{ category.href }}" class="see-all">{{ text_all }} {{ category.name }}</a>
+            <div class="dropdown-inner">
+              {% for children in category.children|batch(category.children|length / category.column|round(1, 'ceil')) %}
+                <ul class="list-unstyled">
+                  {% for child in children %}
+                    <li><a href="{{ child.href }}">{{ child.name }}</a></li>
+                  {% endfor %}
+                </ul>
+              {% endfor %}
+            </div>
+          </div>
         </li>
         <li>
           <a class="delimiter hidden-xs hidden-sm hidden-md"> | </a>
