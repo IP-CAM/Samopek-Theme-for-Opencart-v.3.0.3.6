@@ -5,6 +5,7 @@
   font-size: 12px;
   line-height: 20px;
   width: 100%;
+  overflow-x: hidden;
 }
 
 @media (max-width: 1200px) {
@@ -321,6 +322,13 @@ footer {
 
 .row_search_main {
   margin-bottom: 3%;
+}
+
+.row_menu_main {
+  width: 102vw;
+  margin-left: -51vw;
+  left: 50%;
+  position: relative;
 }
 
 #search_input::placeholder {
