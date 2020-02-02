@@ -5,7 +5,8 @@ $_['heading_title']  = 'Контакты';
 // Text
 $_['text_location']  = 'Наше местонахождение';
 $_['text_store']     = 'Наши магазины';
-$_['text_contact']   = 'Форма обратной связи';
+//mako text_contact->text_feedback as text_contact already exists in footer
+$_['text_feedback']   = 'Отзывы и пожелания';
 $_['text_address']   = 'Адрес';
 $_['text_telephone'] = 'Телефон';
 $_['text_fax']       = 'Факс';
