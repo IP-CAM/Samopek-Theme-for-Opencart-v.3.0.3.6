@@ -14,6 +14,11 @@ $_['text_open']      = 'Opening Times';
 $_['text_comment']   = 'Comments';
 $_['text_success']   = '<p>Your enquiry has been successfully sent to the store owner!</p>';
 
+//mako0216
+$_['text_contact_us']  = 'Contact us';
+$_['title_message_sent']  = 'Message has been sent';
+$_['text_message_sent']  = 'Thank you for you request. Your question will be addressed by our specialists soon. <br> Samopek team.';
+
 // Entry
 $_['entry_name']     = 'Your Name';
 $_['entry_email']    = 'E-Mail Address';

@@ -10,7 +10,6 @@
         {% endif %}
         <div id="content" class="{{ class }}">{{ content_top }}
             <h1>{{ heading_title }}</h1>
-            <h3>{{ text_location }}</h3>
             <div class="panel panel-default">
                 <div class="panel-body">
                     <div class="row">
@@ -25,9 +24,18 @@
                                 <a href="https://maps.google.com/maps?q={{ geocode|url_encode }}&hl={{ geocode_hl }}&t=m&z=15" target="_blank" class="btn btn-info"><i class="fa fa-map-marker"></i> {{ button_map }}</a>
                             {% endif %}
                         </div>
-                        <div class="col-sm-3"><strong>{{ text_telephone }}</strong><br>
-                            {{ telephone }}<br />
-                            <br />
+                        <div class="col-sm-3">
+                            <strong>{{ text_contact_us }}</strong> <br>
+                            {{ telephone }}<br>
+                            <div class="row" style="margin-bottom: 20px; margin-top: 10px; margin-left: 0px">
+                                <a target="_blank" rel="noopener noreferrer" href="https://vk.com/samopek.shop" title="Samopek vkontakte">
+                                    <img src="catalog/view/theme/opencartSamopekTheme/image/vk_ico.png">
+                                </a>
+                                <a target="_blank" rel="noopener noreferrer" href="https://www.instagram.com/samopek.shop/" title="Samopek instagram">
+                                    <img src="catalog/view/theme/opencartSamopekTheme/image/instagram_ico.png">
+                                </a>
+                            </div>
+                            <br>
                             {% if fax %}
                                 <strong>{{ text_fax }}</strong><br>
                                 {{ fax }}
@@ -38,10 +46,6 @@
                                 <strong>{{ text_open }}</strong><br />
                                 {{ open }}<br />
                                 <br />
-                            {% endif %}
-                            {% if comment %}
-                                <strong>{{ text_comment }}</strong><br />
-                                {{ comment }}
                             {% endif %}
                         </div>
                     </div>
