@@ -149,7 +149,7 @@
 }
 
 @media (min-width: 1200px) {
-  #top-links li:first-child {
+  #top-links > ul > li:first-child {
     margin-left: 200px;
   }
 }
