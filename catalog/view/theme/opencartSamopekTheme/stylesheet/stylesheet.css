@@ -210,7 +210,7 @@
   line-height: 19px;
 }
 
-#menu .nav > li > a {
+#menu .nav > li > a, #menu .nav > li > span {
   color: white;
   text-transform: uppercase;
   font-family: "Roboto";
