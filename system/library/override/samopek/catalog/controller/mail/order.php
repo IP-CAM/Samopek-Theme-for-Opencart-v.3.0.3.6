@@ -138,7 +138,9 @@ class samopek_ControllerMailOrder extends ControllerMailOrder {
             $mail->setFrom($this->config->get('config_email'));
             $mail->setSender(html_entity_decode($order_info['store_name'], ENT_QUOTES, 'UTF-8'));
             $mail->setSubject(html_entity_decode(sprintf($this->language->get('text_subject'), $this->config->get('config_name'), $order_info['order_id']), ENT_QUOTES, 'UTF-8'));
-            $mail->setText($this->load->view('mail/order_alert', $data));
+            // MAKO - Want to send HTML, not text
+            //$mail->setText($this->load->view('mail/order_alert', $data));
+            $mail->setHtml($this->load->view('mail/order_alert', $data));
             $mail->send();
            // file_put_contents('/tmp/testAlert.html', $this->load->view('mail/order_alert', $data));
 
