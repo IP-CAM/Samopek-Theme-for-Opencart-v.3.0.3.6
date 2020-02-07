@@ -45,6 +45,13 @@ class samopek_ControllerMailOrder extends ControllerMailOrder {
             $data['customer_phone'] = $order_info['telephone'];
             $data['customer_email'] = $order_info['email'];
 
+            // MAKO - Add Order details
+            $data['order_payment_method'] = $order_info['payment_method'];
+            $data['order_shipping_method'] = $order_info['shipping_method'];
+            $data['order_shipping_address'] = $order_info['shipping_city'] . " "
+                . $order_info['shipping_address_1'];
+
+
             $data['order_id'] = $order_info['order_id'];
             $data['date_added'] = date($this->language->get('date_format_short'), strtotime($order_info['date_added']));
 

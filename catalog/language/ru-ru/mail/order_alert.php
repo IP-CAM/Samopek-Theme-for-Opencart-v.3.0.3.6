@@ -10,8 +10,12 @@ $_['text_total']        = 'Итого';
 $_['text_comment']      = 'Комментарий к Вашему заказу:';
 
 // mako
-$_['text_customer']      = 'Клиент:';
-$_['text_customer_name'] = 'Имя: ';
-$_['text_customer_phone'] = 'Номер телефона: ';
-$_['text_customer_email'] = 'Email: ';
+$_['text_customer']          = 'Клиент:';
+$_['text_customer_name']     = 'Имя: ';
+$_['text_customer_phone']    = 'Номер телефона: ';
+$_['text_customer_email']    = 'Email: ';
+$_['text_payment_shipping']  = 'Оплата и Доставка: ';
+$_['text_payment_method']    = 'Способ оплаты: ';
+$_['text_shipping_method']   = 'Способ доставки: ';
+$_['text_shipping_address']  = 'Адрес доставки: ';
 ?>

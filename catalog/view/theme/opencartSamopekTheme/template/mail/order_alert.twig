@@ -4,12 +4,17 @@
 {{ text_date_added }} {{ date_added }}
 {{ text_order_status }} {{ order_status }}
 
-{{ text_customer }}
+<B><I>{{ text_customer }}</I></B>
 {{ text_customer_name }}  {{ customer_name }}
 {{ text_customer_phone }} {{ customer_phone }}
 {{ text_customer_email }} {{ customer_email }}
 
-{{ text_product }}
+<B><I>{{ text_payment_shipping }}</I></B>
+{{ text_payment_method }} {{ order_payment_method }}
+{{ text_shipping_method }} {{ order_shipping_method }}
+{{ text_shipping_address }} {{ order_shipping_address }}
+
+<B><I>{{ text_product }}</I></B>
 
 {% for product in products %}
     {{ product.quantity }}x {{ product.name }} ({{ product.model }}) {{ product.total }}
