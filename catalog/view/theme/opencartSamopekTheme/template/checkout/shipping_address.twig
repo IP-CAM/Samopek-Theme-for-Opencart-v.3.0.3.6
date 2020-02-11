@@ -9,9 +9,9 @@
     <select name="address_id" class="form-control">
      {% for address in addresses %}
       {% if address.address_id == address_id %}
-      <option value="{{ address.address_id }}" selected="selected">{{ address.firstname }} {{ address.lastname }}, {{ address.address_1 }}, {{ address.city }}, {{ address.zone }}, {{ address.country }}</option>
+      <option value="{{ address.address_id }}" selected="selected">{{ address.firstname }} {{ address.lastname }}, {{ address.address_1 }}, {{ address.zone }}, {{ address.country }}</option>
       {% else %}
-      <option value="{{ address.address_id }}">{{ address.firstname }} {{ address.lastname }}, {{ address.address_1 }}, {{ address.city }}, {{ address.zone }}, {{ address.country }}</option>
+      <option value="{{ address.address_id }}">{{ address.firstname }} {{ address.lastname }}, {{ address.address_1 }}, {{ address.zone }}, {{ address.country }}</option>
       {% endif %}
       {% endfor %}
     </select>
@@ -43,6 +43,28 @@
       </div>
     </div>
     <div class="form-group required">
+      <label class="col-sm-2 control-label" for="input-shipping-country">{{ entry_country }}</label>
+      <div class="col-sm-10">
+        <select name="country_id" id="input-shipping-country" class="form-control">
+          <option value="">{{ text_select }}</option>
+          {% for country in countries %}
+            {% if country.country_id == country_id %}
+              <option value="{{ country.country_id }}" selected="selected">{{ country.name }}</option>
+            {% else %}
+              <option value="{{ country.country_id }}">{{ country.name }}</option>
+            {% endif %}
+          {% endfor %}
+        </select>
+      </div>
+    </div>
+    <div class="form-group required">
+      <label class="col-sm-2 control-label" for="input-shipping-zone">{{ entry_city }}</label>
+      <div class="col-sm-10">
+        <select name="zone_id" id="input-shipping-zone" class="form-control">
+        </select>
+      </div>
+    </div>
+    <div class="form-group required">
       <label class="col-sm-2 control-label" for="input-shipping-address-1">{{ entry_address_1 }}</label>
       <div class="col-sm-10">
         <input type="text" name="address_1" value="" placeholder="{{ entry_address_1 }}" id="input-shipping-address-1" class="form-control" />
@@ -54,38 +76,17 @@
         <input type="text" name="address_2" value="" placeholder="{{ entry_address_2 }}" id="input-shipping-address-2" class="form-control" />
       </div>
     </div>
-    <div class="form-group required">
+    <!-- MAKO: Do not display CITY for now -->
+    <div class="form-group required" style="display: none">
       <label class="col-sm-2 control-label" for="input-shipping-city">{{ entry_city }}</label>
       <div class="col-sm-10">
-        <input type="text" name="city" value="" placeholder="{{ entry_city }}" id="input-shipping-city" class="form-control" />
+        <input type="text" name="city" value="CITY" placeholder="{{ entry_city }}" id="input-shipping-city" class="form-control" />
       </div>
     </div>
     <div class="form-group required">
       <label class="col-sm-2 control-label" for="input-shipping-postcode">{{ entry_postcode }}</label>
       <div class="col-sm-10">
         <input type="text" name="postcode" value="{{ postcode }}" placeholder="{{ entry_postcode }}" id="input-shipping-postcode" class="form-control" />
-      </div>
-    </div>
-    <div class="form-group required">
-      <label class="col-sm-2 control-label" for="input-shipping-country">{{ entry_country }}</label>
-      <div class="col-sm-10">
-        <select name="country_id" id="input-shipping-country" class="form-control">
-          <option value="">{{ text_select }}</option>
-          {% for country in countries %}
-          {% if country.country_id == country_id %}
-          <option value="{{ country.country_id }}" selected="selected">{{ country.name }}</option>
-          {% else %}
-          <option value="{{ country.country_id }}">{{ country.name }}</option>
-           {% endif %}
-           {% endfor %}
-        </select>
-      </div>
-    </div>
-    <div class="form-group required">
-      <label class="col-sm-2 control-label" for="input-shipping-zone">{{ entry_zone }}</label>
-      <div class="col-sm-10">
-        <select name="zone_id" id="input-shipping-zone" class="form-control">
-        </select>
       </div>
     </div>
    <!--{% for custom_field in custom_fields %}
@@ -330,7 +331,12 @@ $('#collapse-shipping-address select[name=\'country_id\']').on('change', functio
 					if (json['zone'][i]['zone_id'] == '{{ zone_id }}') {
 						html += ' selected="selected"';
 					}
-
+                    {% if not zone_id %}
+                        <!-- Нижний Новгород-->
+                        if (json['zone'][i]['zone_id'] == 2766) {
+                            html += ' selected="selected"';
+                        }
+                    {% endif %}
 					html += '>' + json['zone'][i]['name'] + '</option>';
 				}
 			} else {

@@ -70,8 +70,9 @@ class samopek_ControllerCheckoutGuest extends ControllerCheckoutGuest {
 				$customer_group_id = $this->config->get('config_customer_group_id');
 			}
 
+			// MAKO Remove custom fields validation for now
 			// Custom field validation
-			$this->load->model('account/custom_field');
+			/*$this->load->model('account/custom_field');
 
 			$custom_fields = $this->model_account_custom_field->getCustomFields($customer_group_id);
 
@@ -81,7 +82,7 @@ class samopek_ControllerCheckoutGuest extends ControllerCheckoutGuest {
 				} elseif (($custom_field['type'] == 'text') && !empty($custom_field['validation']) && !filter_var($this->request->post['custom_field'][$custom_field['location']][$custom_field['custom_field_id']], FILTER_VALIDATE_REGEXP, array('options' => array('regexp' => $custom_field['validation'])))) {
                     $json['error']['custom_field' . $custom_field['custom_field_id']] = sprintf($this->language->get('error_custom_field'), $custom_field['name']);
                 }
-			}
+			}*/
 
 			// Captcha
 			if ($this->config->get('captcha_' . $this->config->get('config_captcha') . '_status') && in_array('guest', (array)$this->config->get('config_captcha_page'))) {
