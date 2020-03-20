@@ -39,7 +39,7 @@ class samopek_ControllerCheckoutGuest extends ControllerCheckoutGuest {
 			}
 
 			// Removing this information as we don't need it in this step.
-			/*if ((utf8_strlen(trim($this->request->post['address_1'])) < 3) || (utf8_strlen(trim($this->request->post['address_1'])) > 128)) {
+			if ((utf8_strlen(trim($this->request->post['address_1'])) < 3) || (utf8_strlen(trim($this->request->post['address_1'])) > 128)) {
 				$json['error']['address_1'] = $this->language->get('error_address_1');
 			}
 
@@ -61,7 +61,7 @@ class samopek_ControllerCheckoutGuest extends ControllerCheckoutGuest {
 
 			if (!isset($this->request->post['zone_id']) || $this->request->post['zone_id'] == '' || !is_numeric($this->request->post['zone_id'])) {
 				$json['error']['zone'] = $this->language->get('error_zone');
-			}*/
+			}
 
 			// Customer Group
 			if (isset($this->request->post['customer_group_id']) && is_array($this->config->get('config_customer_group_display')) && in_array($this->request->post['customer_group_id'], $this->config->get('config_customer_group_display'))) {

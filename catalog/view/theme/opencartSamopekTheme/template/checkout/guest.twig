@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col-sm-12">
+  <div class="col-sm-6">
     <fieldset id="account">
       <legend>{{ text_your_details }}</legend>
       <div class="form-group" style="display: {% if customer_groups|length > 1 %} block {% else %} none {% endif %};">
@@ -148,7 +148,7 @@
       {% endfor %}-->
     </fieldset>
   </div>
-  <!--<div class="col-sm-6">
+  <div class="col-sm-6">
     <fieldset id="address">
       <legend>{{ text_your_address }}</legend>
       <div class="form-group">
@@ -201,6 +201,7 @@
         <select name="zone_id" id="input-payment-zone" class="form-control">
         </select>
       </div>
+		<!--
       {% for custom_field in custom_fields %}
       {% if custom_field.location == 'address' %}
       {% if custom_field.type == 'select' %}
@@ -312,9 +313,9 @@
       {% endif %}
       {% endif %}
       {% endfor %}
-    </fieldset>
+    </fieldset>-->
     {{ captcha }}
-  </div> -->
+  </div>
 </div>
 {% if shipping_required %}
 <div class="checkbox">
@@ -326,6 +327,7 @@
     {{ entry_shipping }}</label>
 </div>
 {% endif %}
+
 <div class="buttons">
   <div class="pull-right">
     <input type="button" value="{{ button_continue }}" id="button-guest" data-loading-text="{{ text_loading }}" class="btn btn-primary" />

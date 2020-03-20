@@ -385,17 +385,25 @@ footer {
   margin-top: 3%;
 }
 
-.samopek_breadcrumbs {
-  list-style: none;
-  display: flex;
-  padding-left: 0px;
+@media (max-width: 767px) {
+  .samopek_breadcrumbs {
+    list-style: none;
+    display: flex;
+    padding-left: 0px;
 
-  font-family: Roboto;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 12px;
-  line-height: 180%;
-  color: #000000;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 180%;
+    color: #000000;
+  }
+}
+
+@media (min-width: 767px) {
+  .samopek_breadcrumbs {
+    display: none;
+  }
 }
 
 .samopek_breadcrumbs > li + li:before {
