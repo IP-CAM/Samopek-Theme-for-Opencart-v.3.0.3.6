@@ -704,9 +704,7 @@ footer {
   font-weight: normal;
   font-size: 14px;
   line-height: 180%;
-
-  width: 80%;
-
+  width: 70%;
   flex-grow: 5;
 }
 
