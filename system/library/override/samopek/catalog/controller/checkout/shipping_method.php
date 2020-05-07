@@ -12,6 +12,14 @@ class samopek_ControllerCheckoutShippingMethod extends ControllerCheckoutShippin
 
 			$results = $this->model_setting_extension->getExtensions('shipping');
 
+        // MAKO0216
+        if (!isset($this->session->data['shipping_address'])) {
+            $this->session->data['shipping_address'] = array();
+            $this->session->data['shipping_address']['country_id'] = 176;
+            $this->session->data['shipping_address']['zone_id'] = 2766;
+        }
+        // MAKO0216
+
 			foreach ($results as $result) {
 				if ($this->config->get('shipping_' . $result['code'] . '_status')) {
 					$this->load->model('extension/shipping/' . $result['code']);
@@ -110,7 +118,7 @@ class samopek_ControllerCheckoutShippingMethod extends ControllerCheckoutShippin
 			$json['error']['warning'] = $this->language->get('error_shipping');
 		} else {
 			$shipping = explode('.', $this->request->post['shipping_method']);
-
+            //echo var_export($this->session->data['shipping_methods'], true);
 			if (!isset($shipping[0]) || !isset($shipping[1]) || !isset($this->session->data['shipping_methods'][$shipping[0]]['quote'][$shipping[1]])) {
 				$json['error']['warning'] = $this->language->get('error_shipping');
 			}

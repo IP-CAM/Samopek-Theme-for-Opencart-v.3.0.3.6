@@ -137,18 +137,18 @@ class samopek_ControllerCheckoutConfirm extends ControllerCheckoutConfirm {
 				$order_data['custom_field'] = $this->session->data['guest']['custom_field'];
 			}
 
-			$order_data['payment_firstname'] = $this->session->data['payment_address']['firstname'];
-			$order_data['payment_lastname'] = $this->session->data['payment_address']['lastname'];
-            $order_data['payment_company'] = $this->session->data['payment_address']['company'];
-            $order_data['payment_address_1'] = $this->session->data['payment_address']['address_1'];
-            $order_data['payment_address_2'] = $this->session->data['payment_address']['address_2'];
-            $order_data['payment_city'] = $this->session->data['payment_address']['city'];
-			$order_data['payment_postcode'] = $this->session->data['payment_address']['postcode'];
-			$order_data['payment_zone'] = $this->session->data['payment_address']['zone'];
-			$order_data['payment_zone_id'] = $this->session->data['payment_address']['zone_id'];
-			$order_data['payment_country'] = $this->session->data['payment_address']['country'];
-			$order_data['payment_country_id'] = $this->session->data['payment_address']['country_id'];
-			$order_data['payment_address_format'] = $this->session->data['payment_address']['address_format'];
+			$order_data['payment_firstname'] = (isset($this->session->data['payment_address']['firstname']) ? $this->session->data['payment_address']['firstname'] : "");
+			$order_data['payment_lastname'] = (isset($this->session->data['payment_address']['lastname']) ? $this->session->data['payment_address']['lastname'] : "");
+            $order_data['payment_company'] = (isset($this->session->data['payment_address']['company']) ? $this->session->data['payment_address']['company'] : "");
+            $order_data['payment_address_1'] = (isset($this->session->data['payment_address']['address_1']) ? $this->session->data['payment_address']['address_1'] : "");
+            $order_data['payment_address_2'] = (isset($this->session->data['payment_address']['address_2']) ? $this->session->data['payment_address']['address_2'] : "");
+            $order_data['payment_city'] = (isset($this->session->data['payment_address']['city']) ? $this->session->data['payment_address']['city'] : "");
+			$order_data['payment_postcode'] = (isset($this->session->data['payment_address']['postcode']) ? $this->session->data['payment_address']['postcode'] : "");
+			$order_data['payment_zone'] = (isset($this->session->data['payment_address']['zone']) ? $this->session->data['payment_address']['zone'] : "");
+			$order_data['payment_zone_id'] = (isset($this->session->data['payment_address']['zone_id']) ? $this->session->data['payment_address']['zone_id'] : "");
+			$order_data['payment_country'] = (isset($this->session->data['payment_address']['country']) ? $this->session->data['payment_address']['country'] : "");
+			$order_data['payment_country_id'] = (isset($this->session->data['payment_address']['country_id']) ? $this->session->data['payment_address']['country_id'] : "");
+			$order_data['payment_address_format'] = (isset($this->session->data['payment_address']['address_format']) ? $this->session->data['payment_address']['address_format'] : "");
 			$order_data['payment_custom_field'] = (isset($this->session->data['payment_address']['custom_field']) ? $this->session->data['payment_address']['custom_field'] : array());
 
 			if (isset($this->session->data['payment_method']['title'])) {
@@ -164,18 +164,18 @@ class samopek_ControllerCheckoutConfirm extends ControllerCheckoutConfirm {
 			}
 
 			if ($this->cart->hasShipping()) {
-				$order_data['shipping_firstname'] = $this->session->data['shipping_address']['firstname'];
-				$order_data['shipping_lastname'] = $this->session->data['shipping_address']['lastname'];
-				$order_data['shipping_company'] = $this->session->data['shipping_address']['company'];
-				$order_data['shipping_address_1'] = $this->session->data['shipping_address']['address_1'];
-				$order_data['shipping_address_2'] = $this->session->data['shipping_address']['address_2'];
-				$order_data['shipping_city'] = $this->session->data['shipping_address']['city'];
-				$order_data['shipping_postcode'] = $this->session->data['shipping_address']['postcode'];
-				$order_data['shipping_zone'] = $this->session->data['shipping_address']['zone'];
-				$order_data['shipping_zone_id'] = $this->session->data['shipping_address']['zone_id'];
-				$order_data['shipping_country'] = $this->session->data['shipping_address']['country'];
-				$order_data['shipping_country_id'] = $this->session->data['shipping_address']['country_id'];
-				$order_data['shipping_address_format'] = $this->session->data['shipping_address']['address_format'];
+				$order_data['shipping_firstname'] = (isset($this->session->data['shipping_address']['firstname']) ? $this->session->data['shipping_address']['firstname'] : "");
+				$order_data['shipping_lastname'] = (isset($this->session->data['shipping_address']['lastname']) ? $this->session->data['shipping_address']['lastname'] : "");
+				$order_data['shipping_company'] = (isset($this->session->data['shipping_address']['company']) ? $this->session->data['shipping_address']['company'] : "");
+				$order_data['shipping_address_1'] = (isset($this->session->data['shipping_address']['address_1']) ? $this->session->data['shipping_address']['address_1'] : "");
+				$order_data['shipping_address_2'] = (isset($this->session->data['shipping_address']['address_2']) ? $this->session->data['shipping_address']['address_2'] : "");
+				$order_data['shipping_city'] = (isset($this->session->data['shipping_address']['city']) ? $this->session->data['shipping_address']['city'] : "");
+				$order_data['shipping_postcode'] = (isset($this->session->data['shipping_address']['postcode']) ? $this->session->data['shipping_address']['postcode'] : "");
+				$order_data['shipping_zone'] = (isset($this->session->data['shipping_address']['zone']) ? $this->session->data['shipping_address']['zone'] : "");
+				$order_data['shipping_zone_id'] = (isset($this->session->data['shipping_address']['zone_id']) ? $this->session->data['shipping_address']['zone_id'] : "");
+				$order_data['shipping_country'] = (isset($this->session->data['shipping_address']['country']) ? $this->session->data['shipping_address']['country'] : "");
+				$order_data['shipping_country_id'] = (isset($this->session->data['shipping_address']['country_id']) ? $this->session->data['shipping_address']['country_id'] : "");
+				$order_data['shipping_address_format'] = (isset($this->session->data['shipping_address']['address_format']) ? $this->session->data['shipping_address']['address_format'] : "");
 				$order_data['shipping_custom_field'] = (isset($this->session->data['shipping_address']['custom_field']) ? $this->session->data['shipping_address']['custom_field'] : array());
 
 				if (isset($this->session->data['shipping_method']['title'])) {

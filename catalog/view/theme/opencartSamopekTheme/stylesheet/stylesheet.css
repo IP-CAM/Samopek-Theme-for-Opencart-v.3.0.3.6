@@ -1,13 +1,40 @@
 ﻿body {
-  font-family: "Roboto Condensed";
-  font-weight: 400;
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 500;
   color: #666;
   font-size: 12px;
   line-height: 20px;
   width: 100%;
   overflow-x: hidden;
 }
-
+/* Override Opencart defaults */
+h1, h2, h3, h4, h5, h6 {
+  color: #000000;
+}
+/* Override Opencart defaults */
+h1 {
+  font-size: 33px;
+}
+h2 {
+  font-size: 22px;
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 500;
+  line-height: 26px;
+}
+h3 {
+  font-size: 21px;
+}
+h4 {
+  font-size: 15px;
+}
+h5 {
+  font-size: 12px;
+}
+h6 {
+  font-size: 10.2px;
+}
 @media (max-width: 1200px) {
   .product-thumb .button-group button, .product-thumb .button-group button + button {
     width: 100%;
