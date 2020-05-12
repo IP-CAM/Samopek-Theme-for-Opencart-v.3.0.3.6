@@ -27,6 +27,11 @@ class samopek_ControllerCheckoutShippingMethod extends ControllerCheckoutShippin
 					$quote = $this->{'model_extension_shipping_' . $result['code']}->getQuote($this->session->data['shipping_address']);
 
 					if ($quote) {
+
+					    if ($quote['quote'][$result['code']]['cost'] == 0) {
+                            $quote['quote'][$result['code']]['text'] = $this->language->get('text_shipping_pickup_price');
+                        }
+
 						$method_data[$result['code']] = array(
 							'title'      => $quote['title'],
 							'quote'      => $quote['quote'],
@@ -124,10 +129,12 @@ class samopek_ControllerCheckoutShippingMethod extends ControllerCheckoutShippin
 			}
 		}
 
+        if ((utf8_strlen($this->request->post['telephone']) < 3) || (utf8_strlen($this->request->post['telephone']) > 32)) {
+            $json['error']['warning'] = $this->language->get('error_telephone');
+        }
+
 		if (!$json) {
 			$this->session->data['shipping_method'] = $this->session->data['shipping_methods'][$shipping[0]]['quote'][$shipping[1]];
-
-			$this->session->data['comment'] = strip_tags($this->request->post['comment']);
 		}
 
 		$this->response->addHeader('Content-Type: application/json');

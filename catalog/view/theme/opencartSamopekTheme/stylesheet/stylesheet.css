@@ -945,3 +945,22 @@ footer {
 #information-information {
   font-size: 14px;
 }
+
+.samopek-checkout-title {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 36px;
+  line-height: 42px;
+  text-transform: uppercase;
+
+  color: #1799B2;
+}
+
+.make-me-sticky {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+
+  padding: 0 15px;
+}

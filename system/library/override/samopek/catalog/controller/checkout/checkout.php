@@ -97,6 +97,32 @@ class samopek_ControllerCheckoutCheckout extends ControllerCheckoutCheckout {
 		$data['footer'] = $this->load->controller('common/footer');
 		$data['header'] = $this->load->controller('common/header');
 
+        $totals = array();
+        $taxes = $this->cart->getTaxes();
+        $total = 0;
+
+        $total_data = array(
+            'totals' => &$totals,
+            'taxes'  => &$taxes,
+            'total'  => &$total
+        );
+
+        $this->load->model('setting/extension');
+
+        $sort_order = array();
+
+        $results = $this->model_setting_extension->getExtensions('total');
+
+        foreach ($results as $result) {
+            if ($this->config->get('total_' . $result['code'] . '_status')) {
+                $this->load->model('extension/total/' . $result['code']);
+
+                // We have to put the totals in an array so that they pass by reference.
+                $this->{'model_extension_total_' . $result['code']}->getTotal($total_data);
+            }
+        }
+        $data['total_price'] = $this->currency->format($total_data['total'], $this->session->data['currency']);
+
 		$this->response->setOutput($this->load->view('checkout/checkout', $data));
 	}
 }

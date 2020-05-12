@@ -97,14 +97,24 @@ $_['text_already_registered']  = 'Уже зарегистрированы?';
 $_['text_quick_registration']  = 'Быстрая регистрация';
 $_['text_email_placeholder']   = 'Электронная почта';
 
-$_['text_shipping_title']      = 'Доставка';
-$_['text_payment_title']       = 'Оплата';
-$_['text_shipping_firstname']  = 'Имя получателя';
-$_['text_shipping_lastname']   = 'Фамилия получателя';
-$_['text_shipping_telephone']  = 'Телефон получателя';
-$_['text_shipping_street']     = 'Улица';
-$_['text_shipping_house']      = 'Дом';
-$_['text_shipping_block']      = 'Корпус';
-$_['text_shipping_front_door'] = 'Подъезд';
-$_['text_shipping_flat']       = 'Квартира';
-$_['text_shipping_comment']    = 'Есть комментарии к заказу?';
+$_['text_checkout_title']        = 'Оформление заказа';
+$_['text_shipping_title']        = 'Доставка';
+$_['text_payment_title']         = 'Оплата';
+$_['text_confirm_title']         = 'Подтверждение заказа';
+
+$_['text_shipping_pickup_price']   = 'Бесплатно';
+$_['text_shipping_pickup_address'] = 'ул. Коммунистическая, д. 30 (полуцокольный этаж) ежедневно 10:00–19:00';
+$_['text_shipping_pickup_address_info'] = 'Оставьте свой номер телефона, чтобы мы могли связаться с вами в случае необходимости';
+
+$_['text_shipping_firstname']    = 'Имя получателя';
+$_['text_shipping_lastname']     = 'Фамилия получателя';
+$_['text_shipping_telephone']    = 'Телефон получателя';
+$_['text_shipping_street']       = 'Улица';
+$_['text_shipping_house']        = 'Дом';
+$_['text_shipping_block']        = 'Корпус';
+$_['text_shipping_front_door']   = 'Подъезд';
+$_['text_shipping_flat']         = 'Квартира';
+$_['text_shipping_comment']      = 'Есть комментарии к заказу?';
+
+$_['text_all_products_in_stock'] = 'Все товары есть в наличии';
+$_['text_samopek_cart'] = 'Корзина';
