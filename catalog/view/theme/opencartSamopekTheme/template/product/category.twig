@@ -63,7 +63,7 @@
           <!-- MAKO: Removed Compare as currently nothing to compare-->
           <!--<div class="form-group"><a href="{{ compare }}" id="compare-total" class="btn btn-link">{{ text_compare }}</a></div>-->
         </div>
-        <div class="col-md-4 col-xs-6">
+        <div class="col-md-4 col-6">
           <div class="form-group input-group input-group-sm">
             <label class="input-group-addon" for="input-sort">{{ text_sort }}</label>
             <select id="input-sort" class="form-control" onchange="location = this.value;">
@@ -95,7 +95,7 @@
             </select>
           </div>
         </div>
-        <div class="col-md-3 col-xs-6">
+        <div class="col-md-3 col-6">
           <div class="form-group input-group input-group-sm">
             <label class="input-group-addon" for="input-limit">{{ text_limit }}</label>
             <select id="input-limit" class="form-control" onchange="location = this.value;">
@@ -131,7 +131,7 @@
       <div class="row">
         {% for product in products %}
           {% if product.quantity > 0 %}
-        <div class="product-layout product-list col-xs-12">
+        <div class="product-layout product-list col-6">
           <div class="product-thumb product-thumb-category">
             <div class="row featured_buttons_group_fav_preview">
               <!-- Preview in development -->

@@ -121,6 +121,16 @@ class samopek_ControllerCheckoutCheckout extends ControllerCheckoutCheckout {
                 $this->{'model_extension_total_' . $result['code']}->getTotal($total_data);
             }
         }
+
+        foreach ($total_data['totals'] as $total_data_elem) {
+            if ($total_data_elem['code'] == 'sub_total') {
+                $data['cart_price'] = $this->currency->format($total_data_elem['value'], $this->session->data['currency']);
+            }
+            if ($total_data_elem['code'] == 'shipping') {
+                $data['shipping_price'] = $this->currency->format($total_data_elem['value'], $this->session->data['currency']);
+            }
+        }
+
         $data['total_price'] = $this->currency->format($total_data['total'], $this->session->data['currency']);
 
 		$this->response->setOutput($this->load->view('checkout/checkout', $data));

@@ -1,9 +1,9 @@
 {% if categories %}
 <div>
-  <nav id="menu" class="navbar">
-    <div class="navbar-header"><span id="category" class="visible-xs">{{ text_category }}</span>
-      <button type="button" class="btn btn-navbar navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse"><i class="fa fa-bars"></i></button>
-    </div>
+  <nav id="menu" class="navbar navbar-expand-lg">
+      <span id="category" class="d-md-none d-lg-none">{{ text_category }}</span>
+      <button type="button" class="btn btn-navbar navbar-toggler d-md-none d-lg-none" data-toggle="collapse" data-target=".navbar-ex1-collapse"><i class="fa fa-bars"></i></button>
+
     <div class="collapse navbar-collapse navbar-ex1-collapse">
       <ul class="nav navbar-nav">
         <li>

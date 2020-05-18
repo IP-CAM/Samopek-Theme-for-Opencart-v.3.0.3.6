@@ -76,7 +76,12 @@ class samopek_ControllerCheckoutShippingMethod extends ControllerCheckoutShippin
 		} else {
 			$data['comment'] = '';
 		}
-		
+
+        $this->load->model('account/customer');
+
+        $customer_info = $this->model_account_customer->getCustomer($this->customer->getId());
+        $data['telephone'] = $customer_info['telephone'];
+
 		$this->response->setOutput($this->load->view('checkout/shipping_method', $data));
 	}
 
@@ -129,15 +134,78 @@ class samopek_ControllerCheckoutShippingMethod extends ControllerCheckoutShippin
 			}
 		}
 
-        if ((utf8_strlen($this->request->post['telephone']) < 3) || (utf8_strlen($this->request->post['telephone']) > 32)) {
+        if (!$json && (utf8_strlen($this->request->post['telephone']) < 3) || (utf8_strlen($this->request->post['telephone']) > 32)) {
             $json['error']['warning'] = $this->language->get('error_telephone');
         }
 
-		if (!$json) {
+        if (isset($this->request->post['shipping_method']) && $this->request->post['shipping_method'] == 'flat.flat') {
+            if (!$json && (utf8_strlen(trim($this->request->post['firstname'])) < 1) || (utf8_strlen(trim($this->request->post['firstname'])) > 32)) {
+                $json['error']['warning'] = $this->language->get('error_firstname');
+            }
+
+            if (!$json && (utf8_strlen(trim($this->request->post['street'])) < 1)) {
+                $json['error']['warning'] = $this->language->get('error_street');
+            }
+
+            if (!$json && (utf8_strlen(trim($this->request->post['house'])) < 1)) {
+                $json['error']['warning'] = $this->language->get('error_house');
+            }
+
+            if (!$json && (utf8_strlen(trim($this->request->post['flat'])) < 1)) {
+                $json['error']['warning'] = $this->language->get('error_flat');
+            }
+        }
+
+        if (!$json) {
 			$this->session->data['shipping_method'] = $this->session->data['shipping_methods'][$shipping[0]]['quote'][$shipping[1]];
+            $totals = $this->getTotals();
+            $json['shipping_price'] = $totals['shipping'];
+            $json['total_price'] = $totals['total'];
 		}
 
 		$this->response->addHeader('Content-Type: application/json');
 		$this->response->setOutput(json_encode($json));
 	}
+
+    public function getTotals() {
+        $totalsToReturn = array();
+
+        $totals = array();
+        $taxes = $this->cart->getTaxes();
+        $total = 0;
+
+        $total_data = array(
+            'totals' => &$totals,
+            'taxes'  => &$taxes,
+            'total'  => &$total
+        );
+
+        $this->load->model('setting/extension');
+
+        $sort_order = array();
+
+        $results = $this->model_setting_extension->getExtensions('total');
+
+        foreach ($results as $result) {
+            if ($this->config->get('total_' . $result['code'] . '_status')) {
+                $this->load->model('extension/total/' . $result['code']);
+
+                // We have to put the totals in an array so that they pass by reference.
+                $this->{'model_extension_total_' . $result['code']}->getTotal($total_data);
+            }
+        }
+
+        foreach ($total_data['totals'] as $total_data_elem) {
+            if ($total_data_elem['code'] == 'sub_total') {
+                $totalsToReturn['cart'] = $this->currency->format($total_data_elem['value'], $this->session->data['currency']);
+            }
+            if ($total_data_elem['code'] == 'shipping') {
+                $totalsToReturn['shipping'] = $this->currency->format($total_data_elem['value'], $this->session->data['currency']);
+            }
+        }
+
+        $totalsToReturn['total'] = $this->currency->format($total_data['total'], $this->session->data['currency']);
+
+        return $totalsToReturn;
+    }
 }

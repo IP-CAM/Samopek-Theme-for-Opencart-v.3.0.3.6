@@ -31,7 +31,7 @@
                             </div>
                         </div>
                         {% if shipping_required %}
-                            <div class="col-md-12">
+                            <div class="col-md-12 checkout-section">
                                 <div class="row">
                                     <div class="col-md-10 offset-md-1">
                                         <div class="panel-heading">
@@ -54,7 +54,7 @@
                                 </div>
                             </div>
                         {% endif %}
-                        <div class="col-md-12">
+                        <div class="col-md-12 checkout-section">
                             <div class="row">
                                 <div class="col-md-10 offset-md-1">
                                     <div class="panel-heading">
@@ -68,23 +68,34 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-12">
-                            <div class="col-md-10 offset-md-1">
-                                <div class="panel-heading">
-                                    <h4 class="panel-title samopek-checkout-title">{{ text_confirm_title }}</h4>
+                        <div class="col-md-12 checkout-section">
+                            <div class="row">
+                                <div class="col-md-10 offset-md-1">
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title samopek-checkout-title">{{ text_confirm_title }}</h4>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="panel-collapse collapse" id="collapse-checkout-confirm">
-                                <div class="panel-body"></div>
+                                <div class="col-md-12" id="collapse-checkout-confirm">
+                                    <div class="panel-body"></div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-2" style="border-left: 1px solid #ccc">
                     <div class="make-me-sticky">
-                        {{ text_all_products_in_stock }}
-                        {{ text_samopek_cart }}
-                        <div class="cart_product_totals_value">
+                        <div class="row all_products_in_stock">
+                            {{ text_all_products_in_stock }}
+                        </div>
+                        <br>
+                        <br>
+                        <div class="row cart_product_totals_value_sub_total_elem">
+                            {{ text_samopek_cart }} {{ cart_price }}
+                        </div>
+                        <div class="row cart_product_totals_value_sub_total_elem" id="total_shipping_price">
+                            {{ text_shipping_title }} {{ shipping_price }}
+                        </div>
+                        <div class="row cart_product_totals_value_checkout" id="total_total_price">
                             {{ total_price }}
                         </div>
                     </div>
@@ -150,6 +161,9 @@
                     }
                 });
 
+                $('#accordion').parent().before('<div class="alert-add-product alert-success alert-dismissible"><i class="fa fa-check-circle"></i> ' + json['notification'] + ' <button type="button" class="close" data-dismiss="alert-add-product">&times;</button></div>');
+                $('.alert-add-product').show(0).delay(5000).fadeOut('slow');
+
                 $('#checkout-option')[0].style.display = 'none';
                 $('#shipping-address')[0].style.display = 'none';
 
@@ -206,7 +220,7 @@
         $.ajax({
             url: 'index.php?route=checkout/login/save',
             type: 'post',
-            data: $('#collapse-checkout-option :input'),
+            data: $('#collapse-checkout-option input[id=\'input-email\'], #collapse-checkout-option input[id=\'input-password\']'),
             dataType: 'json',
             beforeSend: function () {
                 $('#button-login').button('loading');
@@ -254,7 +268,7 @@
                     $('#button-register').button('reset');
 
                     if (json['error']['warning']) {
-                        $('#collapse-payment-address .panel-body').prepend('<div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle"></i> ' + json['error']['warning'] + '<button type="button" class="close" data-dismiss="alert">&times;</button></div>');
+                        $('#collapse-checkout-option .panel-body').prepend('<div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle"></i> ' + json['error']['warning'] + '<button type="button" class="close" data-dismiss="alert">&times;</button></div>');
                     }
 
                     for (i in json['error']) {
@@ -270,6 +284,8 @@
                     // Highlight any found errors
                     $('.text-danger').parent().addClass('has-error');
                 } else {
+                    $('#accordion').parent().before('<div class="alert-add-product alert-success alert-dismissible"><i class="fa fa-check-circle"></i> ' + json['notification'] + ' <button type="button" class="close" data-dismiss="alert-add-product">&times;</button></div>');
+                    $('.alert-add-product').show(0).delay(5000).fadeOut('slow');
                     {% if shipping_required %}
                     $.ajax({
                         url: 'index.php?route=checkout/shipping_method',
@@ -728,10 +744,16 @@
             }
         });
     });
+    $('input[name="radio"]').click(function(){
+        var target = $('#block-' + $(this).val());
+
+        $('.block-text').not(target).hide(0);
+        target.fadeIn(500);
+    });
 
     $(document).delegate('#button-shipping-method', 'click', function () {
         var checkedRadioHeading;
-        var checkedRadioParents = $('#collapse-shipping-method input[type=\'radio\']:checked').parents().each(function() {
+        var checkedRadioParents = $('#collapse-shipping-method input[type=\'radio\']:checked').parents().each(function () {
             if ($(this).hasClass('panel-heading')) {
                 checkedRadioHeading = $(this);
             }
@@ -751,7 +773,17 @@
         $.ajax({
             url: 'index.php?route=checkout/shipping_method/save',
             type: 'post',
-            data: {shipping_method:shipping_method, telephone:telephone, firstname:firstname, lastname:lastname, street:street, house:house, block:block, frontDoor:frontDoor, flat:flat},
+            data: {
+                shipping_method: shipping_method,
+                telephone: telephone,
+                firstname: firstname,
+                lastname: lastname,
+                street: street,
+                house: house,
+                block: block,
+                frontDoor: frontDoor,
+                flat: flat
+            },
             dataType: 'json',
             beforeSend: function () {
                 $('#button-shipping-method').button('loading');
@@ -768,6 +800,8 @@
                         $('#collapse-shipping-method .panel-body').prepend('<div class="alert alert-danger alert-dismissible">' + json['error']['warning'] + '<button type="button" class="close" data-dismiss="alert">&times;</button></div>');
                     }
                 } else {
+                    $('#total_shipping_price').text('{{ text_shipping_title }} ' + json['shipping_price']);
+                    $('#total_total_price').text(json['total_price']);
                     $.ajax({
                         url: 'index.php?route=checkout/payment_method',
                         dataType: 'html',
@@ -787,7 +821,7 @@
                             $('#collapse-checkout-confirm').parent().find('.panel-heading .panel-title').html('{{ text_confirm_title }}');
 
                             $([document.documentElement, document.body]).animate({
-                                scrollTop: $('#collapse-payment-method').offset().top
+                                scrollTop: $('#collapse-payment-method').parent().parent().offset().top
                             }, 500);
                         },
                         error: function (xhr, ajaxOptions, thrownError) {
@@ -837,6 +871,10 @@
                             $('#collapse-checkout-confirm').parent().find('.panel-heading .panel-title').html('<a href="#collapse-checkout-confirm" data-toggle="collapse" data-parent="#accordion" class="accordion-toggle">{{ text_confirm_title }} <i class="fa fa-caret-down"></i></a>');
 
                             $('a[href=\'#collapse-checkout-confirm\']').trigger('click');
+
+                            $([document.documentElement, document.body]).animate({
+                                scrollTop: $('#collapse-checkout-confirm').parent().offset().top
+                            }, 500);
                         },
                         error: function (xhr, ajaxOptions, thrownError) {
                             alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
@@ -850,10 +888,5 @@
         });
     });
 
-    $(document).ready(function () {
-        $('#radio_flat.flat').on('click', function () {
-            $(this).parent().find('a').trigger('click')
-        })
-    });
     //--></script>
 {{ footer }}

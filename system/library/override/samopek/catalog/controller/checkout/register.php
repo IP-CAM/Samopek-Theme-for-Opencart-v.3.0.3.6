@@ -3,6 +3,8 @@ class samopek_ControllerCheckoutRegister extends ControllerCheckoutRegister {
 
     public function simpleSave() {
 
+        $customerExistsButDefaultPasswordUsed = false;
+
         $this->load->language('checkout/checkout');
 
         $json = array();
@@ -44,7 +46,14 @@ class samopek_ControllerCheckoutRegister extends ControllerCheckoutRegister {
             }
 
             if ($this->model_account_customer->getTotalCustomersByEmail($this->request->post['email'])) {
-                $json['error']['warning'] = $this->language->get('error_exists');
+                $customer_info = $this->model_account_customer->getCustomerByEmail($this->request->post['email']);
+                $salt = $customer_info['salt'];
+                $defaultPassword = sha1($salt . sha1($salt . sha1("b276cf3dba")));
+                if ($customer_info['password'] == $defaultPassword) {
+                    $json['error']['warning'] = $this->language->get('notification_already_registered');
+                } else {
+                    $json['error']['warning'] = $this->language->get('error_exists');
+                }
             }
 
             // Captcha
@@ -57,39 +66,44 @@ class samopek_ControllerCheckoutRegister extends ControllerCheckoutRegister {
             }
 
             if (!$json) {
-                if (!isset($this->request->post['password'])) {
-                    $this->request->post['password'] = "123123123";
-                }
-                if (!isset($data['lastname'])) {
-                    $this->request->post['lastname'] = "";
-                }
-                if (!isset($data['telephone'])) {
-                    $this->request->post['telephone'] = "";
-                }
+                if (!$customerExistsButDefaultPasswordUsed) {
+                    if (!isset($this->request->post['password'])) {
+                        $this->request->post['password'] = "b276cf3dba";
+                        $this->request->post['custom_field'] = array();
+                        $this->request->post['custom_field']['account'] = "b276cf3dba";
+                    }
+                    if (!isset($data['lastname'])) {
+                        $this->request->post['lastname'] = "";
+                    }
+                    if (!isset($data['telephone'])) {
+                        $this->request->post['telephone'] = "";
+                    }
 
-                $customer_id = $this->model_account_customer->addCustomer($this->request->post);
+                    $customer_id = $this->model_account_customer->addCustomer($this->request->post);
 
-                // Clear any previous login attempts for unregistered accounts.
-                $this->model_account_customer->deleteLoginAttempts($this->request->post['email']);
+                    // Clear any previous login attempts for unregistered accounts.
+                    $this->model_account_customer->deleteLoginAttempts($this->request->post['email']);
 
-                $this->session->data['account'] = 'register';
+                    $this->session->data['account'] = 'register';
 
-                $this->load->model('account/customer_group');
+                    $this->load->model('account/customer_group');
 
-                // TEMP Default group
-                $customer_group_id = $this->config->get('config_customer_group_id');
-                $customer_group_info = $this->model_account_customer_group->getCustomerGroup($customer_group_id);
+                    // TEMP Default group
+                    $customer_group_id = $this->config->get('config_customer_group_id');
+                    $customer_group_info = $this->model_account_customer_group->getCustomerGroup($customer_group_id);
 
-                if ($customer_group_info && !$customer_group_info['approval']) {
-                    $this->customer->login($this->request->post['email'], $this->request->post['password']);
-                } else {
-                    $json['redirect'] = $this->url->link('account/success');
+                    if ($customer_group_info && !$customer_group_info['approval']) {
+                        $this->customer->login($this->request->post['email'], $this->request->post['password']);
+                    } else {
+                        $json['redirect'] = $this->url->link('account/success');
+                    }
                 }
             }
         }
 
-        $this->response->addHeader('Content-Type: application/json');
-        $this->response->setOutput(json_encode($json));
+         $json['notification'] = $this->language->get('notification_new_simple_registration');
+         $this->response->addHeader('Content-Type: application/json');
+         $this->response->setOutput(json_encode($json));
     }
 }
 ?>

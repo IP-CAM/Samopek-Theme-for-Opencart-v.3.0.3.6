@@ -3,11 +3,11 @@
     </div>
 {% endif %}
 {% if shipping_methods %}
+    <div class="radio" id="shippingRadioButtons">
     {% for shipping_method in shipping_methods %}
         {% if not shipping_method.error %}
             {% for quote in shipping_method.quote %}
-                <div class="radio">
-                    <div class="panel-heading">
+                    <div class="panel-heading" id="heading{{ quote.code }}">
                         <div class="row">
                             <div class="col-sm-10">
                                 <div class="row">
@@ -31,7 +31,7 @@
                             </div>
                         </div>
                     </div>
-                    <div id="collapse{{ quote.code }}" class="collapse">
+                    <div id="collapse{{ quote.code }}" class="collapse  {% if code == quote.code %} show {% endif %}" aria-labelledby="heading{{ quote.code }}" data-parent="#shippingRadioButtons">
                         {% if quote.code == "flat.flat" %}
                             <div class="row">
                                 <div class="col-sm-6 offset-sm-1">
@@ -46,7 +46,7 @@
                                                id="input-shipping-lastname" class="form-control"/>
                                     </div>
                                     <div class="form-group">
-                                        <input type="text" name="telephone" value=""
+                                        <input type="text" name="telephone" value="{{ telephone }}"
                                                placeholder="{{ text_shipping_telephone }}"
                                                id="input-shipping-telephone" class="form-control"/>
                                     </div>
@@ -91,7 +91,7 @@
                                 <div class="col-sm-6 offset-sm-1">
                                     {{ text_shipping_pickup_address }}
                                     <div class="form-group">
-                                        <input type="text" name="telephone" value=""
+                                        <input type="text" name="telephone" value="{{ telephone }}"
                                                placeholder="{{ text_shipping_telephone }}"
                                                id="input-shipping-telephone" class="form-control"/>
                                     </div>
@@ -106,10 +106,10 @@
                             </div>
                         {% endif %}
                     </div>
-                </div>
             {% endfor %}
         {% else %}
             <div class="alert alert-danger alert-dismissible">{{ shipping_method.error }}</div>
         {% endif %}
     {% endfor %}
+    </div>
 {% endif %}

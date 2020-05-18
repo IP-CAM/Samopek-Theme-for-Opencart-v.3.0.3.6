@@ -1,0 +1,35 @@
+{% if not redirect %}
+
+<div class="table-responsive">
+  <table class="table table-hover">
+    <tbody>
+    
+    {% for product in products %}
+    <tr>
+      <td class="text-left" style="border-top:none"><a href="{{ product.href }}" target="_blank"><h2>{{ product.name }}</h2></a> {% for option in product.option %} <br />
+        &nbsp;<small> - {{ option.name }}: {{ option.value }}</small> {% endfor %}
+        {% if product.recurring %} <br />
+        <span class="label label-info">{{ text_recurring_item }}</span> <small>{{ product.recurring }}</small> {% endif %}</td>
+      <td class="text-right checkout_confirm_artikul" style="border-top:none">{{ text_artikul }} {{ product.model }}</td>
+      <td class="text-right checkout_confirm_quantity" style="border-top:none">{{ product.quantity }} {{ text_count_label }}</td>
+      <td class="text-right checkout_confirm_price" style="border-top:none">{{ product.total }}</td>
+    </tr>
+    {% endfor %}
+    {% for voucher in vouchers %}
+    <tr>
+      <td class="text-left">{{ voucher.description }}</td>
+      <td class="text-left"></td>
+      <td class="text-right">1</td>
+      <td class="text-right">{{ voucher.amount }}</td>
+      <td class="text-right">{{ voucher.amount }}</td>
+    </tr>
+    {% endfor %}
+      </tbody>
+  </table>
+</div>
+{{ payment }}
+{% else %} 
+<script type="text/javascript"><!--
+location = '{{ redirect }}';
+//--></script> 
+{% endif %} 
