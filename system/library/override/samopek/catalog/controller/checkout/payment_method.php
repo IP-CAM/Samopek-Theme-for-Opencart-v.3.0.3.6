@@ -188,6 +188,8 @@ class samopek_ControllerCheckoutPaymentMethod extends ControllerCheckoutPaymentM
 
 		if (!$json) {
 			$this->session->data['payment_method'] = $this->session->data['payment_methods'][$this->request->post['payment_method']];
+
+            $this->session->data['comment'] = strip_tags($this->request->post['comment']);
 		}
 
 		$this->response->addHeader('Content-Type: application/json');

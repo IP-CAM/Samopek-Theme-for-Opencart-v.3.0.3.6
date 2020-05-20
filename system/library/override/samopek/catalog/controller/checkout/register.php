@@ -3,8 +3,6 @@ class samopek_ControllerCheckoutRegister extends ControllerCheckoutRegister {
 
     public function simpleSave() {
 
-        $customerExistsButDefaultPasswordUsed = false;
-
         $this->load->language('checkout/checkout');
 
         $json = array();
@@ -50,7 +48,7 @@ class samopek_ControllerCheckoutRegister extends ControllerCheckoutRegister {
                 $salt = $customer_info['salt'];
                 $defaultPassword = sha1($salt . sha1($salt . sha1("b276cf3dba")));
                 if ($customer_info['password'] == $defaultPassword) {
-                    $json['error']['warning'] = $this->language->get('notification_already_registered');
+                    $json['notification'] = $this->language->get('notification_already_registered');
                 } else {
                     $json['error']['warning'] = $this->language->get('error_exists');
                 }
@@ -65,8 +63,7 @@ class samopek_ControllerCheckoutRegister extends ControllerCheckoutRegister {
                 }
             }
 
-            if (!$json) {
-                if (!$customerExistsButDefaultPasswordUsed) {
+            if (!$json || !$json['error']) {
                     if (!isset($this->request->post['password'])) {
                         $this->request->post['password'] = "b276cf3dba";
                         $this->request->post['custom_field'] = array();
@@ -97,7 +94,6 @@ class samopek_ControllerCheckoutRegister extends ControllerCheckoutRegister {
                     } else {
                         $json['redirect'] = $this->url->link('account/success');
                     }
-                }
             }
         }
 
