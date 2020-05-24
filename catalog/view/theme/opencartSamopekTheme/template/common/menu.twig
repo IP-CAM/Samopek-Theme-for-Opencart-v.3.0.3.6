@@ -1,46 +1,58 @@
 {% if categories %}
-<div>
-  <nav id="menu" class="navbar navbar-expand-lg">
-      <span id="category" class="d-md-none d-lg-none">{{ text_category }}</span>
-      <button type="button" class="btn btn-navbar navbar-toggler d-md-none d-lg-none" data-toggle="collapse" data-target=".navbar-ex1-collapse"><i class="fa fa-bars"></i></button>
+    <div class="container">
+        <div class="row">
+            {% for category in categories %}
+                {% if loop.index0 < 4 %}
+                    <div class="col main-menu-thumb bg-color-white">
+                        <a href="{{ category.href }}" style="width:100%;height:100%;display:block">
+                            <div class="font-button-catalog color-grey-dark main-menu-thumb-inner">
+                                <img src="catalog/view/theme/opencartSamopekTheme/image/product_icon.svg">
+                                {{ category.name }}
+                            </div>
+                        </a>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
 
-    <div class="collapse navbar-collapse navbar-ex1-collapse">
-      <ul class="nav navbar-nav">
-        <li>
-          <span class="delimiter hidden-xs hidden-sm hidden-md" style="margin-left: 0px"> | </span>
-        </li>
-        {% for category in categories %}
-        {% if category.children %}
-        <li class="dropdown"><a href="{{ category.href }}" class="dropdown-toggle" data-toggle="dropdown">{{ category.name }}</a>
-          <div class="dropdown-menu">
-            <a href="{{ category.href }}" class="see-all">{{ text_all }} {{ category.name }}</a>
-            <div class="dropdown-inner">
-              {% for children in category.children|batch(category.children|length / category.column|round(1, 'ceil')) %}
-                <ul class="list-unstyled">
-                  {% for child in children %}
-                    <li>
-                      <a href="{{ child.href }}">{{ child.name }}</a>
-                    </li>
-                  {% endfor %}
-                </ul>
-              {% endfor %}
-            </div>
-          </div>
-        </li>
-        <li>
-          <span class="delimiter hidden-xs hidden-sm hidden-md"> | </span>
-        </li>
-        {% else %}
-        <li>
-          <a href="{{ category.href }}">{{ category.name }}</a>
-        </li>
-        <li>
-          <span class="delimiter hidden-xs hidden-sm hidden-md"> | </span>
-        </li>
-        {% endif %}
-        {% endfor %}
-      </ul>
+        <div class="row">
+            {% for category in categories %}
+
+                {% if loop.index0 >= 4 and loop.index0 < 8 %}
+                    {% if loop.index0 == 7 %}
+                        <div class="col main-menu-thumb bg-color-red">
+                            <a href="#" data-toggle="modal"
+                               data-target="#subcategoriesModalScrollable">
+                                <div class="font-header-2 color-white main-menu-thumb-inner">
+                                    {{ text_all_others }}
+                                </div>
+                            </a>
+                        </div>
+                    {% else %}
+                        <div class="col main-menu-thumb bg-color-white">
+                            <a href="{{ category.href }}" style="width:100%;height:100%;display:block">
+                                <div class="font-button-catalog color-grey-dark main-menu-thumb-inner">
+                                    <img src="catalog/view/theme/opencartSamopekTheme/image/product_icon.svg">
+                                    {{ category.name }}
+                                </div>
+                            </a>
+                        </div>
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+        </div>
     </div>
-  </nav>
-</div>
+
+    <!-- Modal Subcategories-->
+    <div class="modal fade" id="subcategoriesModalScrollable" tabindex="-1" role="dialog"
+         aria-labelledby="subcategoriesModalLabel" aria-hidden="true">
+        <div class="modal-dialog categories-modal-dialog" role="document">
+            <div class="modal-content categories-modal-content" id="subcategoriesModalLabel">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                Hello!
+            </div>
+        </div>
+    </div>
 {% endif %} 

@@ -17,3 +17,11 @@ $_['text_all']           = 'Смотреть Все';
 $_['text_contacts']      = 'Контакты';
 $_['text_shipping']      = 'Доставка';
 
+$_['text_tagline']          = 'Всё для кондитера и домашней выпечки';
+$_['text_account_part_1']   = 'Личный';
+$_['text_account_part_2']   = 'кабинет';
+$_['text_city'] = 'Нижний Новгород';
+$_['text_shipping_payment'] = 'Доставка и оплата';
+$_['text_contact_phone_number'] = '<b>+7 (950) 622-22-58</b> | Каждый день c 9:00–20:00';
+
+
