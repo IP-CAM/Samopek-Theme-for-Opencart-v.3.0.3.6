@@ -1,11 +1,6 @@
 {{ header }}
-<div id="common-success" class="container">
-  <!-- MAKO: Removing breadcrumbs -->
-  <!--<ul class="breadcrumb">
-    {% for breadcrumb in breadcrumbs %}
-    <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
-    {% endfor %}
-  </ul>-->
+<div id="common-success" class="container container-lg">
+  {{ content_top }}
   <div class="row">{{ column_left }}
     {% if column_left and column_right %}
     {% set class = 'col-sm-6' %}
@@ -14,13 +9,14 @@
     {% else %}
     {% set class = 'col-sm-12' %}
     {% endif %}
-    <div id="content" class="{{ class }}">{{ content_top }}
-      <h1>{{ heading_title }}</h1>
+    <div id="content" class="contentArea {{ class }}">
+      <h1 class="h2">{{ heading_title }}</h1>
       {{ text_message }}
       <div class="buttons">
-        <div class="pull-right"><a href="{{ continue }}" class="btn btn-primary">{{ button_continue }}</a></div>
+        <div class="pull-right"><a href="{{ continue }}" class="btn btn-blue btn-sq">{{ button_continue }}</a></div>
       </div>
-      {{ content_bottom }}</div>
+     </div>
     {{ column_right }}</div>
 </div>
+{{ content_bottom }}
 {{ footer }}

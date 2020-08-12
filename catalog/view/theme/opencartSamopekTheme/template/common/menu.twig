@@ -1,46 +1,52 @@
 {% if categories %}
-<div>
-  <nav id="menu" class="navbar navbar-expand-lg">
-      <span id="category" class="d-md-none d-lg-none">{{ text_category }}</span>
-      <button type="button" class="btn btn-navbar navbar-toggler d-md-none d-lg-none" data-toggle="collapse" data-target=".navbar-ex1-collapse"><i class="fa fa-bars"></i></button>
-
-    <div class="collapse navbar-collapse navbar-ex1-collapse">
-      <ul class="nav navbar-nav">
-        <li>
-          <span class="delimiter hidden-xs hidden-sm hidden-md" style="margin-left: 0px"> | </span>
-        </li>
-        {% for category in categories %}
-        {% if category.children %}
-        <li class="dropdown"><a href="{{ category.href }}" class="dropdown-toggle" data-toggle="dropdown">{{ category.name }}</a>
-          <div class="dropdown-menu">
-            <a href="{{ category.href }}" class="see-all">{{ text_all }} {{ category.name }}</a>
-            <div class="dropdown-inner">
-              {% for children in category.children|batch(category.children|length / category.column|round(1, 'ceil')) %}
-                <ul class="list-unstyled">
-                  {% for child in children %}
-                    <li>
-                      <a href="{{ child.href }}">{{ child.name }}</a>
-                    </li>
-                  {% endfor %}
-                </ul>
-              {% endfor %}
+    <section class="homeCategories">
+        <div class="container container-lg">
+            <div class="row">
+                {% for category in categories %}
+                    {% if loop.index < 8 %}
+                        <div class="col-lg-3 col-md-4 col-sm-6">
+                            <a href="{{ category.href }}" title="{{ category.name }}" class="homeCategories_item">
+                                <span><img src="catalog/view/theme/opencartSamopekTheme/img/category_{{ loop.index }}.svg" alt=""></span>
+                                <strong>{{ category.name }}</strong>
+                            </a>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <a href="#" class="homeCategories_item homeCategories_item-all js-catalog">
+                        <strong>{{ text_all_others }}</strong>
+                    </a>
+                </div>
             </div>
-          </div>
-        </li>
-        <li>
-          <span class="delimiter hidden-xs hidden-sm hidden-md"> | </span>
-        </li>
-        {% else %}
-        <li>
-          <a href="{{ category.href }}">{{ category.name }}</a>
-        </li>
-        <li>
-          <span class="delimiter hidden-xs hidden-sm hidden-md"> | </span>
-        </li>
-        {% endif %}
-        {% endfor %}
-      </ul>
-    </div>
-  </nav>
-</div>
+        </div>
+    </section>
+
+    <section class="catalog">
+        <div class="container container-lg">
+            <a href="#" class="catalog_close"></a>
+            <div class="row">
+                <div class="col-md-4 col-sm-6">
+                    {% for category in categories %}
+                        {% if loop.index == 4 or loop.index == 7 %}
+                            </div>
+                            <div class="col-md-4 col-sm-6">
+                        {% endif %}
+                        <div class="catalog_item">
+                            <h3 class="h3"><a href="{{ category.href }}">{{ category.name }}</a></h3>
+                            {% if category.children %}
+                                <nav>
+                                    {% for children in category.children|batch(category.children|length / category.column|round(1, 'ceil')) %}
+                                        {% for child in children %}
+                                            <a href="{{ child.href }}">{{ child.name }}</a>
+                                        {% endfor %}
+                                    {% endfor %}
+                                </nav>
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </section>
+
 {% endif %} 

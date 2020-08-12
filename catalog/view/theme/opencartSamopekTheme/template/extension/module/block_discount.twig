@@ -1,0 +1,61 @@
+<section class="specialProducts">
+    <div class="specialProducts_wrap">
+        <div class="container">
+            <div class="row">
+                <div class="specialProducts_col">
+                    <div class="specialProducts_item">
+                        <strong class="h2">{{ title }}</strong>
+                        <p>{{ description }}</p>
+                        <a href="{{ link }}" class="btn btn-lg btn-white">{{ link_text }}</a>
+                    </div>
+                </div>
+                {% for product in products %}
+                    <div class="specialProducts_col">
+                        <div class="product_item">
+                            <a href="{{ product.href }}" class="product_item_img" title="{{ product.name }}">
+                                <img src="{{ product.thumb }}" alt="{{ product.name }}" title="{{ product.name }}" />
+                            </a>
+                            <div class="product_item_body">
+                                <a href="{{ product.href }}" title="{{ product.name }}" class="product_item_title">
+                                    {{ product.name }}
+                                </a>
+                                <ul>
+                                    {% for attribute in product.attributes %}
+                                        <li>– {{ attribute }}</li>
+                                    {% endfor %}
+                                </ul>
+                                {% if product.quantity == 0 %}
+                                    <span class="product_item_stock product_item_stock-not">{{ text_stock_not }}</span>
+                                {% elseif product.quantity < 11 %}
+                                    <span class="product_item_stock product_item_stock-few">{{ text_stock_few }}</span>
+                                {% else %}
+                                    <span class="product_item_stock">{{ text_stock }}</span>
+                                {% endif %}
+                            </div>
+                            <div class="product_item_f">
+                                {% if product.price %}
+                                    <span class="product_item_price">
+                                    {% if not product.special %}
+                                        {{ product.price }}
+                                    {% else %}
+                                        <i>{{ product.special }}</i><b>{{ product.price }}</b>
+                                    {% endif %}
+                                </span>
+                                {% endif %}
+                                <a href="#" class="product_item_wishlist {% if product.in_wishlist %}active{% endif %}" data-product="{{ product.product_id }}" onclick="wishlist.add('{{ product.product_id }}');">
+                                    <img src="catalog/view/theme/opencartSamopekTheme/img/wishlist.svg" alt="" class="product_item_wishlist_notAdded">
+                                    <img src="catalog/view/theme/opencartSamopekTheme/img/wishlist-added.svg" alt="" class="product_item_wishlist_added">
+                                </a>
+                                {% if product.quantity != 0 %}
+                                    <a href="#" class="product_item_cart {% if product.in_cart %}active{% endif %}" data-product="{{ product.product_id }}" onclick="cart.add('{{ product.product_id }}');">
+                                        <img src="catalog/view/theme/opencartSamopekTheme/img/cart.svg" alt="">
+                                    </a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>

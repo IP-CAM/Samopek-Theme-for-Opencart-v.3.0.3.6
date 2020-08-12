@@ -1,0 +1,49 @@
+<div class="order_coupon">
+  <div class="order_coupon_first">
+    <a href="#">{{ heading_title }}</a>
+  </div>
+  <div class="order_coupon_second">
+    <div class="form-group-2">
+      <input type="text" name="voucher" value="{{ voucher }}" id="input-voucher" />
+      <label for="input-voucher">{{ entry_voucher }}</label>
+    </div>
+    <a href="#" class="order_coupon_add">
+      <img src="catalog/view/theme/opencartSamopekTheme/img/close.svg" alt="">
+    </a>
+  </div>
+  <div class="order_coupon_third">
+    <a href="#"><img src="catalog/view/theme/opencartSamopekTheme/img/close.svg" alt="">Сертификат добавлен</a>
+  </div>
+</div>
+<script type="text/javascript"><!--
+$(document).on('click', '.order_coupon_second .order_coupon_add', function (e) {
+	e.preventDefault();
+	$.ajax({
+			url: 'index.php?route=extension/total/voucher/voucher',
+			type: 'post',
+			data: 'voucher=' + encodeURIComponent($('input[name=\'voucher\']').val()),
+			dataType: 'json',
+			success: function(json) {
+				$('.alert-dismissible').remove();
+				
+				if (json['error']) {
+					$('input[name="voucher"]').closest('.form-group-2').addClass('has-error');
+					$('input[name="voucher"]').closest('.form-group-2').find('label').text(json['error']);
+				}
+				
+				if (json['redirect']) {
+					location = json['redirect'];
+				}
+			},
+			error: function(xhr, ajaxOptions, thrownError) {
+				alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+			}
+		});
+});
+$(document).on('click', '.order_coupon_first a', function (e) {
+	e.preventDefault();
+	if (!$(this).closest('.order_coupon').hasClass('active') && !$(this).closest('.order_coupon').hasClass('actived')) {
+		$(this).closest('.order_coupon').addClass('active');
+	}
+});
+//--></script>

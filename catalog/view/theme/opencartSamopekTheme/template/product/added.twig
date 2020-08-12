@@ -1,0 +1,121 @@
+<div class="modal fade" id="addedModal" tabindex="-1" role="dialog" aria-labelledby="addedModal" aria-hidden="true">
+  <div class="modal-dialog modal-xl modal-dialog-centered">
+    <div class="modal-content modal-product">
+      <div class="modal-product_t">
+        <div class="modal-product_head">
+          <h2 class="h2">{{ text_product_added }}</h2>
+          <a href="{{ cart }}" class="modal-product_cart active">
+            <img src="catalog/view/theme/opencartSamopekTheme/img/cart.svg" alt="">
+          </a>
+          <a href="#" class="modal-product_wishlist {% if product_info.in_wishlist %}active{% endif %}" data-product="{{ product_info.product_id }}" onclick="wishlist.add('{{ product_info.product_id }}');">  
+            <img src="catalog/view/theme/opencartSamopekTheme/img/wishlist.svg" alt="" class="modal-product_wishlist_notAdded">
+            <img src="catalog/view/theme/opencartSamopekTheme/img/wishlist-added.svg" alt="" class="modal-product_wishlist_added">
+          </a>
+          <a href="#" class="modal-product_remove" onclick="cart.remove('{{ product_info.cart_id }}');">{{ text_cancel }}</a>
+        </div>
+        <div class="modal-product_item">
+          <div class="modal-product_item_l">
+            <img src="{{ product_info.image }}" alt="{{ product_info.name }}">
+          </div>
+          <div class="modal-product_item_r">
+            <div class="modal-product_item_t">
+              <span>{{ text_sku }} {{ product_info.model }}</span>
+              {% if product_info.quantity <= 0 %}
+                <span class="product_item_stock product_item_stock-not">{{ text_stock_not }}</span>
+              {% elseif product_info.quantity < 11 %}
+                <span class="product_item_stock product_item_stock-few">{{ text_stock_few }}</span>
+              {% else %}
+                <span class="product_item_stock">{{ text_stock }}</span>
+              {% endif %}
+              {% if product_info.price %}
+                <span class="product_item_price">{% if not product_info.special %}{{ product_info.price }}{% else %}<i>{{ product_info.special }}</i><b>{{ product_info.price }}</b>{% endif %}</span>
+              {% endif %}
+              <b data-json-total="{{ product_info.cart_id }}">{{ product_info.current_total }}</b>
+            </div>
+            <div class="modal-product_item_b">
+              <div>
+                <p>{{ product_info.name }}</p>
+                <p>
+                  {% for attribute in product_info.attributes %}
+                    — {{ attribute }}<br>
+                  {% endfor %}
+                </p>
+              </div>
+              {% if product_info.quantity > 0 %}
+                <div>
+                  <div class="quantityInput">
+                    <a href="#" class="quantity_modal_minus quantityInput_minus">-</a>
+                    <input type="text" class="input-quantity input-quantity-modal" name="quantity" data-max="{{ product_info.max }}" value="{{ product_info.current_quantity }}" size="2" data-product="{{ product_info.cart_id }}" />
+                    <a href="#" class="quantity_modal_plus quantityInput_plus">+</a>
+                  </div>
+                  <div class="text-red text-center" style="display: none">{{ text_max }}</div>
+                </div>
+              {% endif %}
+              <div>
+                {% if product_info.tags %}
+                  {% for tag in product_info.tags %}
+                    <a href="{{ tag.href }}" class="btn btn-sm btn-grey-o" title="{{ tag.tag }}">{{ tag.tag }}</a>
+                  {% endfor %}
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <a href="#" class="modal-product_m" data-dismiss="modal">{{ text_continue }}</a>
+      {% if products %}
+        <div class="modal-product_b products_recommends">
+          <h4 class="h4">{{ text_related_product }}</h4>
+          <div class="row">
+            {% for product in products %}
+              <div class="col-lg-3 col-sm-6">
+                <div class="product_item">
+                  <a href="{{ product.href }}" class="product_item_img" title="{{ product.name }}">
+                    <img src="{{ product.thumb }}" alt="{{ product.name }}" title="{{ product.name }}" />
+                  </a>
+                  <div class="product_item_body">
+                    <a href="{{ product.href }}" title="{{ product.name }}" class="product_item_title">
+                      {{ product.name }}
+                    </a>
+                    <ul>
+                      {% for attribute in product.attributes %}
+                        <li>– {{ attribute }}</li>
+                      {% endfor %}
+                    </ul>
+                    {% if product.quantity <= 0 %}
+                      <span class="product_item_stock product_item_stock-not">{{ text_stock_not }}</span>
+                    {% elseif product.quantity < 11 %}
+                      <span class="product_item_stock product_item_stock-few">{{ text_stock_few }}</span>
+                    {% else %}
+                      <span class="product_item_stock">{{ text_stock }}</span>
+                    {% endif %}
+                  </div>
+                  <div class="product_item_f">
+                    {% if product.price %}
+                      <span class="product_item_price">
+                          {% if not product.special %}
+                            {{ product.price }}
+                          {% else %}
+                            <i>{{ product.special }}</i><b>{{ product.price }}</b>
+                          {% endif %}
+                      </span>
+                    {% endif %}
+                    <a href="#" class="product_item_wishlist {% if product.in_wishlist %}active{% endif %}" data-product="{{ product.product_id }}" onclick="wishlist.add('{{ product.product_id }}');">
+                      <img src="catalog/view/theme/opencartSamopekTheme/img/wishlist.svg" alt="" class="product_item_wishlist_notAdded">
+                      <img src="catalog/view/theme/opencartSamopekTheme/img/wishlist-added.svg" alt="" class="product_item_wishlist_added">
+                    </a>
+                    {% if product.quantity > 0 %}
+                      <a href="#" class="product_item_cart {% if product.in_cart %}active{% endif %}" data-product="{{ product.product_id }}" onclick="cart.add('{{ product.product_id }}');">
+                        <img src="catalog/view/theme/opencartSamopekTheme/img/cart.svg" alt="">
+                      </a>
+                    {% endif %}
+                  </div>
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</div>

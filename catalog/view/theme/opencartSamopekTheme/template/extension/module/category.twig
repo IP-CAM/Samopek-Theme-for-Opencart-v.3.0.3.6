@@ -1,0 +1,17 @@
+<h4 class="h4 category_title">{{ heading_title }}</h4>
+<div class="widget widget_menu">
+  <ul>
+    {% for category in categories %}
+      <li class="{% if category.children %}widget_menu_hasChild{% endif %} {% if category.category_id == category_id %}active{% endif %}">
+        <a href="{{ category.href }}" class="widget_menu_link">{{ category.name }}</a>
+        {% if category.children %}
+          <ul class="widget_menu_dropdown" {% if category.category_id == category_id %}style="display:block;"{% endif %}">
+          {% for child in category.children %}
+            <li><a href="{{ child.href }}">{{ child.name }}</a></li>
+          {% endfor %}
+          </ul>
+        {% endif %}
+      </li>
+    {% endfor %}
+  </ul>
+</div>

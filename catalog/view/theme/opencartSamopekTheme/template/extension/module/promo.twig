@@ -1,0 +1,31 @@
+<section class="features">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                {% for banner in banners %}
+                    {% if loop.index == 1 or loop.index == 2 %}
+                        <a href="{{ banner.link }}" class="features_item features_item-{{ loop.index }}" style="background-image: url('{{ banner.image }}');">
+                            <strong>{{ banner.title }}</strong>
+                            {% if banner.description %}
+                                <p>{{ banner.description }}</p>
+                            {% endif %}
+                        </a>
+                    {% endif %}
+                {% endfor %}
+            </div>
+            <div class="col-md-6">
+                {% for banner in banners %}
+                    {% if loop.index == 3 %}
+                        <div class="features_item features_item-{{ loop.index }}" style="background-image: url('{{ banner.image }}');">
+                            <a href="{{ banner.link }}"><strong>{{ banner.title }}</strong></a>
+                            {% if banner.description %}
+                                <p>{{ banner.description }}</p>
+                            {% endif %}
+                            <a href="{{ banner.link }}" class="btn btn-lg btn-white">{{ text_read_more }}</a>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>

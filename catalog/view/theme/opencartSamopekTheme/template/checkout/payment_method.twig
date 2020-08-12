@@ -1,47 +1,74 @@
 {% if error_warning %}
 <div class="alert alert-warning alert-dismissible"><i class="fa fa-exclamation-circle"></i> {{ error_warning }}</div>
 {% endif %}
-{% if payment_methods %}
 
-{% for payment_method in payment_methods %}
-  <div class="row">
-    <div class="col-sm-10">
-      <div class="row">
-{% if payment_method.code == code or not code %}
-    {% set code = payment_method.code %}
-    <input type="radio" name="payment_method" value="{{ payment_method.code }}" checked="checked" />
-    {% else %}
-    <input type="radio" name="payment_method" value="{{ payment_method.code }}" />
-    {% endif %}
-    <h2 style="margin-top: 0px; margin-left: 10%">{{ payment_method.title }}</h2>
-    {% if payment_method.terms %}
-    ({{ payment_method.terms }})
-    {% endif %}
-      </div>
-    </div>
-  </div>
+<div class="order_panel_payment">
+  {% if payment_methods %}
+    {% for payment_method in payment_methods %}
+      <a href="#" class="btn h3 btn-sq selectPayment {% if payment_method.code == 'cod' %}btn-black-o{% else %}btn-yellow{% endif %}" data-code="{{ payment_method.code }}">{{ payment_method.title }}</a>
+    {% endfor %}
+  {% endif %}
+</div>
+<div class="order_end"></div>
+<div class="order_payment">
+  <table>
+    <tr>
+      <th>{{ text_payment_model }}</th>
+      <th>{{ text_payment_name }}</th>
+      <th class="text-right">{{ text_payment_qty }}</th>
+      <th class="text-center">{{ text_payment_price }}</th>
+    </tr>
+    {% for one in products %}
+    <tr>
+      <td>{{ one.model }}</td>
+      <td>
+        <strong class="h4">{{ one.name }}</strong>
+        <p>
+          {% for at in one.attributes %}
+            {{ at.name }}: <span class="text-blue">{{ at.text }}</span><br>
+          {% endfor %}
+        </p>
+      </td>
+      <td class="text-right">{{ one.quantity }} {{ text_payment_qty_one }}</td>
+      <td class="text-center">{{ one.total }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+</div>
 
-{% endfor %}
-{% endif %}
-{% if text_agree %}
-<div class="buttons">
-  <div class="pull-right">{{ text_agree }}
-    {% if agree %}
-    <input type="checkbox" name="agree" value="1" checked="checked" />
-    {% else %}
-    <input type="checkbox" name="agree" value="1" />
-    {% endif %}
-    &nbsp;
-    <input type="button" value="{{ button_continue }}" id="button-payment-method" data-loading-text="{{ text_loading }}" class="btn btn-primary" />
-  </div>
-</div>
-{% else %}
-<div class="buttons">
-  <div class="pull-right">
-    <input type="button" value="{{ button_continue }}" id="button-payment-method" data-loading-text="{{ text_loading }}" class="btn btn-primary" />
-  </div>
-</div>
-{% endif %}
-<p>
-  <textarea name="comment" rows="8" class="form-control" placeholder="{{ text_order_comment }}"></textarea>
-</p>
+<script type="text/javascript">
+  $(document).ready(function () {
+    $(document).on('click', '.selectPayment', function(e) {
+      e.preventDefault();      
+      var code = $(this).data('code');
+      $.ajax({
+        url: '/index.php?route=checkout/payment_method/save',
+        data: {payment_method: code},
+        datType: 'json',
+        method: 'POST',
+        success: function(json) {
+          if (json.redirect) {
+            window.location = json.redirect;
+          }
+
+          if (json.error) {
+            $(document).find('.alert-warning').remove();
+            $('#checkout-checkout').prepend('<div class="alert alert-warning alert-dismissible">' + json.error.warning + '<button type="button" class="close" data-dismiss="alert">&times;</button></div>');
+          } else {
+            $.ajax({
+                url: 'index.php?route=checkout/confirm',
+                dataType: 'html',
+                success: function (html) {
+                    $('.order_end').html(html);
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+                }
+            });
+          }
+        }
+      });
+    });
+
+  });
+</script>

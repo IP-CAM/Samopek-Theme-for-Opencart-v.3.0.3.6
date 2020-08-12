@@ -49,11 +49,11 @@ class samopek_ControllerCheckoutPaymentMethod extends ControllerCheckoutPaymentM
             $recurring = $this->cart->hasRecurringProducts();
 
         // MAKO0216
-        if (!isset($this->session->data['payment_address'])) {
-            $this->session->data['payment_address'] = array();
-            $this->session->data['payment_address']['country_id'] = 176;
-            $this->session->data['payment_address']['zone_id'] = 2766;
-        }
+        // // $this->session->data['payment_address'] = array();
+        // $this->session->data['payment_address']['country_id'] = $this->session->data['shipping_address']['country_id'];
+        // $this->session->data['payment_address']['zone_id'] = $this->session->data['shipping_address']['zone_id'];
+        // $this->session->data['payment_address']['city'] = $this->session->data['shipping_address']['city'];
+
         // MAKO0216
 
             foreach ($results as $result) {
@@ -103,10 +103,47 @@ class samopek_ControllerCheckoutPaymentMethod extends ControllerCheckoutPaymentM
             $data['code'] = '';
         }
 
-        if (isset($this->session->data['comment'])) {
-            $data['comment'] = $this->session->data['comment'];
-        } else {
-            $data['comment'] = '';
+        $this->load->model('catalog/product');
+
+        $data['products'] = array();
+
+        $products = $this->cart->getProducts();
+
+        foreach ($products as $product) {
+            $product_total = 0;
+
+            foreach ($products as $product_2) {
+                if ($product_2['product_id'] == $product['product_id']) {
+                    $product_total += $product_2['quantity'];
+                }
+            }
+
+            // Display prices
+            if ($this->customer->isLogged() || !$this->config->get('config_customer_price')) {
+                $unit_price = $this->tax->calculate($product['price'], $product['tax_class_id'], $this->config->get('config_tax'));
+                $total = $this->currency->format($unit_price * $product['quantity'], $this->session->data['currency']);
+            } else {
+                $total = false;
+            }
+
+            $recurring = '';
+
+            $attributes = [];
+            foreach ($this->model_catalog_product->getProductAttributes($product['product_id']) as $one) {
+              foreach ($one['attribute'] as $item) {
+                  if (count($attributes) == 2) break;
+                  $attributes[] = $item;
+              }
+            }
+            $product_info = $this->model_catalog_product->getProduct($product['product_id']);
+
+            $data['products'][] = array(
+                'name'      => $product['name'],
+                'model'     => $product['model'],
+                'attributes' => $attributes,
+                'quantity'  => $product['quantity'],
+                'total'     => $total,
+            );
         }
 
         $data['scripts'] = $this->document->getScripts();
@@ -176,20 +213,18 @@ class samopek_ControllerCheckoutPaymentMethod extends ControllerCheckoutPaymentM
 			$json['error']['warning'] = $this->language->get('error_payment');
 		}
 
-		if ($this->config->get('config_checkout_id')) {
-			$this->load->model('catalog/information');
+		// if ($this->config->get('config_checkout_id')) {
+		// 	$this->load->model('catalog/information');
 
-			$information_info = $this->model_catalog_information->getInformation($this->config->get('config_checkout_id'));
+		// 	$information_info = $this->model_catalog_information->getInformation($this->config->get('config_checkout_id'));
 
-			if ($information_info && !isset($this->request->post['agree'])) {
-				$json['error']['warning'] = sprintf($this->language->get('error_agree'), $information_info['title']);
-			}
-		}
+		// 	if ($information_info && !isset($this->request->post['agree'])) {
+		// 		$json['error']['warning'] = sprintf($this->language->get('error_agree'), $information_info['title']);
+		// 	}
+		// }
 
 		if (!$json) {
 			$this->session->data['payment_method'] = $this->session->data['payment_methods'][$this->request->post['payment_method']];
-
-            $this->session->data['comment'] = strip_tags($this->request->post['comment']);
 		}
 
 		$this->response->addHeader('Content-Type: application/json');

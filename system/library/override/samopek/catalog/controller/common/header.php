@@ -61,7 +61,22 @@ class samopek_ControllerCommonHeader extends ControllerCommonHeader {
         $totalFormatted = sprintf($this->language->get('text_items'), $this->cart->countProducts() + (isset($this->session->data['vouchers']) ? count($this->session->data['vouchers']) : 0), $this->currency->format($total, $this->session->data['currency']));
 
         // Shopping cart
-        $data['shopping_cart_total'] = $totalFormatted;
+        $data['shopping_cart_total'] = ($this->cart->countProducts() > 0 ) ? $totalFormatted : false;
+
+        $data['login_action'] = $this->url->link('account/login', '', true);
+        $data['forgotten'] = $this->url->link('account/forgotten', '', true);
+
+        if (isset($this->request->post['email'])) {
+            $data['email'] = $this->request->post['email'];
+        } else {
+            $data['email'] = '';
+        }
+
+        if (isset($this->request->post['password'])) {
+            $data['password'] = $this->request->post['password'];
+        } else {
+            $data['password'] = '';
+        }
 
         return parent::preRender($template_buffer, $template_name, $data);
     }

@@ -1,0 +1,13 @@
+<section class="bannerSlider">
+    <div class="container container-lg">
+        <div class="bannerSlider_wrap">
+            {% for banner in banners %}
+                {% if banner.link %}
+                    <a href="{{ banner.link }}"><img src="{{ banner.image }}" alt="{{ banner.title }}" /></a>
+                {% else %}
+                    <img src="{{ banner.image }}" alt="{{ banner.title }}" />
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+</section>

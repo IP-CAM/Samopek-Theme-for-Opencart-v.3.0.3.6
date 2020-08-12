@@ -1,0 +1,55 @@
+<section class="recipes">
+    <div class="container">
+        <h2 class="h2">{{ title }}</h2>
+        <div class="recipes_row">
+            <div class="recipes_col recipes_col-2">
+                {% for banner in banners %}
+                    {% if loop.index == 1 %}
+                        <a href="{{ banner.link }}" class="recipes_item" style="background-image: url('{{ banner.image }}');">
+                            <strong class="h2" style="color: {{ color_title_1 }}">{{ banner.title }}</strong>
+                            {% if banner.description %}
+                                <p style="color: {{ color_title_1 }}">{{ banner.description }}</p>
+                            {% endif %}
+                        </a>
+                    {% endif %}
+                    {% if loop.index == 2 %}
+                        <a href="{{ banner.link }}" class="recipes_item" style="background-image: url('{{ banner.image }}');">
+                            <strong class="h2" style="color: {{ color_title_2 }}">{{ banner.title }}</strong>
+                            {% if banner.description %}
+                                <p style="color: {{ color_title_2 }}">{{ banner.description }}</p>
+                            {% endif %}
+                        </a>
+                    {% endif %}
+                {% endfor %}
+            </div>
+            <div class="recipes_col recipes_col-2">
+                {% for banner in banners %}
+                    {% if loop.index == 3 %}
+                        <a href="{{ banner.link }}" class="recipes_item" style="background-image: url('{{ banner.image }}');">
+                            <strong class="h2" style="color: {{ color_title_3 }}">{{ banner.title }}</strong>
+                            {% if banner.description %}
+                                <p style="color: {{ color_title_3 }}">{{ banner.description }}</p>
+                            {% endif %}
+                        </a>
+                    {% endif %}
+                    {% if loop.index == 4 %}
+                        <a href="{{ banner.link }}" class="recipes_item" style="background-image: url('{{ banner.image }}');">
+                            <strong class="h2" style="color: {{ color_title_4 }}">{{ banner.title }}</strong>
+                            {% if banner.description %}
+                                <p style="color: {{ color_title_4 }}">{{ banner.description }}</p>
+                            {% endif %}
+                        </a>
+                    {% endif %}
+                {% endfor %}
+            </div>
+            <div class="recipes_col">
+                <div class="recipes_r">
+                    <b>{{ right_text_1 }}</b>
+                    <b>{{ right_text_2 }}</b>
+                    <b>{{ right_text_3 }}</b>
+                    <a href="{{ right_link }}" class="btn btn-lg btn-white">{{ text_read_more }}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

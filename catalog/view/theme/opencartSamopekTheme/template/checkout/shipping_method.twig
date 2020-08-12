@@ -3,113 +3,320 @@
     </div>
 {% endif %}
 {% if shipping_methods %}
-    <div class="radio" id="shippingRadioButtons">
+<div class="order_shipping">              
+  <form class="accordion" id="shippingRadioButtons">
     {% for shipping_method in shipping_methods %}
         {% if not shipping_method.error %}
             {% for quote in shipping_method.quote %}
-                    <div class="panel-heading" id="heading{{ quote.code }}">
-                        <div class="row">
-                            <div class="col-sm-10">
-                                <div class="row">
-                                    {% if quote.code == code or not code %}
-                                        {% set code = quote.code %}
-                                        <input type="radio" name="shipping_method" value="{{ quote.code }}"
-                                               checked="checked"
-                                               data-target="#collapse{{ quote.code }}" aria-expanded="true"
-                                               aria-controls="collapse{{ quote.code }}" data-toggle="collapse"/>
-                                    {% else %}
-                                        <input type="radio" class="collapsed" name="shipping_method"
-                                               value="{{ quote.code }}"
-                                               data-target="#collapse{{ quote.code }}" aria-expanded="false"
-                                               aria-controls="collapse{{ quote.code }}" data-toggle="collapse"/>
-                                    {% endif %}
-                                    <h2 style="margin-top: 0px; margin-left: 10%">{{ quote.title }}</h2>
-                                </div>
+              <div class="card">
+                <div class="card-header" id="heading{{ quote.code }}">
+                  {% if code and quote.code == code %}
+                    <input type="radio" name="shipping_method" id="shipping_method{{ quote.code }}" value="{{ quote.code }}" checked="checked" />
+                  {% else %}
+                    <input type="radio" name="shipping_method" id="shipping_method{{ quote.code }}" value="{{ quote.code }}" />
+                  {% endif %}
+                  <label for="shipping_method{{ quote.code }}" data-toggle="collapse" data-target="#collapse{{ quote.code }}" aria-expanded="true" aria-controls="collapse{{ quote.code }}">
+                    <strong class="h4">{{ shipping_method.title }}</strong>
+                    <p>{{ quote.desc }}</p>
+                    <p>{{ quote.date }}</p>
+                    <b class="h4">{{ quote.text }}</b>
+                  </label>
+                </div>
+                <div id="collapse{{ quote.code }}" class="collapse" aria-labelledby="heading{{ quote.code }}" data-parent="#shippingRadioButtons">
+                  <div class="card-body">
+                    {% if quote.code == "flat.flat" %}
+                      <h4 class="h4 text-blue">{{ text_shipping_flat_title }}</h4>
+                      <div class="row">
+                        <div class="col-xl-4 col-md-6">
+                          <div class="form-group form-group-2 {% if street and street != '' %} active {% endif %}">
+                            <input type="text" id="input-shipping-street" name="sm[{{ quote.code }}][street]" value="{{ street }}">
+                            <label for="input-shipping-street" data-label="{{ text_shipping_street }}">{{ text_shipping_street }}</label>
+                          </div>
+                          <div class="row">
+                            <div class="col-xl-4 col-lg-6">
+                              <div class="form-group form-group-2 {% if house and house != '' %} active {% endif %}">
+                                <input type="text" id="input-shipping-house" name="sm[{{ quote.code }}][house]" value="{{ house }}">
+                                <label for="input-shipping-house" data-label="{{ text_shipping_house }}">{{ text_shipping_house }}</label>
+                              </div>
                             </div>
-                            <div class="col-sm-2 product_details_price" style="margin-top: 0px">
-                                {{ quote.text }}
+                            <div class="col-xl-4 col-lg-6">
+                              <div class="form-group form-group-2 {% if frontdoor and frontdoor != '' %} active {% endif %}">
+                                <input type="text" id="input-shipping-front-door" name="sm[{{ quote.code }}][frontdoor]" value="{{ frontdoor }}">
+                                <label for="input-shipping-front-door" data-label="{{ text_shipping_front_door }}">{{ text_shipping_front_door }}</label>
+                              </div>
                             </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-xl-4 col-lg-6">
+                              <div class="form-group form-group-2 {% if floor and floor != '' %} active {% endif %}">
+                                <input type="text" id="input-shipping-floor" name="sm[{{ quote.code }}][floor]" value="{{ floor }}">
+                                <label for="input-shipping-floor" data-label="{{ text_shipping_floor }}">{{ text_shipping_floor }}</label>
+                              </div>
+                            </div>
+                            <div class="col-xl-4 col-lg-6">
+                              <div class="form-group form-group-2 {% if flat and flat != '' %} active {% endif %}">
+                                <input type="text" id="input-shipping-flat" name="sm[{{ quote.code }}][flat]" value="{{ flat }}">
+                                <label for="input-shipping-flat" data-label="{{ text_shipping_flat }}">{{ text_shipping_flat }}</label>
+                              </div>
+                            </div>
+                          </div>
                         </div>
+                        <div class="col-xl-4 col-md-6 offset-xl-2">
+                          <div class="form-group form-group-2 {% if name and name != '' %} active {% endif %}">
+                            <input type="text" name="sm[{{ quote.code }}][name]" value="{{ name }}" id="input-shipping-name"/>
+                            <label for="input-shipping-name" data-label="{{ text_shipping_name }}">{{ text_shipping_name }}</label>
+                          </div>
+                          <div class="form-group form-group-2 {% if telephone and telephone != '' %} active {% endif %}">
+                            <input type="text" name="sm[{{ quote.code }}][telephone]" value="{{ telephone }}" id="input-shipping-telephone">
+                            <label for="input-shipping-telephone" data-label="{{ text_shipping_phone }}">{{ text_shipping_phone }}</label>
+                          </div>
+                          <div class="form-group form-group-2 {% if comment and comment != '' %} active {% endif %}">
+                            <input type="text" id="input-shipping-comment" name="sm[{{ quote.code }}][comment]" value="{{ comment }}">
+                            <label for="input-shipping-comment" data-label="{{ text_shipping_comment }}">{{ text_shipping_comment }}</label>
+                          </div>
+                        </div>
+                      </div>
+                      <p class="order_shipping_desc">{{ text_shipping_flat_desc }}</p>
+                  {% endif %}
+                  {% if quote.code == "pickup.pickup" %}
+                      <h4 class="h4 text-blue">{{ text_shipping_whoget }}</h4>
+                      <div class="row">
+                        <div class="col-md-4">
+                          <div class="form-group form-group-2 {% if name and name != '' %} active {% endif %}">
+                            <input type="text" id="shipping1name" name="sm[{{ quote.code }}][name]" value="{{ name }}">
+                            <label for="shipping1name" data-label="{{ text_shipping_name }}">{{ text_shipping_name }}</label>
+                          </div>
+                        </div>
+                        <div class="col-md-4">
+                          <div class="form-group form-group-2 {% if telephone and telephone != '' %} active {% endif %}">
+                            <input type="text" name="sm[{{ quote.code }}][telephone]" value="{{ telephone }}" id="shipping1phone">
+                            <label for="shipping1phone" data-label="{{ text_shipping_phone }}">{{ text_shipping_phone }}</label>
+                          </div>
+                        </div>
+                      </div>
+                  {% endif %}
+                  {% if shipping_method.code == "cdek" %}
+                    <h4 class="h4 text-blue">{{ text_shipping_cdek_title }}</h4>
+                    <div class="row">
+                      <div class="col-md-7">
+                        <div class="form-group form-group-2 {% if name and name != '' %} active {% endif %}">
+                          <input type="text" id="shipping3name" name="sm[{{ quote.code }}][name]" value="{{ name }}">
+                          <label for="shipping3name" data-label="{{ text_shipping_name_full }}">{{ text_shipping_name_full }}</label>
+                        </div>
+                      </div>
                     </div>
-                    <div id="collapse{{ quote.code }}" class="collapse  {% if code == quote.code %} show {% endif %}" aria-labelledby="heading{{ quote.code }}" data-parent="#shippingRadioButtons">
-                        {% if quote.code == "flat.flat" %}
-                            <div class="row">
-                                <div class="col-sm-6 offset-sm-1">
-                                    <div class="form-group">
-                                        <input type="text" name="firstname" value=""
-                                               placeholder="{{ text_shipping_firstname }}"
-                                               id="input-shipping-firstname" class="form-control"/>
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="text" name="lastname" value=""
-                                               placeholder="{{ text_shipping_lastname }}"
-                                               id="input-shipping-lastname" class="form-control"/>
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="text" name="telephone" value="{{ telephone }}"
-                                               placeholder="{{ text_shipping_telephone }}"
-                                               id="input-shipping-telephone" class="form-control"/>
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="text" name="street" value=""
-                                               placeholder="{{ text_shipping_street }}"
-                                               id="input-shipping-street" class="form-control"/>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-sm-3 form-group">
-                                            <input type="text" name="house" value=""
-                                                   placeholder="{{ text_shipping_house }}"
-                                                   id="input-shipping-house" class="form-control"/>
-                                        </div>
-                                        <div class="col-sm-3 form-group">
-                                            <input type="text" name="block" value=""
-                                                   placeholder="{{ text_shipping_block }}"
-                                                   id="input-shipping-block" class="form-control"/>
-                                        </div>
-                                        <div class="col-sm-3 form-group">
-                                            <input type="text" name="front-door" value=""
-                                                   placeholder="{{ text_shipping_front_door }}"
-                                                   id="input-shipping-front-door" class="form-control"/>
-                                        </div>
-                                        <div class="col-sm-3 form-group">
-                                            <input type="text" name="flat" value=""
-                                                   placeholder="{{ text_shipping_flat }}"
-                                                   id="input-shipping-flat" class="form-control"/>
-                                        </div>
-                                    </div>
-                                    <div class="buttons">
-                                        <div class="pull-right">
-                                            <input type="button" value="{{ button_submit }}" id="button-shipping-method"
-                                                   data-loading-text="{{ text_loading }}" class="btn btn-primary"/>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        {% endif %}
-                        {% if quote.code == "pickup.pickup" %}
-                            <div class="row">
-                                <div class="col-sm-6 offset-sm-1">
-                                    {{ text_shipping_pickup_address }}
-                                    <div class="form-group">
-                                        <input type="text" name="telephone" value="{{ telephone }}"
-                                               placeholder="{{ text_shipping_telephone }}"
-                                               id="input-shipping-telephone" class="form-control"/>
-                                    </div>
-                                    {{ text_shipping_pickup_address_info }}
-                                    <div class="buttons">
-                                        <div class="pull-right">
-                                            <input type="button" value="{{ button_submit }}" id="button-shipping-method"
-                                                   data-loading-text="{{ text_loading }}" class="btn btn-primary"/>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        {% endif %}
+                    <div class="row">
+                      <div class="col-md-4">
+                        <div class="form-group form-group-2 {% if telephone and telephone != '' %} active {% endif %}">
+                          <input type="text" name="sm[{{ quote.code }}][telephone]" value="{{ telephone }}" id="shipping3phone">
+                          <label for="shipping3phone" data-label="{{ text_shipping_phone }}">{{ text_shipping_phone }}</label>
+                        </div>
+                      </div>
                     </div>
+                    <div class="row">
+                      <div class="col-md-4">
+                        <div class="form-group form-group-2 fill {% if city and city != '' %} active {% endif %}">
+                          <input type="text" class="fill_input" id="shipping3city" name="city" value="{{ city }}" autocomplete="off">
+                          <a href="#" class="fill_arrow">
+                            <img src="catalog/view/theme/opencartSamopekTheme/img/arrow.svg" alt="">
+                          </a>
+                          <label for="shipping3city" data-label="{{ text_shipping_city }}" data-error="{{ error_shipping_city }}">{{ text_shipping_city }}</label>
+                          <div class="fill_dropdown">
+                            {% for one in shipping_method.cities %}
+                              <a href="#" data-value="{{ one.cityName }}">{{ one.cityName }}</a>
+                            {% endfor %}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <input type="hidden" name="need_pvz[]" value="{{ quote.tariff }}">
+                    <button class="btn btn-sq btn-blue getPvzList" type="button">{{ text_shipping_show_pvz }}</button>
+                    {% if cdek_pvz %}
+                      <p class="mt-3 text-success cdekSelectedPvz">{{ cdek_pvz }}</p>
+                    {% endif %}
+                    <script src="https://api-maps.yandex.ru/2.1/?lang=ru-RU&amp;apikey=ba0659ff-72aa-41bb-bc67-437646f8d45b" type="text/javascript"></script>
+                    <script type="text/javascript">
+                      $(document).on('click', '.getPvzList', function() {
+                        var city = $(document).find('#shipping3city');
+                        if (city.val().length == 0) {
+                          city.closest('.form-group').addClass('has-error');
+                          city.closest('.form-group').find('label').text(city.closest('.form-group').find('label').data('error'));
+                          return false;
+                        } else {
+                          city.closest('.form-group').removeClass('has-error');
+                          city.closest('.form-group').find('label').text(city.closest('.form-group').find('label').data('label'));
+                        }
+                        $.ajax({
+                          url: '/index.php?route=checkout/shipping_method/getCdekPvz',
+                          data: {city: $(document).find('#shipping3city').val()},
+                          method: 'POST',
+                          success: function() {
+                            $.ajax({
+                              url: '/index.php?route=extension/shipping/cdek/getPvzList',
+                              data: {tariff_type: $(document).find('input[name="need_pvz[]"]').val()},
+                              datType: 'json',
+                              method: 'POST',
+                              success: function(json) {
+                                json = JSON.parse(json);
+                                if ($.isEmptyObject(json.data)) {
+                                  city.closest('.form-group').addClass('has-error');
+                                  city.closest('.form-group').find('label').text(json.message);
+                                } else {
+                                  buildMap(json.data);
+                                }
+                              }
+                            });
+                          }
+                        });
+                      });
+                      $(document).on('click', '.cdekSelectPvz', function() {
+                        var btn = $(this),
+                            id = btn.data('select'),
+                            tariff = $(document).find('input[name="need_pvz[]"]').val();
+                        $.ajax({
+                          url: '/index.php?route=extension/shipping/cdek/selectPvz',
+                          data: {tariff: $(document).find('input[name="need_pvz[]"]').val(), pvz_code: id},
+                          datType: 'json',
+                          method: 'POST',
+                          success: function(json) {
+                            json = JSON.parse(json);
+                            if (!$.isEmptyObject(json.data)) {
+                              $(document).find('.cdekSelectedPvz').remove();
+                              $(document).find('.getPvzList').after('<p class="mt-3 text-success cdekSelectedPvz">' + json.data.address + '</p>');
+                              $(document).find('.cdekSelectPvz.btn-yellow').removeClass('btn-yellow').addClass('btn-blue').text('{{ text_select }}');
+                              btn.removeClass('btn-blue');
+                              btn.addClass('btn-yellow');
+                              btn.text('{{ text_selected }}');
+                            }
+                          }
+                        });
+                      });
+                      function buildMap(data) {
+                        $(document).find('.order_shipping_map').show();                        
+                        $(document).find('#cdekMap').html('');
+
+                        var centerX = 0, centerY = 0;
+                        $.each(data, function(index, value) {
+                          centerY = value.coordY;
+                          centerX = value.coordX;
+                          return false;
+                        });
+                        
+                        var myMap = new ymaps.Map('cdekMap', {
+                            center: [centerY, centerX],
+                            zoom: 11,
+                            controls: ['zoomControl']
+                        }),                        
+                        objectManager = new ymaps.ObjectManager({
+                            clusterize: true,
+                            gridSize: 32,
+                            clusterDisableClickZoom: true
+                        });
+
+                        myMap.panes.get("ground").getElement().style.filter = "grayscale(100%)"
+
+                        objectManager.objects.options.set({
+                          iconLayout: 'default#image',
+                          iconImageHref: "/catalog/view/theme/opencartSamopekTheme/img/point.png",
+                          iconImageSize: [25, 25],
+                          iconImageOffset: [-12, -12]
+                        });
+                        objectManager.clusters.options.set({
+                          preset: "islands#invertedDarkGreenClusterIcons",
+                          clusterDisableClickZoom: !1,
+                          clusterNumbers: [5, 10, 20, 30, 50],
+                          clusterIcons: [
+                              { href: "/catalog/view/theme/opencartSamopekTheme/img/cluster.svg", size: [50, 50], offset: [-25, -25] },
+                              { href: "/catalog/view/theme/opencartSamopekTheme/img/cluster.svg", size: [55, 55], offset: [-27, -27] },
+                              { href: "/catalog/view/theme/opencartSamopekTheme/img/cluster.svg", size: [60, 60], offset: [-30, -30] },
+                              { href: "/catalog/view/theme/opencartSamopekTheme/img/cluster.svg", size: [65, 65], offset: [-32, -32] },
+                              { href: "/catalog/view/theme/opencartSamopekTheme/img/cluster.svg", size: [70, 70], offset: [-35, -35] },
+                          ],
+                        });
+                        myMap.geoObjects.add(objectManager);
+
+                        var newData = [];
+                        $.each(data, function(index, value) {
+                          newData.push({
+                            type: 'Feature',
+                            id: index,
+                            geometry: {
+                              type: 'Point',
+                              coordinates: [value.coordY, value.coordX]
+                            },
+                            properties: {
+                              balloonContentHeader: '<div class="">' + value.City + ', ' + value.Address +  '</div>',
+                              balloonContentBody: '<div class="">' + value.Code + '</div><div class="">' + value.WorkTime + '</div><div class="">' + value.Phone + '</div>',
+                              balloonContentFooter: '<button type="button" class="btn btn-sq btn-blue cdekSelectPvz" data-select="' + value.Code + '">{{ text_select }}</button>',
+                              clusterCaption: '<strong>' + value.Address + '</strong>',
+                              hintContent: '<strong>' + value.Address + '</strong>'
+                            }
+                          });
+                        });
+                        var dataMap = {
+                          type: 'FeatureCollection',
+                          features: newData
+                        };
+                        objectManager.add(dataMap);
+                      }
+                    </script>
+                    <div class="order_shipping_map" style="display: none;">
+                      <label data-label="{{ text_shipping_pvz }}">{{ text_shipping_pvz }}</label>
+                      <div id="cdekMap" style="height: 400px"></div>
+                    </div>
+                  {% endif %}                    
+                  </div>
+                </div>
+              </div>
             {% endfor %}
         {% else %}
             <div class="alert alert-danger alert-dismissible">{{ shipping_method.error }}</div>
         {% endif %}
     {% endfor %}
-    </div>
+  </form>
+</div>
+  
 {% endif %}
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    $(document).on('click', '.sendShipping, .order_r_continue', function(e) {
+      e.preventDefault();
+      var data = $(document).find('#shippingRadioButtons').serialize();
+      $.ajax({
+        data: data,
+        url: '/index.php?route=checkout/shipping_method/save',
+        method: 'POST',
+        dataType: 'json',
+        success: function(json) {
+          if (json.redirect) {
+            window.location = json.redirect;
+          }
+
+          if (json.error) {
+            $(document).find('.form-group-2.has-error').each(function () {
+              $(this).removeClass('has-error');
+              $(this).find('label').text($(this).find('label').data('label'));
+            });
+            $(document).find('.has-error').removeClass('has-error');
+            $(document).find('.alert-warning').remove();
+            $(document).find('.order_shipping_map label').removeClass('text-danger');
+            $(document).find('.order_shipping_map label').text($(document).find('.order_shipping_map label').data('label'));
+            $.each(json.error, function (key, value) {
+              if (key != 'need_pvz' && key != 'warning') {
+                var input = $(document).find('input[name="' + key + '"]');
+                input.closest('.form-group-2').addClass('has-error');
+                input.closest('.form-group-2').find('label').text(value);
+              } else if (key == 'warning') {
+                $('#checkout-checkout').prepend('<div class="alert alert-warning alert-dismissible">' + value + '<button type="button" class="close" data-dismiss="alert">&times;</button></div>');
+              } else if (key == 'need_pvz') {
+                $(document).find('.order_shipping_map').show();
+                $(document).find('.order_shipping_map label').addClass('text-danger').text(value);
+              }
+            });
+          }
+        }
+      });
+    });
+  });
+</script>

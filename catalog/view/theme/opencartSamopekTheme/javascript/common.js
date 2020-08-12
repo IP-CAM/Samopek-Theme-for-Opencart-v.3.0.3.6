@@ -23,6 +23,14 @@ function getURLVar(key) {
 }
 
 $(document).ready(function() {
+	$(document).on('input', 'input.input-quantity', function() {
+		$(this).val(parseInt($(this).val()));
+		var attr = $(this).attr('data-max');
+		if (typeof attr !== typeof undefined && attr !== false && parseInt($(this).val()) > parseInt(attr)) {
+			$(this).val(attr);
+		}
+	});
+
 	// Highlight any found errors
 	$('.text-danger').each(function() {
 		var element = $(this).parent().parent();
@@ -63,10 +71,17 @@ $(document).ready(function() {
 		location = url;
 	});
 
-	$('#search input[name=\'search\']').on('keydown', function(e) {
-		if (e.keyCode == 13) {
-			$('header #search input[name=\'search\']').parent().find('button').trigger('click');
+	$('#search').submit(function(e) {
+		e.preventDefault();
+		var url = $('base').attr('href') + 'index.php?route=product/search';
+
+		var value = $('header #search input[name=\'search\']').val();
+
+		if (value) {
+			url += '&search=' + encodeURIComponent(value);
 		}
+
+		location = url;
 	});
 
 	// Menu
@@ -133,6 +148,10 @@ $(document).ready(function() {
 	$(document).ajaxStop(function() {
 		$('[data-toggle=\'tooltip\']').tooltip({container: 'body'});
 	});
+
+	$(document).on('click', '.product_item_wishlist, .product_item_cart, .product_wishlist, .modal-product_wishlist, .modal-product_remove', function (e) {
+		e.preventDefault();
+	});
 });
 
 // Cart add remove functions
@@ -154,25 +173,25 @@ var cart = {
 
 				if (json['redirect']) {
 					location = json['redirect'];
+					return false;
 				}
 
 				if (json['success']) {
-					$('#content').parent().before('<div class="alert-add-product alert-success alert-dismissible"><i class="fa fa-check-circle"></i> ' + json['success'] + ' <button type="button" class="close" data-dismiss="alert-add-product">&times;</button></div>');
-
-					// Need to set timeout otherwise it wont update the total
-					setTimeout(function () {
-						$('#cart > button').html('<span id="cart-total"><i class="fa fa-shopping-cart"></i> ' + json['total'] + '</span>');
-					}, 100);
-
-					// We don't want to srcoll to bottom every time
-					//$('html, body').animate({ scrollTop: 0 }, 'slow');
-
-					// But we do want to show and hide after some time
-					$('.alert-add-product').show(0).delay(4000).fadeOut('slow');
-
-					$('#cart-header').html(json['total']);
-
-					$('#cart > ul').load('index.php?route=common/cart/info ul li');
+					$('#cart-header').find('div').remove();
+					$('#cart-header').addClass('active');
+					$('#cart-header').prepend('<div>' + json['total'] + '</div>');
+					$(document).find('.product_item_cart[data-product="' + product_id + '"]').addClass('active');                    
+					$(document).find('.product_item_cart[data-product="' + product_id + '"]').addClass('pCartAnimate');   
+					setTimeout(function() {
+						$(document).find('.product_item_cart[data-product="' + product_id + '"]').removeClass('pCartAnimate');                    
+					}, 600);
+                    if (json['modal']) {
+                    	$(document).find('#addedModal').modal('hide');
+	                    $(document).find('.modal-backdrop').remove();
+	                    $(document).find('#addedModal').remove();
+	                    $('body').append(json['modal']);
+	                    $(document).find('#addedModal').modal('show');	
+                    }
 				}
 			},
 			error: function(xhr, ajaxOptions, thrownError) {
@@ -180,11 +199,11 @@ var cart = {
 			}
 		});
 	},
-	'update': function(key, quantity) {
+	'update': function(key, quantity, redirect = true) {
 		$.ajax({
 			url: 'index.php?route=checkout/cart/edit',
 			type: 'post',
-			data: 'key=' + key + '&quantity=' + (typeof(quantity) != 'undefined' ? quantity : 1),
+			data: 'key=' + key + '&quantity=' + (typeof(quantity) != 'undefined' ? quantity : 1) + (redirect == true ? '&redirect=true' : ''),
 			dataType: 'json',
 			beforeSend: function() {
 				$('#cart > button').button('loading');
@@ -193,15 +212,20 @@ var cart = {
 				$('#cart > button').button('reset');
 			},
 			success: function(json) {
-				// Need to set timeout otherwise it wont update the total
-				setTimeout(function () {
-					$('#cart > button').html('<span id="cart-total"><i class="fa fa-shopping-cart"></i> ' + json['total'] + '</span>');
-				}, 100);
-
 				if (getURLVar('route') == 'checkout/cart' || getURLVar('route') == 'checkout/checkout') {
 					location = 'index.php?route=checkout/cart';
 				} else {
-					$('#cart > ul').load('index.php?route=common/cart/info ul li');
+	                if (json['redirect'] && redirect == true) {
+	                  location = json['redirect'];
+	                  return false;
+	                }
+					$('#cart-header').find('div').remove();
+					$('#cart-header').addClass('active');
+					$('#cart-header').prepend('<div>' + json['total'] + '</div>');
+					if (quantity < 1) $(document).find('.product_item_cart[data-product="' + key + '"]').removeClass('active');
+					if ($(document).find('[data-json-total="' + key + '"]').length > 0) {
+						$(document).find('[data-json-total="' + key + '"]').html(json.current_total);
+					}
 				}
 			},
 			error: function(xhr, ajaxOptions, thrownError) {
@@ -224,7 +248,15 @@ var cart = {
 			success: function(json) {
 				// Need to set timeout otherwise it wont update the total
 				setTimeout(function () {
-					$('#cart > button').html('<span id="cart-total"><i class="fa fa-shopping-cart"></i> ' + json['total'] + '</span>');
+					$('#cart-header').find('div').remove();
+					if (json['total'] == 0) {
+						$('#cart-header').removeClass('active');
+					} else {
+						$('#cart-header').addClass('active');
+						$('#cart-header').prepend('<div>' + json['total'] + '</div>');
+					}
+					$(document).find('.product_item_cart[data-product="' + key + '"]').removeClass('active');
+                    $(document).find('#addedModal').modal('hide');
 				}, 100);
 
 				if (getURLVar('route') == 'checkout/cart' || getURLVar('route') == 'checkout/checkout') {
@@ -276,7 +308,11 @@ var voucher = {
 }
 
 var wishlist = {
-	'add': function(product_id) {
+	'add': function(product_id) {					
+		if ($(document).find('.product_item_wishlist[data-product="' + product_id + '"], .modal-product_wishlist[data-product="' + product_id + '"], .product_wishlist[data-product="' + product_id + '"]').hasClass('active')) {
+			wishlist.remove(product_id);
+			return false;
+		}
 		$.ajax({
 			url: 'index.php?route=account/wishlist/add',
 			type: 'post',
@@ -290,25 +326,51 @@ var wishlist = {
 				}
 
 				if (json['success']) {
-					$('#content').parent().before('<div class="alert-add-product alert-success alert-dismissible"><i class="fa fa-check-circle"></i> ' + json['success'] + ' <button type="button" class="close" data-dismiss="alert">&times;</button></div>');
+					$(document).find('.product_item_wishlist[data-product="' + product_id + '"], .modal-product_wishlist[data-product="' + product_id + '"], .product_wishlist[data-product="' + product_id + '"]').addClass('active');
 				}
 
-				$('#wishlist-total span').html(json['total']);
+				if (json['error']) {
+					$('#wishlistModal').find('.modal-body').html(json['error']);
+					$('#wishlistModal').modal('show');
+					// 	$('#content').parent().before('<div class="alert-add-product alert-success alert-dismissible"><i class="fa fa-check-circle"></i> ' + json['success'] + ' <button type="button" class="close" data-dismiss="alert">&times;</button></div>');
+				}
+
+				// $('#wishlist-total span').html(json['total']);
 				$('#wishlist-total').attr('title', json['total']);
 
 				// We don't want to srcoll to bottom every time
 				//$('html, body').animate({ scrollTop: 0 }, 'slow');
 
 				// But we do want to show and hide after some time
-				$('.alert-add-product').show(0).delay(4000).fadeOut('slow');
+				// $('.alert-add-product').show(0).delay(4000).fadeOut('slow');
 			},
 			error: function(xhr, ajaxOptions, thrownError) {
 				alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
 			}
 		});
 	},
-	'remove': function() {
+	'remove': function(product_id) {
+		$.ajax({
+			url: 'index.php?route=account/wishlist/remove',
+			type: 'post',
+			data: 'product_id=' + product_id,
+			dataType: 'json',
+			success: function(json) {
+				$('.alert-dismissible').remove();
 
+				if (json['redirect']) {
+					location = json['redirect'];
+				}
+
+				if (json['total']) {
+					$(document).find('.product_item_wishlist[data-product="' + product_id + '"], .modal-product_wishlist[data-product="' + product_id + '"], .product_wishlist[data-product="' + product_id + '"]').removeClass('active');
+					$('#wishlist-total').attr('title', json['total']);
+				}
+			},
+			error: function(xhr, ajaxOptions, thrownError) {
+				alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+			}
+		});
 	}
 }
 
@@ -501,6 +563,23 @@ $(document).delegate('.agree', 'click', function(e) {
 
 // Script to change quantity count on +,- buttons click
     $(document).ready(function () {
+    	$(document).on('click', '.quantity_modal_minus', function () {
+            var $input = $(this).parent().find('input');
+            var count = parseInt($input.val()) - 1;
+            count = count < 1 ? 1 : count;
+            $input.val(count);
+            $input.change();
+            return false;
+        });
+        $(document).on('click', '.quantity_modal_plus', function () {
+            var $input = $(this).parent().find('input');
+            count = parseInt($input.val()) + 1;
+            if ($input.data('max') >= count) {
+	            $input.val(count);
+	            $input.change();
+            }
+            return false;
+        });
         $('.quantity_more_less_btn_minus').click(function () {
             var $input = $(this).parent().find('input');
             var count = parseInt($input.val()) - 1;
@@ -511,8 +590,11 @@ $(document).delegate('.agree', 'click', function(e) {
         });
         $('.quantity_more_less_btn_plus').click(function () {
             var $input = $(this).parent().find('input');
-            $input.val(parseInt($input.val()) + 1);
-            $input.change();
+            count = parseInt($input.val()) + 1;
+            if ($input.data('max') >= count) {
+	            $input.val(count);
+	            $input.change();
+            }
             return false;
         });
         $('.quantity_more_less_btn_minus_cart').click(function () {
@@ -521,54 +603,6 @@ $(document).delegate('.agree', 'click', function(e) {
             count = count < 1 ? 1 : count;
             $input.val(count);
             $input.change();
-            $.ajax({
-                url: 'index.php?route=checkout/cart/add',
-                type: 'post',
-                data: $('#product input[type=\'text\'], #product input[type=\'hidden\'], #product input[type=\'radio\']:checked, #product input[type=\'checkbox\']:checked, #product select, #product textarea'),
-                dataType: 'json',
-                success: function (json) {
-                    $('.alert-dismissible, .text-danger').remove();
-                    $('.form-group').removeClass('has-error');
-
-                    if (json['error']) {
-                        if (json['error']['option']) {
-                            for (i in json['error']['option']) {
-                                var element = $('#input-option' + i.replace('_', '-'));
-
-                                if (element.parent().hasClass('input-group')) {
-                                    element.parent().after('<div class="text-danger">' + json['error']['option'][i] + '</div>');
-                                } else {
-                                    element.after('<div class="text-danger">' + json['error']['option'][i] + '</div>');
-                                }
-                            }
-                        }
-
-                        if (json['error']['recurring']) {
-                            $('select[name=\'recurring_id\']').after('<div class="text-danger">' + json['error']['recurring'] + '</div>');
-                        }
-
-                        // Highlight any found errors
-                        $('.text-danger').parent().addClass('has-error');
-                    }
-
-                    if (json['success']) {
-                        $('.samopek_breadcrumb').after('<div class="alert-add-product alert-success alert-dismissible">' + json['success'] + '<button type="button" class="close" data-dismiss="alert">&times;</button></div>');
-
-                        $('#cart > button').html('<span id="cart-total"><i class="fa fa-shopping-cart"></i> ' + json['total'] + '</span>');
-
-                        // We don't want to scroll to top every time
-                        //$('html, body').animate({scrollTop: 0}, 'slow');
-
-                        // But we do want to show and hide after some time
-                        $('.alert-add-product').show(0).delay(4000).fadeOut('slow');
-
-                        $('#cart > ul').load('index.php?route=common/cart/info ul li');
-                    }
-                },
-                error: function (xhr, ajaxOptions, thrownError) {
-                    alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
-                }
-            });
             return false;
         });
         $('.quantity_more_less_btn_plus_cart').click(function () {
@@ -576,6 +610,23 @@ $(document).delegate('.agree', 'click', function(e) {
             $input.val(parseInt($input.val()) + 1);
             $input.change();
             return false;
+        });
+        $(document).on('change', '.input-quantity-cart', function() {
+        	var $input = $(this);
+            cart.update($input.data('product'), parseInt($input.val()));
+            return false;
+        });
+        $(document).on('change', '.input-quantity-modal', function() {
+        	var $input = $(this);
+            cart.update($input.data('product'), parseInt($input.val()), false);
+            return false;
+        });
+        $(document).on('change', '.input-quantity-product, .input-quantity-modal', function() {
+        	if (parseInt($(this).val()) == parseInt($(this).data('max'))) {
+        		$(this).parent().parent().find('.text-red').show();
+        	} else {
+        		$(this).parent().parent().find('.text-red').hide();
+        	}
         });
 
     });

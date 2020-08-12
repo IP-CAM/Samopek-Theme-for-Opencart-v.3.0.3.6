@@ -7,6 +7,13 @@
   line-height: 20px;
   width: 100%;
   overflow-x: hidden;
+  background-color: #E5E5E5;
+}
+header {
+  background-color: #FFFFFF;
+}
+a {
+  color: #FFFFFF;
 }
 /* Override Opencart defaults */
 h1, h2, h3, h4, h5, h6 {
@@ -141,10 +148,10 @@ h6 {
 
 /* top */
 #top {
-  background-color: #FFF;
+  background-color: #E5E5E5;
   border-bottom: none;
   padding: 4px 0px 3px 0;
-  margin: 0 0 20px 0;
+  margin: 0 0 0 0;
   min-height: 40px;
 }
 
@@ -153,17 +160,22 @@ h6 {
 }
 
 #top-links {
-  padding-top: 6px;
+  padding-top: 2%;
+  padding-bottom: 5%;
   width: 100%;
 }
 
 #top-links > ul {
   align-items: stretch;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   width: 100%;
   padding: 0;
   margin: 0;
+}
+
+#top-links > ul > li {
+  padding-right: 5%;
 }
 
 .search_label {
@@ -175,21 +187,9 @@ h6 {
   margin-left: 10px;
 }
 
-@media (min-width: 1200px) {
-  #top-links > ul > li:first-child {
-    margin-left: 200px;
-  }
-}
-
 #top .btn-link, #top-links li, #top-links a, #top-links label {
   color: #000;
   text-decoration: none;
-
-  font-family: "Roboto";
-  font-size: 12px;
-  font-weight: normal;
-  font-style: normal;
-  line-height: 160%;
 
   display: flex;
   align-items: flex-end;
@@ -198,11 +198,6 @@ h6 {
 
 #banner_cupcakes {
   margin-bottom: 0%;
-  text-align: center;
-}
-
-#banner_cupcakes > a > img {
-  width: 20%;
 }
 
 .row .no-float {
@@ -314,6 +309,7 @@ footer {
 }
 
 .row_menu_main {
+  background: #E5E5E5;
   width: 102vw;
   margin-left: -51vw;
   left: 50%;
@@ -321,16 +317,16 @@ footer {
 }
 
 #search_input::placeholder {
-  font-family: Roboto;
+  /* .font-text-1 */
+  font-family: Fira Sans;
   font-style: normal;
-  font-weight: 500;
+  font-weight: normal;
   font-size: 14px;
-  line-height: 16px;
+  line-height: 140%;
+  /* or 20px */
 
-  color: #997a7a;
-
-  text-align: center;
-  text-transform: uppercase;
+  /* Text/ grey 60 */
+  color: #999999;
 }
 
 #search .input-lg {
@@ -803,20 +799,7 @@ footer {
 }
 
 .btn-search {
-  color: #997a7a;
-  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
   background-color: #FFFFFF;
-  border: none;
-
-  border-left: 1px solid #cccccc;
-
-  text-transform: uppercase;
-  font-family: Roboto;
-  font-style: normal;
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 16px;
-
 }
 
 @media (max-width: 767px) {
@@ -874,6 +857,10 @@ footer {
   padding-right: 10%;
 }
 
+.cart-header > img {
+  background: url("../image/header_bg_circle.svg");
+}
+
 .cart-header-total-style {
   padding-left: 5px;
   padding-right: 5px;
@@ -925,6 +912,14 @@ footer {
   top: 20%;
 
   padding: 0 15px;
+}
+
+.make-me-sticky-fixed-top {
+  position: -webkit-sticky;
+  position: fixed;
+  top: 0;
+  padding-top: 1%;
+  z-index: 10;
 }
 
 .checkout-section {
@@ -1022,4 +1017,189 @@ cart_product_totals_value_sub_total_elem {
 
   color: #3AC2D7;
 
+}
+
+/*NEW Styles*/
+
+/* We override here bootstrap max-width=1140px to fit Design sizing */
+@media (min-width: 1200px) {
+  .container {
+    max-width: 984px;
+  }
+}
+
+@media (min-width: 1400px) {
+  .container {
+    max-width: 1374px;
+  }
+}
+
+.main-menu-thumb {
+  margin-right: 1%;
+  margin-left: 1%;
+  margin-top: 1%;
+  margin-bottom: 1%;
+}
+
+.main-menu-thumb:hover {
+  background-color: #257CFF;
+  color: #FFFFFF; !important;
+}
+
+.main-menu-thumb-inner {
+  padding-top: 10%;
+  padding-bottom: 10%;
+  padding-left: 10%;
+  padding-right: 10%;
+}
+
+.main-menu-thumb-inner:hover {
+  background-color: #257CFF;
+  color: #FFFFFF; !important;
+}
+
+/* Next two classes used to make full-screen modal. See https://stackoverflow.com/questions/18432394/how-to-make-twitter-bootstrap-modal-full-screen */
+.categories-modal-dialog {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.categories-modal-content {
+  background-color: #D40C3C;
+  height: auto;
+  min-height: 100%;
+  border-radius: 0;
+}
+
+.category-with-children-box {
+  border: 1px solid #FFFFFF;
+  box-sizing: border-box;
+  border-radius: 6px;
+  padding-left: 65px;
+  padding-top: 55px;
+}
+
+.subcategories-list {
+  padding-top: 30px;
+}
+
+.promo-container {
+  margin-left: 10%;
+  margin-right: 10%;
+}
+
+.promo2 {
+  background: url('../image/bake_for_birthday.png');
+  background-size: cover;
+}
+
+/* Override bootstrap max width */
+@media (min-width: 576px) {
+  .modal-dialog {
+    max-width: 2000px;
+    margin: 0;
+  }
+}
+
+/* NEW Fonts */
+.font-header-1 {
+  font-family: Fira Sans;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 18px;
+  line-height: 140%;
+  /* or 25px */
+}
+
+.font-header-2 {
+  font-family: Fira Sans;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 36px;
+  line-height: 116%;
+  /* or 42px */
+
+  letter-spacing: 0.03em;
+}
+
+.font-header-22 {
+  font-family: Fira Sans;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 48px;
+  line-height: 112%;
+  /* or 54px */
+}
+
+.font-header-11 {
+  font-family: Fira Sans;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 72px;
+  line-height: 111.5%;
+  /* or 80px */
+}
+
+.font-text-1 {
+  font-family: Fira Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 140%;
+  /* or 20px */
+}
+
+.font-text-2 {
+  font-family: Fira Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 156%;
+}
+
+.font-button-catalog {
+  font-family: Fira Sans;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 22px;
+  line-height: 140%;
+  /* or 31px */
+}
+
+/* NEW Colors */
+.color-black {
+  /* Text/ grey 60 */
+  color: #000000;
+}
+
+.color-white {
+  color: #FFFFFF; !important;
+}
+
+.color-blue {
+  color: #4B97B1;
+}
+
+.color-grey {
+  /* Text/ grey 60 */
+  color: #999999;
+}
+
+.color-grey-dark {
+  /* Grey */
+  color: #797979;
+}
+
+.bg-color-red {
+  background-color: #D40C3C;
+}
+
+.bg-color-white {
+  background-color: #FFFFFF;
+}
+
+.background-grey {
+  background: #E5E5E5;
 }

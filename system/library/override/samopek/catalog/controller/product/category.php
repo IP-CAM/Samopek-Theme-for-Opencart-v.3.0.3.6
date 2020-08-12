@@ -15,6 +15,18 @@ class samopek_ControllerProductCategory extends ControllerProductCategory {
             $filter = '';
         }
 
+        if (isset($this->request->get['filter_stock'])) {
+            $filter_stock = $this->request->get['filter_stock'];
+        } else {
+            $filter_stock = 0;
+        }
+
+        if (isset($this->request->get['filter_sales'])) {
+            $filter_sales = $this->request->get['filter_sales'];
+        } else {
+            $filter_sales = 0;
+        }
+
         if (isset($this->request->get['sort'])) {
             $sort = $this->request->get['sort'];
         } else {
@@ -51,6 +63,14 @@ class samopek_ControllerProductCategory extends ControllerProductCategory {
 
             if (isset($this->request->get['sort'])) {
                 $url .= '&sort=' . $this->request->get['sort'];
+            }
+
+            if (isset($this->request->get['filter_stock'])) {
+                $url .= '&filter_stock=' . $this->request->get['filter_stock'];
+            }
+
+            if (isset($this->request->get['filter_sales'])) {
+                $url .= '&filter_sales=' . $this->request->get['filter_sales'];
             }
 
             if (isset($this->request->get['order'])) {
@@ -119,6 +139,14 @@ class samopek_ControllerProductCategory extends ControllerProductCategory {
                 $url .= '&filter=' . $this->request->get['filter'];
             }
 
+            if (isset($this->request->get['filter_stock'])) {
+                $url .= '&filter_stock=' . $this->request->get['filter_stock'];
+            }
+
+            if (isset($this->request->get['filter_sales'])) {
+                $url .= '&filter_sales=' . $this->request->get['filter_sales'];
+            }
+
             if (isset($this->request->get['sort'])) {
                 $url .= '&sort=' . $this->request->get['sort'];
             }
@@ -152,6 +180,9 @@ class samopek_ControllerProductCategory extends ControllerProductCategory {
             $filter_data = array(
                 'filter_category_id' => $category_id,
                 'filter_filter'      => $filter,
+                'filter_sub_category' => true,
+                'filter_sales'       => $filter_sales,
+                'filter_stock'       => $filter_stock,
                 'sort'               => $sort,
                 'order'              => $order,
                 'start'              => ($page - 1) * $limit,
@@ -161,6 +192,15 @@ class samopek_ControllerProductCategory extends ControllerProductCategory {
             $product_total = $this->model_catalog_product->getTotalProducts($filter_data);
 
             $results = $this->model_catalog_product->getProducts($filter_data);
+
+            $cartlistIds = [];
+
+            $cartlist = $this->cart->getProducts();
+            foreach ($cartlist as $one) {
+                $cartlistIds[] = $one['product_id'];
+            }
+            $this->load->model('account/wishlist');
+            $wishListProductsIds = $this->model_account_wishlist->getWishlistProductsList();
 
             foreach ($results as $result) {
                 if ($result['image']) {
@@ -211,6 +251,14 @@ class samopek_ControllerProductCategory extends ControllerProductCategory {
 
                 $hasOptions = $this->model_catalog_product->hasOptions($result['product_id']);
 
+                $attributes = [];
+                foreach ($this->model_catalog_product->getProductAttributes($result['product_id']) as $one) {
+                    foreach ($one['attribute'] as $item) {
+                        if (count($attributes) == 2) break;
+                        $attributes[] = $item['text'];
+                    }
+                }
+
                 $data['products'][] = array(
                     'product_id'  => $result['product_id'],
                     'thumb'       => $image,
@@ -224,6 +272,9 @@ class samopek_ControllerProductCategory extends ControllerProductCategory {
                     'href'        => $this->url->link('product/product', 'path=' . $this->request->get['path'] . '&product_id=' . $result['product_id'] . $url),
                     'quantity'    => $quantity,
                     'stock'       => $stock,
+                    'attributes' => $attributes,
+                    'in_wishlist' => in_array($result['product_id'], $wishListProductsIds),
+                    'in_cart' => in_array($result['product_id'], $cartlistIds),
                     'hasOptions'  => $hasOptions
                 );
             }
@@ -234,6 +285,14 @@ class samopek_ControllerProductCategory extends ControllerProductCategory {
                 $url .= '&filter=' . $this->request->get['filter'];
             }
 
+            if (isset($this->request->get['filter_sales'])) {
+                $url .= '&filter_sales=' . $this->request->get['filter_sales'];
+            }
+
+            if (isset($this->request->get['filter_stock'])) {
+                $url .= '&filter_stock=' . $this->request->get['filter_stock'];
+            }
+
             if (isset($this->request->get['limit'])) {
                 $url .= '&limit=' . $this->request->get['limit'];
             }
@@ -241,65 +300,29 @@ class samopek_ControllerProductCategory extends ControllerProductCategory {
             $data['sorts'] = array();
 
             $data['sorts'][] = array(
-                'text'  => $this->language->get('text_default'),
-                'value' => 'p.sort_order-ASC',
-                'href'  => $this->url->link('product/category', 'path=' . $this->request->get['path'] . '&sort=p.sort_order&order=ASC' . $url)
-            );
-
-            $data['sorts'][] = array(
-                'text'  => $this->language->get('text_name_asc'),
-                'value' => 'pd.name-ASC',
-                'href'  => $this->url->link('product/category', 'path=' . $this->request->get['path'] . '&sort=pd.name&order=ASC' . $url)
-            );
-
-            $data['sorts'][] = array(
-                'text'  => $this->language->get('text_name_desc'),
-                'value' => 'pd.name-DESC',
-                'href'  => $this->url->link('product/category', 'path=' . $this->request->get['path'] . '&sort=pd.name&order=DESC' . $url)
+                'text'  => $this->language->get('text_price_desc'),
+                'value' => 'p.price-DESC',
+                'href'  => $this->url->link('product/category', 'path=' . $this->request->get['path'] . ((isset($this->request->get['sort']) && $this->request->get['sort'] == 'p.price' && isset($this->request->get['order']) && $this->request->get['order'] == 'DESC') ? '' : '&sort=p.price&order=DESC') . $url)
             );
 
             $data['sorts'][] = array(
                 'text'  => $this->language->get('text_price_asc'),
                 'value' => 'p.price-ASC',
-                'href'  => $this->url->link('product/category', 'path=' . $this->request->get['path'] . '&sort=p.price&order=ASC' . $url)
-            );
-
-            $data['sorts'][] = array(
-                'text'  => $this->language->get('text_price_desc'),
-                'value' => 'p.price-DESC',
-                'href'  => $this->url->link('product/category', 'path=' . $this->request->get['path'] . '&sort=p.price&order=DESC' . $url)
-            );
-
-            if ($this->config->get('config_review_status')) {
-                $data['sorts'][] = array(
-                    'text'  => $this->language->get('text_rating_desc'),
-                    'value' => 'rating-DESC',
-                    'href'  => $this->url->link('product/category', 'path=' . $this->request->get['path'] . '&sort=rating&order=DESC' . $url)
-                );
-
-                $data['sorts'][] = array(
-                    'text'  => $this->language->get('text_rating_asc'),
-                    'value' => 'rating-ASC',
-                    'href'  => $this->url->link('product/category', 'path=' . $this->request->get['path'] . '&sort=rating&order=ASC' . $url)
-                );
-            }
-
-            $data['sorts'][] = array(
-                'text'  => $this->language->get('text_model_asc'),
-                'value' => 'p.model-ASC',
-                'href'  => $this->url->link('product/category', 'path=' . $this->request->get['path'] . '&sort=p.model&order=ASC' . $url)
-            );
-
-            $data['sorts'][] = array(
-                'text'  => $this->language->get('text_model_desc'),
-                'value' => 'p.model-DESC',
-                'href'  => $this->url->link('product/category', 'path=' . $this->request->get['path'] . '&sort=p.model&order=DESC' . $url)
+                'href'  => $this->url->link('product/category', 'path=' . $this->request->get['path'] . ((isset($this->request->get['sort']) && $this->request->get['sort'] == 'p.price' && isset($this->request->get['order']) && $this->request->get['order'] == 'ASC') ? '' : '&sort=p.price&order=ASC') . $url)
             );
 
             $url = '';
 
             if (isset($this->request->get['filter'])) {
                 $url .= '&filter=' . $this->request->get['filter'];
+            }
+
+            if (isset($this->request->get['filter_sales'])) {
+                $url .= '&filter_sales=' . $this->request->get['filter_sales'];
+            }
+
+            if (isset($this->request->get['filter_stock'])) {
+                $url .= '&filter_stock=' . $this->request->get['filter_stock'];
             }
 
             if (isset($this->request->get['sort'])) {
@@ -328,6 +351,14 @@ class samopek_ControllerProductCategory extends ControllerProductCategory {
 
             if (isset($this->request->get['filter'])) {
                 $url .= '&filter=' . $this->request->get['filter'];
+            }
+
+            if (isset($this->request->get['filter_sales'])) {
+                $url .= '&filter_sales=' . $this->request->get['filter_sales'];
+            }
+
+            if (isset($this->request->get['filter_stock'])) {
+                $url .= '&filter_stock=' . $this->request->get['filter_stock'];
             }
 
             if (isset($this->request->get['sort'])) {
@@ -371,6 +402,59 @@ class samopek_ControllerProductCategory extends ControllerProductCategory {
             $data['order'] = $order;
             $data['limit'] = $limit;
 
+            $url = '';
+
+            if (isset($this->request->get['filter'])) {
+                $url .= '&filter=' . $this->request->get['filter'];
+            }
+
+            if (isset($this->request->get['filter_stock'])) {
+                $url .= '&filter_stock=' . $this->request->get['filter_stock'];
+            }
+
+            if (isset($this->request->get['sort'])) {
+                $url .= '&sort=' . $this->request->get['sort'];
+            }
+
+            if (isset($this->request->get['order'])) {
+                $url .= '&order=' . $this->request->get['order'];
+            }
+
+            if (isset($this->request->get['limit'])) {
+                $url .= '&limit=' . $this->request->get['limit'];
+            }
+
+            $data['filter_sales'] = [
+                'checked' => ($filter_sales == 1) ? true : false,
+                'href' => $this->url->link('product/category', 'path=' . $this->request->get['path'] . '&filter_sales=' . (($filter_sales == 1) ? 0 : 1) . $url)
+            ];
+
+            $url = '';
+
+            if (isset($this->request->get['filter'])) {
+                $url .= '&filter=' . $this->request->get['filter'];
+            }
+
+            if (isset($this->request->get['filter_sales'])) {
+                $url .= '&filter_sales=' . $this->request->get['filter_sales'];
+            }
+
+            if (isset($this->request->get['sort'])) {
+                $url .= '&sort=' . $this->request->get['sort'];
+            }
+
+            if (isset($this->request->get['order'])) {
+                $url .= '&order=' . $this->request->get['order'];
+            }
+
+            if (isset($this->request->get['limit'])) {
+                $url .= '&limit=' . $this->request->get['limit'];
+            }
+            $data['filter_stock'] = [
+                'checked' => ($filter_stock == 1) ? true : false,
+                'href' => $this->url->link('product/category', 'path=' . $this->request->get['path'] . '&filter_stock=' . (($filter_stock == 1) ? 0 : 1) . $url)
+            ];
+
             $data['continue'] = $this->url->link('common/home');
 
             $data['column_left'] = $this->load->controller('common/column_left');
@@ -390,6 +474,14 @@ class samopek_ControllerProductCategory extends ControllerProductCategory {
 
             if (isset($this->request->get['filter'])) {
                 $url .= '&filter=' . $this->request->get['filter'];
+            }
+
+            if (isset($this->request->get['filter_sales'])) {
+                $url .= '&filter_sales=' . $this->request->get['filter_sales'];
+            }
+
+            if (isset($this->request->get['filter_stock'])) {
+                $url .= '&filter_stock=' . $this->request->get['filter_stock'];
             }
 
             if (isset($this->request->get['sort'])) {

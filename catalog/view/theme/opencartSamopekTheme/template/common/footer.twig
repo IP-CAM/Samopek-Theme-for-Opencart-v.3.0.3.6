@@ -1,60 +1,65 @@
-<footer>
+<footer class="f">
   <div class="container">
-    <div class="row">
-      <div class="col-sm-2">
-        <img src="catalog/view/theme/opencartSamopekTheme/image/logo_footer_white.png">
-      </div>
+    <div class="f_t">
+      <h2 class="h2">{{ text_title }}</h2>
+      <a target="_blank" rel="noopener noreferrer" href="https://www.instagram.com/samopek.shop/" title="Samopek instagram">
+        <img src="catalog/view/theme/opencartSamopekTheme/img/insta_white.svg" alt="">
+      </a>
+      <a target="_blank" rel="noopener noreferrer" href="https://vk.com/samopek.shop" title="Samopek vkontakte">
+        <img src="catalog/view/theme/opencartSamopekTheme/img/vk_white.svg" alt="">
+      </a>
+    </div>
+    <nav class="f_b">
       {% if informations %}
-      <div class="col-sm-2">
-        <h5>{{ text_information }}</h5>
-        <ul class="list-unstyled">
-         {% for information in informations %}
-          <li><a href="{{ information.href }}">{{ information.title }}</a></li>
+        <nav>
+          {% for information in informations %}
+            <a href="{{ information.href }}">{{ information.title }}</a>
           {% endfor %}
-        </ul>
-      </div>
+        </nav>
       {% endif %}
-      <div class="col-sm-2">
-        <h5>{{ text_service }}</h5>
-        <ul class="list-unstyled">
-          <li><a href="{{ contact }}">{{ text_contact }}</a></li>
-          <li><a href="{{ return }}">{{ text_return }}</a></li>
-          <li><a href="{{ sitemap }}">{{ text_sitemap }}</a></li>
-        </ul>
-      </div>
-      <div class="col-sm-2">
-        <h5>{{ text_extra }}</h5>
-        <ul class="list-unstyled">
-          <li><a href="{{ manufacturer }}">{{ text_manufacturer }}</a></li>
-          <li><a href="{{ voucher }}">{{ text_voucher }}</a></li>
-          <!-- MAKO: There was a Partner section. We don't have partners -->
-          <li><a href="{{ special }}">{{ text_special }}</a></li>
-        </ul>
-      </div>
-      <div class="col-sm-2">
-        <h5>{{ text_account }}</h5>
-        <ul class="list-unstyled">
-          <li><a href="{{ account }}">{{ text_account }}</a></li>
-          <li><a href="{{ order }}">{{ text_order }}</a></li>
-          <li><a href="{{ wishlist }}">{{ text_wishlist }}</a></li>
-          <li><a href="{{ newsletter }}">{{ text_newsletter }}</a></li>
-        </ul>
-      </div>
-      <div class="col-sm-2">
-        <div class="row" style="margin-bottom: 20px;">
-          <a target="_blank" rel="noopener noreferrer" href="https://vk.com/samopek.shop" title="Samopek vkontakte">
-            <img src="catalog/view/theme/opencartSamopekTheme/image/vk_ico.png">
-          </a>
-        </div>
-        <div class="row">
-          <a target="_blank" rel="noopener noreferrer" href="https://www.instagram.com/samopek.shop/" title="Samopek instagram">
-            <img src="catalog/view/theme/opencartSamopekTheme/image/instagram_ico.png">
-          </a>
+      <nav>
+        <a href="{{ contact }}">{{ text_contact }}</a>
+        <a href="{{ return }}">{{ text_return }}</a>
+        <a href="{{ sitemap }}">{{ text_sitemap }}</a>
+      </nav>
+      <nav>
+        <a href="{{ manufacturer }}">{{ text_manufacturer }}</a>
+        <a href="{{ voucher }}">{{ text_voucher }}</a>
+        <a href="{{ special }}">{{ text_special }}</a>
+      </nav>
+      <nav>
+        <a href="{{ account }}">{{ text_account }}</a>
+        <a href="{{ order }}">{{ text_order }}</a>
+        <a href="{{ wishlist }}">{{ text_wishlist }}</a>
+        <a href="{{ newsletter }}">{{ text_newsletter }}</a>
+      </nav>
+      <div class="f_b_r">
+        <p>{{ text_payment }}</p>
+        <div class="f_pay">
+          <img src="catalog/view/theme/opencartSamopekTheme/img/footer_pay1.png" alt="">
+          <img src="catalog/view/theme/opencartSamopekTheme/img/footer_pay2.png" alt="">
+          <img src="catalog/view/theme/opencartSamopekTheme/img/footer_pay3.png" alt="">
         </div>
       </div>
     </div>
   </div>
 </footer>
+
+<div class="modal" tabindex="-1" role="dialog" id="wishlistModal">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+      </div>
+    </div>
+  </div>
+</div>
+
 {% for script in scripts %}
 <script src="{{ script }}" type="text/javascript"></script>
 {% endfor %}

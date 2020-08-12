@@ -15,6 +15,13 @@ class samopek_ControllerExtensionModuleFeatured extends ControllerExtensionModul
 			$setting['limit'] = 4;
 		}
 
+        $cartlistIds = [];
+
+        $cartlist = $this->cart->getProducts();
+        foreach ($cartlist as $one) {
+            $cartlistIds[] = $one['product_id'];
+        }
+
         $wishListProductsIds = $this->model_account_wishlist->getWishlistProductsList();
 
 		if (!empty($setting['product'])) {
@@ -74,6 +81,14 @@ class samopek_ControllerExtensionModuleFeatured extends ControllerExtensionModul
 
                     $hasOptions = $this->model_catalog_product->hasOptions($product_info['product_id']);
 
+                    $attributes = [];
+                    foreach ($this->model_catalog_product->getProductAttributes($product_info['product_id']) as $one) {
+                        foreach ($one['attribute'] as $item) {
+                            if (count($attributes) == 2) break;
+                            $attributes[] = $item['text'];
+                        }
+                    }
+
 					$data['products'][] = array(
 						'product_id'  => $product_info['product_id'],
 						'thumb'       => $image,
@@ -86,7 +101,9 @@ class samopek_ControllerExtensionModuleFeatured extends ControllerExtensionModul
 						'href'        => $this->url->link('product/product', $product_path . '&product_id=' . $product_info['product_id']),
                         'quantity'    => $quantity,
                         'stock'       => $stock,
+                        'attributes' => $attributes,
                         'in_wishlist' => in_array($product_info['product_id'], $wishListProductsIds),
+                        'in_cart' => in_array($product_info['product_id'], $cartlistIds),
                         'hasOptions'  => $hasOptions
 					);
 				}

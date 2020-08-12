@@ -1,6 +1,4 @@
-<div id="search" class="input-group mb-3">
-  <input id="search_input" type="text" name="search" value="{{ search }}" class="form-control" />
-  <div  class="input-group-append">
-    <button type="button" class="btn btn-search btn-lg">{{ text_search }}<!--<i class="fa fa-search"></i>--></button>
-  </div>
-</div>
+<form class="h_search" id="search">
+  <input type="text" id="search_input" name="search" placeholder="{{ text_search_placeholder }}">
+  <button type="button">{{ text_search }}</button>
+</form>

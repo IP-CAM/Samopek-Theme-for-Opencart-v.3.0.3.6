@@ -7,7 +7,18 @@ class samopek_ControllerExtensionModuleLatest extends ControllerExtensionModuleL
 
 		$this->load->model('tool/image');
 
-		$data['products'] = array();
+        $this->load->model('account/wishlist');
+
+        $cartlistIds = [];
+
+        $cartlist = $this->cart->getProducts();
+        foreach ($cartlist as $one) {
+            $cartlistIds[] = $one['product_id'];
+        }
+
+        $wishListProductsIds = $this->model_account_wishlist->getWishlistProductsList();
+
+        $data['products'] = array();
 
 		$filter_data = array(
 			'sort'  => 'p.date_added',
@@ -71,6 +82,14 @@ class samopek_ControllerExtensionModuleLatest extends ControllerExtensionModuleL
 
                 $hasOptions = $this->model_catalog_product->hasOptions($result['product_id']);
 
+                $attributes = [];
+                foreach ($this->model_catalog_product->getProductAttributes($result['product_id']) as $one) {
+                    foreach ($one['attribute'] as $item) {
+                        if (count($attributes) == 2) break;
+                        $attributes[] = $item['text'];
+                    }
+                }
+
 				$data['products'][] = array(
 					'product_id'  => $result['product_id'],
 					'thumb'       => $image,
@@ -83,6 +102,9 @@ class samopek_ControllerExtensionModuleLatest extends ControllerExtensionModuleL
 					'href'        => $this->url->link('product/product', $product_path . '&product_id=' . $result['product_id']),
                     'quantity'    => $quantity,
                     'stock'       => $stock,
+                    'attributes' => $attributes,
+                    'in_wishlist' => in_array($result['product_id'], $wishListProductsIds),
+                    'in_cart' => in_array($result['product_id'], $cartlistIds),
                     'hasOptions'  => $hasOptions
 				);
 			}

@@ -1,0 +1,151 @@
+{{ header }}
+<div id="account-return" class="container container-lg">
+  <div class="breadcrumbs">
+    {% for breadcrumb in breadcrumbs %}
+      {% if loop.last == loop.index %}
+        <span>{{ breadcrumb.text }}</span>
+      {% else %}
+        <a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a> >
+      {% endif %}
+    {% endfor %}
+  </div>
+  {% if error_warning %}
+  <div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle"></i> {{ error_warning }}</div>
+  {% endif %}
+{{ content_top }}
+  <div class="row"> {{ column_left }}
+    {% if column_left and column_right %}
+    {% set class = 'col-sm-6' %}
+    {% elseif column_left or column_right %}
+    {% set class = 'col-sm-9' %}
+    {% else %}
+    {% set class = 'col-sm-12' %}
+    {% endif %}
+    <div id="content" class="contentArea {{ class }}"> 
+      <h1 class="h2">{{ heading_title }}</h1>
+      <p>{{ text_description }}</p>
+      <form action="{{ action }}" method="post" enctype="multipart/form-data">
+      	<div class="row">
+      		<div class="col-md-6">
+	          <legend class="h4">{{ text_order }}</legend>
+	          <div class="form-group form-group-2 required {% if error_firstname %}has-error{% endif %}">
+				<input type="text" name="firstname" value="{{ firstname }}" id="input-firstname" />
+				<label for="input-firstname" data-label="{{ entry_firstname }}" data-error="{% if error_firstname %}{{ error_firstname }}{% endif %}">{{ entry_firstname }}</label>
+	          </div>
+	          <div class="form-group form-group-2 required {% if error_lastname %}has-error{% endif %}">
+				<input type="text" name="lastname" value="{{ lastname }}" id="input-lastname" />
+				<label for="input-lastname" data-label="{{ entry_lastname }}" data-error="{% if error_lastname %}{{ error_lastname }}{% endif %}">{{ entry_lastname }}</label>
+	          </div>
+	          <div class="form-group form-group-2 required {% if error_email %}has-error{% endif %}">
+				<input type="text" name="email" value="{{ email }}" id="input-email" />
+				<label for="input-email" data-label="{{ entry_email }}" data-error="{% if error_email %}{{ error_email }}{% endif %}">{{ entry_email }}</label>
+	          </div>
+	          <div class="form-group form-group-2 required {% if error_telephone %}has-error{% endif %}">
+				<input type="text" name="telephone" value="{{ telephone }}" id="input-telephone" />
+				<label for="input-telephone" data-label="{{ entry_telephone }}" data-error="{% if error_telephone %}{{ error_telephone }}{% endif %}">{{ entry_telephone }}</label>
+	          </div>
+	          <div class="form-group form-group-2 required {% if error_order_id %}has-error{% endif %}">
+				<input type="text" name="order_id" value="{{ order_id }}" id="input-order-id" />
+				<label for="input-order-id" data-label="{{ entry_order_id }}" data-error="{% if error_order_id %}{{ error_order_id }}{% endif %}">{{ entry_order_id }}</label>
+	          </div>
+	          <div class="form-group form-group-2 form-group-date date">
+	            <input type="text" name="date_ordered" value="{{ date_ordered }}" data-date-format="YYYY-MM-DD" id="input-date-ordered" />
+	            <label for="input-date-ordered">{{ entry_date_ordered }}</label>
+	        	<button type="button" class="btn btn-blue"><i class="fa fa-calendar"></i></button>
+	          </div>
+      		</div>
+      		<div class="col-md-6">
+      			<legend class="h4">{{ text_product }}</legend>
+				<div class="form-group form-group-2 required {% if error_product %}has-error{% endif %}">                      
+				  <input type="text" name="product" value="{{ product }}" id="input-product" />
+				  <label for="input-product" data-label="{{ entry_product }}" data-error="{% if error_product %}{{ error_product }}{% endif %}">{{ entry_product }}</label>
+				</div>
+				<div class="form-group form-group-2 required {% if error_model %}has-error{% endif %}">                      
+				  <input type="text" name="model" value="{{ model }}" id="input-model" />
+				  <label for="input-model" data-label="{{ entry_model }}" data-error="{% if error_model %}{{ error_model }}{% endif %}">{{ entry_model }}</label>
+				</div>
+				<div class="form-group form-group-2">                      
+				  <input type="text" name="quantity" value="{{ quantity }}" id="input-quantity" />
+				  <label for="input-quantity">{{ entry_quantity }}</label>
+				</div>
+				<div class="form-group required">
+					<label class="control-label">{{ entry_reason }}</label>
+					<div> {% for return_reason in return_reasons %}
+					  {% if return_reason.return_reason_id == return_reason_id %}
+					  <div class="radio">
+					    <label>
+					      <input type="radio" name="return_reason_id" value="{{ return_reason.return_reason_id }}" checked="checked" />
+					      {{ return_reason.name }}</label>
+					  </div>
+					  {% else %}
+					  <div class="radio">
+					    <label>
+					      <input type="radio" name="return_reason_id" value="{{ return_reason.return_reason_id }}" />
+					      {{ return_reason.name }}</label>
+					  </div>
+					  {% endif %}
+					  {% endfor %}
+					  {% if error_reason %}
+					  <div class="text-danger">{{ error_reason }}</div>
+					  {% endif %}
+					</div>
+				</div>
+				<div class="form-group required">
+					<label class="control-label">{{ entry_opened }}</label>
+					<div>
+					  <label class="radio-inline"> {% if opened %}
+					    <input type="radio" name="opened" value="1" checked="checked" />
+					    {% else %}
+					    <input type="radio" name="opened" value="1" />
+					    {% endif %}
+					    {{ text_yes }}</label>
+					  <label class="radio-inline"> {% if not opened %}
+					    <input type="radio" name="opened" value="0" checked="checked" />
+					    {% else %}
+					    <input type="radio" name="opened" value="0" />
+					    {% endif %}
+					    {{ text_no }}</label>
+					</div>
+				</div>
+      		</div>
+      	</div>
+          
+          <div class="form-group form-group-2">
+            <textarea name="comment" rows="7" id="input-comment">{{ comment }}</textarea>
+            <label for="input-comment">{{ entry_fault_detail }}</label>
+          </div>
+          {{ captcha }}
+        {% if text_agree %}
+        <div class="buttons clearfix">
+          <div class="pull-left"><a href="{{ back }}" class="btn btn-grey-o-red">{{ button_back }}</a></div>
+          <div class="pull-right">{{ text_agree }}
+            {% if agree %}
+            <input type="checkbox" name="agree" value="1" checked="checked" />
+            {% else %}
+            <input type="checkbox" name="agree" value="1" />
+            {% endif %}
+            <input type="submit" value="{{ button_submit }}" class="btn btn-primary" />
+          </div>
+        </div>
+        {% else %}
+        <div class="buttons clearfix">
+          <div class="pull-left"><a href="{{ back }}" class="btn btn-grey-o-red">{{ button_back }}</a></div>
+          <div class="pull-right">
+            <input type="submit" value="{{ button_submit }}" class="btn btn-blue" />
+          </div>
+        </div>
+        {% endif %}
+      </form>
+  </div>
+    {{ column_right }}</div>
+</div>
+{{ content_bottom }}
+<script type="text/javascript"><!--
+$('.date').datetimepicker({
+	language: '{{ datepicker }}',
+	pickTime: false
+}).on('change', function (e) {
+	$(e.currentTarget).addClass('active');
+});
+//--></script> 
+{{ footer }} 
