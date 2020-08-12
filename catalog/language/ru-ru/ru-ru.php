@@ -83,3 +83,7 @@ $_['error_curl']            = 'CURL: Ошибка кода(%s): %s';
 // Datepicker
 $_['datepicker']                    = 'ru';
 
+$_['text_stock'] = 'Достаточно';
+$_['text_stock_few'] = 'Мало';
+$_['text_stock_not'] = 'Нет в наличии';
+$_['text_read_more'] = 'Подробнее';
