@@ -1,0 +1,115 @@
+{% if error_warning %}
+    <div class="alert alert-warning alert-dismissible"><i class="fa fa-exclamation-circle"></i> {{ error_warning }}
+    </div>
+{% endif %}
+{% if shipping_methods %}
+    <div class="radio" id="shippingRadioButtons">
+    {% for shipping_method in shipping_methods %}
+        {% if not shipping_method.error %}
+            {% for quote in shipping_method.quote %}
+                    <div class="panel-heading" id="heading{{ quote.code }}">
+                        <div class="row">
+                            <div class="col-sm-10">
+                                <div class="row">
+                                    {% if quote.code == code or not code %}
+                                        {% set code = quote.code %}
+                                        <input type="radio" name="shipping_method" value="{{ quote.code }}"
+                                               checked="checked"
+                                               data-target="#collapse{{ quote.code }}" aria-expanded="true"
+                                               aria-controls="collapse{{ quote.code }}" data-toggle="collapse"/>
+                                    {% else %}
+                                        <input type="radio" class="collapsed" name="shipping_method"
+                                               value="{{ quote.code }}"
+                                               data-target="#collapse{{ quote.code }}" aria-expanded="false"
+                                               aria-controls="collapse{{ quote.code }}" data-toggle="collapse"/>
+                                    {% endif %}
+                                    <h2 style="margin-top: 0px; margin-left: 10%">{{ quote.title }}</h2>
+                                </div>
+                            </div>
+                            <div class="col-sm-2 product_details_price" style="margin-top: 0px">
+                                {{ quote.text }}
+                            </div>
+                        </div>
+                    </div>
+                    <div id="collapse{{ quote.code }}" class="collapse  {% if code == quote.code %} show {% endif %}" aria-labelledby="heading{{ quote.code }}" data-parent="#shippingRadioButtons">
+                        {% if quote.code == "flat.flat" %}
+                            <div class="row">
+                                <div class="col-sm-6 offset-sm-1">
+                                    <div class="form-group">
+                                        <input type="text" name="firstname" value=""
+                                               placeholder="{{ text_shipping_firstname }}"
+                                               id="input-shipping-firstname" class="form-control"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="text" name="lastname" value=""
+                                               placeholder="{{ text_shipping_lastname }}"
+                                               id="input-shipping-lastname" class="form-control"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="text" name="telephone" value="{{ telephone }}"
+                                               placeholder="{{ text_shipping_telephone }}"
+                                               id="input-shipping-telephone" class="form-control"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="text" name="street" value=""
+                                               placeholder="{{ text_shipping_street }}"
+                                               id="input-shipping-street" class="form-control"/>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-3 form-group">
+                                            <input type="text" name="house" value=""
+                                                   placeholder="{{ text_shipping_house }}"
+                                                   id="input-shipping-house" class="form-control"/>
+                                        </div>
+                                        <div class="col-sm-3 form-group">
+                                            <input type="text" name="block" value=""
+                                                   placeholder="{{ text_shipping_block }}"
+                                                   id="input-shipping-block" class="form-control"/>
+                                        </div>
+                                        <div class="col-sm-3 form-group">
+                                            <input type="text" name="front-door" value=""
+                                                   placeholder="{{ text_shipping_front_door }}"
+                                                   id="input-shipping-front-door" class="form-control"/>
+                                        </div>
+                                        <div class="col-sm-3 form-group">
+                                            <input type="text" name="flat" value=""
+                                                   placeholder="{{ text_shipping_flat }}"
+                                                   id="input-shipping-flat" class="form-control"/>
+                                        </div>
+                                    </div>
+                                    <div class="buttons">
+                                        <div class="pull-right">
+                                            <input type="button" value="{{ button_submit }}" id="button-shipping-method"
+                                                   data-loading-text="{{ text_loading }}" class="btn btn-primary"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
+                        {% if quote.code == "pickup.pickup" %}
+                            <div class="row">
+                                <div class="col-sm-6 offset-sm-1">
+                                    {{ text_shipping_pickup_address }}
+                                    <div class="form-group">
+                                        <input type="text" name="telephone" value="{{ telephone }}"
+                                               placeholder="{{ text_shipping_telephone }}"
+                                               id="input-shipping-telephone" class="form-control"/>
+                                    </div>
+                                    {{ text_shipping_pickup_address_info }}
+                                    <div class="buttons">
+                                        <div class="pull-right">
+                                            <input type="button" value="{{ button_submit }}" id="button-shipping-method"
+                                                   data-loading-text="{{ text_loading }}" class="btn btn-primary"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
+                    </div>
+            {% endfor %}
+        {% else %}
+            <div class="alert alert-danger alert-dismissible">{{ shipping_method.error }}</div>
+        {% endif %}
+    {% endfor %}
+    </div>
+{% endif %}

@@ -1,0 +1,175 @@
+{{ header }}
+<div id="checkout-cart" class="container">
+  {% if attention %}
+  <div class="alert alert-info"><i class="fa fa-info-circle"></i> {{ attention }}
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+  </div>
+  {% endif %}
+  {% if success %}
+  <div class="alert alert-success alert-dismissible"><i class="fa fa-check-circle"></i> {{ success }}
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+  </div>
+  {% endif %}
+  {% if error_warning %}
+  <div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle"></i> {{ error_warning }}
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+  </div>
+  {% endif %}
+  <div class="row">{{ column_left }}
+    {% if column_left and column_right %}
+    {% set class = 'col-sm-6' %}
+    {% elseif column_left or column_right %}
+    {% set class = 'col-sm-9' %}
+    {% else %}
+    {% set class = 'col-sm-12' %}
+    {% endif %}
+    <div id="content" class="{{ class }}">{{ content_top }}
+      <h1 class="cart_head_title">{{ heading_title_cart }}
+        {% if weight %}
+        &nbsp;({{ weight }})
+        {% endif %} </h1>
+      <div class="row">
+        <div class="col-md-12 col-xs-hidden">
+      <form action="{{ action }}" method="post" enctype="multipart/form-data">
+        <div class="table-responsive cart_product_table">
+          <table class="table">
+            <!--<thead>
+              <tr>
+                <td class="text-center">{{ column_image }}</td>
+                <td class="text-left">{{ column_name }}</td>
+                <td class="text-left">{{ column_model }}</td>
+                <td class="text-left">{{ column_quantity }}</td>
+                <td class="text-right">{{ column_price }}</td>
+                <td class="text-right">{{ column_total }}</td>
+              </tr>
+            </thead>-->
+            <tbody>
+
+            {% set notInStock = 0 %}
+            {% for product in products %}
+              {% if not product.stock %}
+                {% set notInStock = 1 %}
+              {% endif %}
+            {% endfor %}
+
+            {% for product in products %}
+            <div class="cart_product_row">
+              <div class="cart_product_delete">
+                <button class="samopek_button_wo_borders" onclick="cart.remove('{{ product.cart_id }}');">
+                  <img src="catalog/view/theme/opencartSamopekTheme/image/cross_delete_from_cart.svg"/>
+                </button>
+              </div>
+              <div class="cart_product_thumb">
+                {% if product.thumb %}
+                  <a href="{{ product.href }}">
+                    <img src="{{ product.thumb }}" alt="{{ product.name }}" title="{{ product.name }}" />
+                  </a>
+                {% endif %}
+              </div>
+              <div class="cart_product_title">
+                <span class="cart_model">{{ text_model }} {{ product.model }}</span>
+                <br>
+                <a class="cart_product_name" href="{{ product.href }}">{{ product.name }}</a>
+                {% if not product.stock %}
+                  <span class="text-danger">***</span>
+                {% endif %}
+                {% if product.option %}
+                {% for option in product.option %} <br />
+                <small>{{ option.name }}: {{ option.value }}</small> {% endfor %}
+                {% endif %}
+                {% if product.reward %} <br />
+                <small>{{ product.reward }}</small> {% endif %}
+                {% if product.recurring %} <br />
+                <span class="label label-info">{{ text_recurring_item }}</span> <small>{{ product.recurring }}</small> {% endif %}
+              </div>
+              <div class="cart_product_quantity_price">
+                <div class="cart_product_quantity">
+                  <div class="input-group btn-block" style="max-width: 200px;">
+                    <div class="quantity_group">
+                      <button class="quantity_more_less_btn_minus_cart samopek_button_wo_borders">-</button>
+                      <input type="text" name="quantity[{{ product.cart_id }}]" value="{{ product.quantity }}" size="2" id="input-quantity" class="form-control"/>
+                      <button class="quantity_more_less_btn_plus_cart samopek_button_wo_borders">+</button>
+                    </div>
+                  </div>
+                </div>
+                <div class="cart_product_update">
+                  <div class="input-group btn-block" style="max-width: 200px;">
+                    <span class="input-group-btn">
+                      <button type="submit" data-toggle="tooltip" title="{{ button_update }}" class="btn btn-primary"><i class="fa fa-refresh"></i></button>
+                    </span>
+                  </div>
+                </div>
+                <div class="cart_product_price">{{ product.price }}</div>
+                <div class="cart_product_total">{{ product.total }}</div>
+              </div>
+            </div>
+            {% endfor %}
+            <div class="cart_product_row_totals">
+                  {% if notInStock == 0 %}
+                    <div class="cart_product_totals_in_stock">
+                      {{ text_all_products_in_stock }}
+                    </div>
+                  {% endif %}
+
+                  <div class="cart_product_totals_title">
+                    {{ totals[0].title }}
+                  </div>
+                  <div class="cart_product_totals_value totals_text">
+                    {{ totals[0].text }}
+                  </div>
+            </div>
+            <div class="cart_product_row_buttons">
+              <div class="cart_product_button_continue">
+                <a href="{{ checkout }}" class="btn btn-cart-continue">{{ button_continue }}</a>
+              </div>
+            </div>
+
+            {% for voucher in vouchers %}
+            <tr>
+              <td></td>
+              <td class="text-left">{{ voucher.description }}</td>
+              <td class="text-left"></td>
+              <td class="text-left"><div class="input-group btn-block" style="max-width: 200px;">
+                  <input type="text" name="" value="1" size="1" disabled="disabled" class="form-control" />
+                  <span class="input-group-btn">
+                  <button type="button" data-toggle="tooltip" title="{{ button_remove }}" class="btn btn-danger" onclick="voucher.remove('{{ voucher.key }}');"><i class="fa fa-times-circle"></i></button>
+                  </span></div></td>
+              <td class="text-right">{{ voucher.amount }}</td>
+              <td class="text-right">{{ voucher.amount }}</td>
+            </tr>
+            {% endfor %}
+              </tbody>
+            
+          </table>
+        </div>
+      </form>
+      {% if modules %}
+      <h2>{{ text_next }}</h2>
+      <p>{{ text_next_choice }}</p>
+      <div class="panel-group" id="accordion"> {% for module in modules %}
+        {{ module }}
+        {% endfor %} </div>
+      {% endif %} <br />
+        </div>
+      </div>
+     <!-- <div class="row">
+        <div class="col-sm-4 offset-sm-8">
+          <table class="table table-bordered">
+            {% for total in totals %}
+            <tr>
+              <td class="text-right"><strong>{{ total.title }}:</strong></td>
+              <td class="text-right">{{ total.text }}</td>
+            </tr>
+            {% endfor %}
+          </table>
+        </div>
+      </div>
+      <div class="buttons clearfix">
+        <div class="pull-left"><a href="{{ continue }}" class="btn btn-default">{{ button_shopping }}</a></div>
+        <div class="pull-right"><a href="{{ checkout }}" class="btn btn-primary">{{ button_checkout }}</a></div>
+      </div>
+      {{ content_bottom }} -->
+    </div>
+    {{ column_right }}</div>
+</div>
+{{ footer }} 

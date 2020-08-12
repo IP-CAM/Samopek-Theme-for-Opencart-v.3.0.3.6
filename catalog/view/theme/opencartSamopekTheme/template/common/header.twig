@@ -1,81 +1,165 @@
 <!DOCTYPE html>
 <!--[if IE]><![endif]-->
-<!--[if IE 8 ]><html dir="{{ direction }}" lang="{{ lang }}" class="ie8"><![endif]-->
-<!--[if IE 9 ]><html dir="{{ direction }}" lang="{{ lang }}" class="ie9"><![endif]-->
+<!--[if IE 8 ]>
+<html dir="{{ direction }}" lang="{{ lang }}" class="ie8"><![endif]-->
+<!--[if IE 9 ]>
+<html dir="{{ direction }}" lang="{{ lang }}" class="ie9"><![endif]-->
 <!--[if (gt IE 9)|!(IE)]><!-->
 <html dir="{{ direction }}" lang="{{ lang }}">
 <!--<![endif]-->
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>{{ title }}</title>
-<base href="{{ base }}" />
-{% if description %}
-<meta name="description" content="{{ description }}" />
-{% endif %}
-{% if keywords %}
-<meta name="keywords" content="{{ keywords }}" />
-{% endif %}
-<script src="catalog/view/javascript/jquery/jquery-2.1.1.min.js" type="text/javascript"></script>
-<link href="catalog/view/javascript/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen" />
-<script src="catalog/view/javascript/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
-<link href="catalog/view/javascript/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
-<link href="//fonts.googleapis.com/css?family=Open+Sans:400,400i,300,700" rel="stylesheet" type="text/css" />
-<link href="catalog/view/theme/opencartSamopekTheme/stylesheet/stylesheet.css" rel="stylesheet">
-{% for style in styles %}
-<link href="{{ style.href }}" type="text/css" rel="{{ style.rel }}" media="{{ style.media }}" />
-{% endfor %}
-{% for script in scripts %}
-<script src="{{ script }}" type="text/javascript"></script>
-{% endfor %}
-<script src="catalog/view/javascript/common.js" type="text/javascript"></script>
-{% for link in links %}
-<link href="{{ link.href }}" rel="{{ link.rel }}" />
-{% endfor %}
-{% for analytic in analytics %}
-{{ analytic }}
-{% endfor %}
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>{{ title }}</title>
+    <base href="{{ base }}"/>
+    {% if description %}
+        <meta name="description" content="{{ description }}"/>
+    {% endif %}
+    {% if keywords %}
+        <meta name="keywords" content="{{ keywords }}"/>
+    {% endif %}
+    <script src="catalog/view/javascript/jquery/jquery-2.1.1.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="catalog/view/javascript/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:400,400i,300,700" rel="stylesheet" type="text/css"/>
+    <link href="catalog/view/theme/default/stylesheet/stylesheet.css" rel="stylesheet">
+    <link href="catalog/view/theme/opencartSamopekTheme/stylesheet/stylesheet.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+    {% for style in styles %}
+        <link href="{{ style.href }}" type="text/css" rel="{{ style.rel }}" media="{{ style.media }}"/>
+    {% endfor %}
+    {% for script in scripts %}
+        <script src="{{ script }}" type="text/javascript"></script>
+    {% endfor %}
+    <script src="catalog/view/theme/opencartSamopekTheme/javascript/common.js" type="text/javascript"></script>
+    {% for link in links %}
+        <link href="{{ link.href }}" rel="{{ link.rel }}"/>
+    {% endfor %}
+    {% for analytic in analytics %}
+        {{ analytic }}
+    {% endfor %}
 </head>
 <body>
 <nav id="top">
-  <div class="container">{{ currency }}
-    {{ language }}
-    <div id="top-links" class="nav pull-right">
-      <ul class="list-inline">
-        <li><a href="{{ contact }}"><i class="fa fa-phone"></i></a> <span class="hidden-xs hidden-sm hidden-md">{{ telephone }}</span></li>
-        <li class="dropdown"><a href="{{ account }}" title="{{ text_account }}" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <span class="hidden-xs hidden-sm hidden-md">{{ text_account }}</span> <span class="caret"></span></a>
-          <ul class="dropdown-menu dropdown-menu-right">
-            {% if logged %}
-            <li><a href="{{ account }}">{{ text_account }}</a></li>
-            <li><a href="{{ order }}">{{ text_order }}</a></li>
-            <li><a href="{{ transaction }}">{{ text_transaction }}</a></li>
-            <li><a href="{{ download }}">{{ text_download }}</a></li>
-            <li><a href="{{ logout }}">{{ text_logout }}</a></li>
-            {% else %}
-            <li><a href="{{ register }}">{{ text_register }}</a></li>
-            <li><a href="{{ login }}">{{ text_login }}</a></li>
-            {% endif %}
-          </ul>
-        </li>
-        <li><a href="{{ wishlist }}" id="wishlist-total" title="{{ text_wishlist }}"><i class="fa fa-heart"></i> <span class="hidden-xs hidden-sm hidden-md">{{ text_wishlist }}</span></a></li>
-        <li><a href="{{ shopping_cart }}" title="{{ text_shopping_cart }}"><i class="fa fa-shopping-cart"></i> <span class="hidden-xs hidden-sm hidden-md">{{ text_shopping_cart }}</span></a></li>
-        <li><a href="{{ checkout }}" title="{{ text_checkout }}"><i class="fa fa-share"></i> <span class="hidden-xs hidden-sm hidden-md">{{ text_checkout }}</span></a></li>
-      </ul>
+    <div class="container"><!--{{ currency }}
+    {{ language }}-->
+        <div id="top-links" class="nav pull-right">
+            <ul>
+                <li>
+                    <a href="{{ contact }}" id="shipping" title="{{ text_contacts }}">
+                        <span class="d-none d-lg-block d-xl-block">+7 (950) 622-22-58</span>
+                        <i class="fa fa-phone d-none d-md-block d-lg-none"></i>
+                    </a>
+                    <span class="delimiter"> | </span>
+                </li>
+
+                <li>
+                    <a href="{{ contact }}" id="contact" title="{{ text_contacts }}">
+                        <span class="d-none d-lg-block d-xl-block">{{ text_contacts }}</span>
+                        <i class="fa fa-info d-none d-md-block d-lg-none"></i>
+                    </a>
+                    <span class="delimiter"> | </span>
+                </li>
+
+                <li>
+                    <a href="{{ delivery }}" id="shipping" title="{{ text_shipping }}">
+                        <span class="d-none d-lg-block d-xl-block">{{ text_shipping }}</span>
+                        <i class="fa fa-truck d-none d-md-block d-lg-none"></i>
+                    </a>
+                    <span class="delimiter"> | </span>
+                </li>
+
+                <li>
+                    <a href="{{ wishlist }}" id="wishlist-total" title="{{ text_wishlist }}">
+                        <span class="d-none d-lg-block d-xl-block">{{ text_wishlist }}</span>
+                        <i class="fa fa-heart d-none d-md-block d-lg-none"></i>
+                    </a>
+                    <span class="delimiter"> | </span>
+                </li>
+
+                <li class="dropdown">
+                    <a href="{{ account }}" title="{{ text_account }}" class="dropdown-toggle"
+                                        data-toggle="dropdown">
+                        <span class="d-none d-lg-block d-xl-block">{{ text_account }}</span>
+                        <i class="fa fa-user d-none d-md-block d-lg-none"></i>
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-right">
+                        {% if logged %}
+                            <li><a href="{{ account }}">{{ text_account }}</a></li>
+                            <li><a href="{{ order }}">{{ text_order }}</a></li>
+                            <!-- ToDo: Remove from controller
+                            <li><a href="{{ transaction }}">{{ text_transaction }}</a></li>
+                            <li><a href="{{ download }}">{{ text_download }}</a></li>-->
+                            <li><a href="{{ logout }}">{{ text_logout }}</a></li>
+                        {% else %}
+                            <li><a href="{{ register }}">{{ text_register }}</a></li>
+                            <li><a href="{{ login }}">{{ text_login }}</a></li>
+                        {% endif %}
+                    </ul>
+                    <span class="delimiter"> | </span>
+                </li>
+
+                <li>
+                    <a href="{{ shopping_cart }}" id="cart-header" title="{{ shopping_cart_total }}">
+                        <span class="cart-header-text-style d-none d-lg-block d-xl-block">{{ text_shopping_cart }} </span>
+                        <span class="cart-header-total-style"> {{ shopping_cart_total }} </span>
+                        <i class="fa fa-shopping-cart d-none d-md-block d-lg-none"></i>
+                    </a>
+                </li>
+                <!--<li><a href="{{ checkout }}" title="{{ text_checkout }}"><i class="fa fa-share"></i> <span class="hidden-xs hidden-sm hidden-md">{{ text_checkout }}</span></a></li>-->
+            </ul>
+        </div>
     </div>
-  </div>
 </nav>
-<header id="head">
-  <div class="container">
-    <div class="row">
-      <div class="col-sm-3">
-        <div id="logo">{% if logo %}<a href="{{ home }}"><img src="{{ logo }}" title="{{ name }}" alt="{{ name }}" class="img-responsive" /></a>{% else %}
-          <h1><a href="{{ home }}">{{ name }}</a></h1>
-          {% endif %}</div>
-      </div>
-      <div class="col-sm-6"></div>
-      <div class="col-sm-3">{{ cart }} {{ search }}</div>
-    </div>
-  </div>
+<header>
+    {% if home_page %}
+        <div class="container">
+            {% if home_page %}
+                <div class="row">
+                    <div id="banner_cupcakes" class="col-md-12">
+                        {% if logo %}
+                        <a href="{{ home }}">
+                          <img src="{{ logo }}" alt="image">
+                        </a>
+                        {% endif %}
+                    </div>
+                </div>
+            {% endif %}
+            <div class="row title_samopek">
+                <object type="image/svg+xml" data="catalog/view/theme/opencartSamopekTheme/image/vse_dlya_konditera_title.svg"></object>
+            </div>
+            <div class="row row_menu_main">
+                <div class="col-12 no-float"> {{ menu }}</div>
+                <!--<div class="col-sm-3">{{ cart }}</div>-->
+            </div>
+            <div class="row row_search_main">
+                <div class="col-lg-6 offset-lg-3 d-none d-sm-block d-md-block"> {{ search }}</div>
+            </div>
+            <div class="row">
+                <div class="d-block d-md-block d-lg-none d-xl-none col-1 no-float">{{ search }} {{ menu }}</div>
+                <!--<div class="col-sm-3">{{ cart }}</div>-->
+            </div>
+        </div>
+    {% else %}
+        <div class="row">
+            <div id="banner_logo" class="col-md-12 d-none d-sm-block d-md-block">
+                <a href="{{ home }}">
+                    <img src="catalog/view/theme/opencartSamopekTheme/image/logo_footer_white.png" alt="image">
+                </a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 no-float"> {{ menu }}</div>
+            <!--<div class="col-sm-3">{{ cart }}</div>-->
+        </div>
+        <div class="row row_search_main">
+            <div class="col-lg-6 offset-lg-3 d-none d-sm-block d-md-block"> {{ search }}</div>
+        </div>
+    {% endif %}
 </header>
-{{ menu }}
+{{ product_preview}}

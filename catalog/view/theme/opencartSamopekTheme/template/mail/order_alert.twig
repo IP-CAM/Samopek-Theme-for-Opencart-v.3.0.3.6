@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/1999/REC-html401-19991224/strict.dtd">
+<html>
+<head>
+</head>
+<body>
+{{ text_received }} <br>
+
+{{ text_order_id }} {{ order_id }} <br>
+{{ text_date_added }} {{ date_added }} <br>
+{{ text_order_status }} {{ order_status }} <br>
+<br>
+<B><I>{{ text_customer }}</I></B> <br>
+{{ text_customer_name }}  {{ customer_name }} <br>
+{{ text_customer_phone }} {{ customer_phone }} <br>
+{{ text_customer_email }} {{ customer_email }} <br>
+<br>
+<B><I>{{ text_payment_shipping }}</I></B> <br>
+{{ text_payment_method }} {{ order_payment_method }} <br>
+{{ text_shipping_method }} {{ order_shipping_method }} <br>
+{{ text_shipping_address }} {{ order_shipping_address }} <br>
+<br>
+<B><I>{{ text_product }}</I></B> <br>
+
+{% for product in products %}
+    {{ product.quantity }}x {{ product.name }} ({{ product.model }}) {{ product.total }}
+    {% if option %}
+        {% for option in product.option %}
+            - {{ option.name }} {{ option.value }}
+        {% endfor %}
+    {% endif %}
+    <br>
+{% endfor %}
+{% if vouchers %}
+
+    {% for voucher in vouchers %}
+        1x {{ voucher.description }} {{ voucher.amount }}
+    {% endfor %}
+{% endif %}
+<br>
+<br>
+<B style="color: red">{{ text_total }}</B>
+<br>
+{% for total in totals %}
+    {{ total.title }}: {{ total.value }} <br>
+{% endfor %}
+<br>
+{% if comment %}
+    {{ text_comment }}
+
+    {{ comment }}
+{% endif %}
+</body>
