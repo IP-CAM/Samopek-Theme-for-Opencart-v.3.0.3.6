@@ -1,7 +1,5 @@
-**/catalog/conroller/
 image/
 ioncube/
-system/
 config.php
 index.php
 php.ini

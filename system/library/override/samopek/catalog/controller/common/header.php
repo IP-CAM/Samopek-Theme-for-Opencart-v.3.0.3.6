@@ -4,7 +4,8 @@ class samopek_ControllerCommonHeader extends ControllerCommonHeader {
         if ($template_name != $this->config->get( 'config_theme' ).'/template/common/header.twig') {
             return parent::preRender( $template_buffer, $template_name, $data );
         }
-        $data['delivery'] = $this->url->link('information/information&information_id=6');
+        // ToDo: Remove hardcoded URL
+        $data['delivery'] = $this->url->link('information/information&information_id=11');
         $data['home_page'] = false;
         if ($this->request->server['REQUEST_METHOD'] == 'GET') {
             //error_log($this->request->get['route']);
