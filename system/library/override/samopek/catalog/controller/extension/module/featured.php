@@ -88,8 +88,9 @@ class samopek_ControllerExtensionModuleFeatured extends ControllerExtensionModul
                             $attributes[] = $item['text'];
                         }
                     }
-
-                    $size = $product_info['length'] . ' x ' . $product_info['width'];
+                    if ($product_info['length'] > 0 && $product_info['width'] > 0) {
+                        $size = $product_info['length'] . ' x ' . $product_info['width'];
+                    }
                     if ($product_info['height'] != null) {
                         $size .= ' x ' . $product_info['height'];
                     }
