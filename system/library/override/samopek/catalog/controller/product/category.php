@@ -259,6 +259,14 @@ class samopek_ControllerProductCategory extends ControllerProductCategory {
                     }
                 }
 
+                $size = null;
+                if ($result['length'] > 0 && $result['width'] > 0) {
+                    $size = $result['length'] . ' x ' . $result['width'];
+                    if ($result['height'] != null) {
+                        $size .= ' x ' . $result['height'];
+                    }
+                }
+
                 $data['products'][] = array(
                     'product_id'  => $result['product_id'],
                     'thumb'       => $image,
@@ -275,7 +283,8 @@ class samopek_ControllerProductCategory extends ControllerProductCategory {
                     'attributes' => $attributes,
                     'in_wishlist' => in_array($result['product_id'], $wishListProductsIds),
                     'in_cart' => in_array($result['product_id'], $cartlistIds),
-                    'hasOptions'  => $hasOptions
+                    'hasOptions'  => $hasOptions,
+                    'size' => $size
                 );
             }
 
