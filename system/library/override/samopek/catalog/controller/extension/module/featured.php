@@ -89,6 +89,11 @@ class samopek_ControllerExtensionModuleFeatured extends ControllerExtensionModul
                         }
                     }
 
+                    $size = $product_info['length'] . ' x ' . $product_info['width'];
+                    if ($product_info['height'] != null) {
+                        $size .= ' x ' . $product_info['height'];
+                    }
+
 					$data['products'][] = array(
 						'product_id'  => $product_info['product_id'],
 						'thumb'       => $image,
@@ -104,7 +109,8 @@ class samopek_ControllerExtensionModuleFeatured extends ControllerExtensionModul
                         'attributes' => $attributes,
                         'in_wishlist' => in_array($product_info['product_id'], $wishListProductsIds),
                         'in_cart' => in_array($product_info['product_id'], $cartlistIds),
-                        'hasOptions'  => $hasOptions
+                        'hasOptions'  => $hasOptions,
+                        'size' => $size
 					);
 				}
 			}

@@ -16,6 +16,7 @@
                                     {{ product.name }}
                                 </a>
                                 <ul>
+                                    <li>– {{ product.size }} см</li>
                                     {% for attribute in product.attributes %}
                                         <li>– {{ attribute }}</li>
                                     {% endfor %}
