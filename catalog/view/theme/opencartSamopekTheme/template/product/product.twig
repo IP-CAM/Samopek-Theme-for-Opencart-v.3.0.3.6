@@ -52,7 +52,7 @@
                 {% if not special %}
                   {{ price }}
                 {% else %}
-                  <i>{{ special }}</i><b>{{ price }}</b>
+                  <i>{{ price }}</i><b>{{ special }}</b>
                 {% endif %}
             </span>
           {% endif %}
@@ -74,7 +74,11 @@
             {% endif %}
             <div class="product_order_total">
               <label>{{ text_price }}</label>
-              <strong>{{ price }}</strong>
+              {% if not special %}
+                <strong>{{ price }}</strong>
+              {% else %}
+                <strong>{{ special }}</strong>
+              {% endif %}
             </div>
           {% endif %}
           <div class="product_order_shipping">
@@ -271,7 +275,7 @@
                       {% if not product.special %}
                         {{ product.price }}
                       {% else %}
-                        <i>{{ product.special }}</i><b>{{ product.price }}</b>
+                        <i>{{ product.price }}</i><b>{{ product.special }}</b>
                       {% endif %}
                   </span>
                 {% endif %}
