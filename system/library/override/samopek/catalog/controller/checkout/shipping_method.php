@@ -219,50 +219,54 @@ class samopek_ControllerCheckoutShippingMethod extends ControllerCheckoutShippin
 		}
 
         if (isset($this->request->post['shipping_method']) && isset($this->request->post['sm'])) {
-        	foreach ($this->request->post['sm'][$this->request->post['shipping_method']] as $key => $value) {
-        		if ($key == 'name' && (utf8_strlen(trim($value)) < 1)) {
-	                $json['error']['sm[' . $this->request->post['shipping_method'] . '][' . $key . ']'] = $this->language->get('error_firstname');
-	            }
+            if (array_key_exists($this->request->post['shipping_method'], $this->request->post['sm'])) {
+                foreach ($this->request->post['sm'][$this->request->post['shipping_method']] as $key => $value) {
+                    if ($key == 'name' && (utf8_strlen(trim($value)) < 1)) {
+                        $json['error']['sm[' . $this->request->post['shipping_method'] . '][' . $key . ']'] = $this->language->get('error_firstname');
+                    }
 
-	            if ($key == 'street' && (utf8_strlen(trim($value)) < 1)) {
-	                $json['error']['sm[' . $this->request->post['shipping_method'] . '][' . $key . ']'] = $this->language->get('error_street');
-	            }
+                    if ($key == 'street' && (utf8_strlen(trim($value)) < 1)) {
+                        $json['error']['sm[' . $this->request->post['shipping_method'] . '][' . $key . ']'] = $this->language->get('error_street');
+                    }
 
-	            if ($key == 'telephone' && (utf8_strlen($value) < 3) || (utf8_strlen($value) > 32)) {
-		            $json['error']['sm[' . $this->request->post['shipping_method'] . '][' . $key . ']'] = $this->language->get('error_telephone');
-		        }
-        	}
+                    if ($key == 'telephone' && (utf8_strlen($value) < 3) || (utf8_strlen($value) > 32)) {
+                        $json['error']['sm[' . $this->request->post['shipping_method'] . '][' . $key . ']'] = $this->language->get('error_telephone');
+                    }
+                }
+            }
         }
 
         if (!$json) {
-			$this->session->data['shipping_method'] = $this->session->data['shipping_methods'][$shipping[0]]['quote'][$shipping[1]];
-			if (isset($this->request->post['shipping_method']) && isset($this->request->post['sm'])) {
-				$address = [];
-	        	foreach ($this->request->post['sm'][$this->request->post['shipping_method']] as $key => $value) {
-	        		if ($key == 'comment') {
-		        		$this->session->data[$key] = $value;
-	        		} elseif ($key == 'name') {
-		        		$name = explode(' ', $value);
-		        		$surname = (isset($name[1]) ? $name[1] . ' ' : ' ') . (isset($name[2]) ? $name[2] : '');
-		        		$this->session->data['shipping_address']['firstname'] = $this->session->data['payment_address']['firstname'] = $name[0];
-		        		$this->session->data['shipping_address']['lastname'] = $this->session->data['payment_address']['lastname'] = $surname;
-	        		} elseif (in_array($key, ['street', 'flat', 'floor', 'frontdoor', 'house'])) {
-		        		$address[$key] = $value;
-	        		} else {
-		        		$this->session->data['shipping_address'][$key] = $value;
-		        		$this->session->data['payment_address'][$key] = $value;
-	        		}
-	        	}
-	        	if (!empty($address)) {
-	        		$address_text = isset($address['street']) && $address['street'] != '' ? $address['street'] . ', ' : '';
-	        		$address_text .= isset($address['house']) && $address['house'] != '' ? 'д. ' . $address['house'] . ', ' : '';
-	        		$address_text .= isset($address['flat']) && $address['flat'] != '' ? 'кв. ' . $address['flat'] . ', ' : '';
-	        		$address_text .= isset($address['frontdoor']) && $address['frontdoor'] != '' ? 'подъезд ' . $address['frontdoor'] . ', ' : '';
-	        		$address_text .= isset($address['floor']) && $address['floor'] != '' ? 'этаж ' . $address['floor'] : '';
-	        		$this->session->data['shipping_address']['address_1'] = $address_text;
-	        		$this->session->data['payment_address']['address_1'] = $address_text;
-	        	}
-	        }
+            if ($this->request->post['shipping_method'] != "free.free") {
+                $this->session->data['shipping_method'] = $this->session->data['shipping_methods'][$shipping[0]]['quote'][$shipping[1]];
+                if (isset($this->request->post['shipping_method']) && isset($this->request->post['sm'])) {
+                    $address = [];
+                    foreach ($this->request->post['sm'][$this->request->post['shipping_method']] as $key => $value) {
+                        if ($key == 'comment') {
+                            $this->session->data[$key] = $value;
+                        } elseif ($key == 'name') {
+                            $name = explode(' ', $value);
+                            $surname = (isset($name[1]) ? $name[1] . ' ' : ' ') . (isset($name[2]) ? $name[2] : '');
+                            $this->session->data['shipping_address']['firstname'] = $this->session->data['payment_address']['firstname'] = $name[0];
+                            $this->session->data['shipping_address']['lastname'] = $this->session->data['payment_address']['lastname'] = $surname;
+                        } elseif (in_array($key, ['street', 'flat', 'floor', 'frontdoor', 'house'])) {
+                            $address[$key] = $value;
+                        } else {
+                            $this->session->data['shipping_address'][$key] = $value;
+                            $this->session->data['payment_address'][$key] = $value;
+                        }
+                    }
+                    if (!empty($address)) {
+                        $address_text = isset($address['street']) && $address['street'] != '' ? $address['street'] . ', ' : '';
+                        $address_text .= isset($address['house']) && $address['house'] != '' ? 'д. ' . $address['house'] . ', ' : '';
+                        $address_text .= isset($address['flat']) && $address['flat'] != '' ? 'кв. ' . $address['flat'] . ', ' : '';
+                        $address_text .= isset($address['frontdoor']) && $address['frontdoor'] != '' ? 'подъезд ' . $address['frontdoor'] . ', ' : '';
+                        $address_text .= isset($address['floor']) && $address['floor'] != '' ? 'этаж ' . $address['floor'] : '';
+                        $this->session->data['shipping_address']['address_1'] = $address_text;
+                        $this->session->data['payment_address']['address_1'] = $address_text;
+                    }
+                }
+            }
 	        $this->session->data['payment_address']['country_id'] = $this->session->data['shipping_address']['country_id'];
 	        $this->session->data['payment_address']['zone_id'] = $this->session->data['shipping_address']['zone_id'];
 	        $this->session->data['payment_address']['city'] = $this->session->data['shipping_address']['city'];

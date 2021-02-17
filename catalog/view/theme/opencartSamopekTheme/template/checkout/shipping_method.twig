@@ -78,7 +78,7 @@
                       </div>
                       <p class="order_shipping_desc">{{ text_shipping_flat_desc }}</p>
                   {% endif %}
-                  {% if quote.code == "pickup.pickup" %}
+                    {% if quote.code == "pickup.pickup" %}
                       <h4 class="h4 text-blue">{{ text_shipping_whoget }}</h4>
                       <div class="row">
                         <div class="col-md-4">
@@ -94,7 +94,27 @@
                           </div>
                         </div>
                       </div>
-                  {% endif %}
+                    {% endif %}
+                    {% if quote.code == "boxberry.pickup" %}
+                      <h4 class="h4 text-blue">{{ quote.title }}</h4>
+                      <div class="row">
+                        <div class="col-md-4">
+                              <div class="form-group form-group-2 fill {% if city and city != '' %} active {% endif %}">
+                                <input type="text" class="fill_input" id="input-shipping-city" name="city" value="{{ city }}" autocomplete="off">
+                                <a href="#" class="fill_arrow">
+                                  <img src="catalog/view/theme/opencartSamopekTheme/img/arrow.svg" alt="">
+                                </a>
+                                <label for="shipping3city" data-label="{{ text_shipping_city }}" data-error="{{ error_shipping_city }}">{{ text_shipping_city }}</label>
+                                <div class="fill_dropdown">
+                                  {% for one in shipping_method.cities %}
+                                    <a href="#" data-value="{{ one.cityName }}">{{ one.cityName }}</a>
+                                  {% endfor %}
+                                </div>
+                              </div>
+                          {{ quote.boxberry_html }}
+                        </div>
+                      </div>
+                    {% endif %}
                   {% if shipping_method.code == "cdek" %}
                     <h4 class="h4 text-blue">{{ text_shipping_cdek_title }}</h4>
                     <div class="row">
